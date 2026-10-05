@@ -429,15 +429,16 @@
     <p>A governança, exercida pelo comitê, define onde a verificação é obrigatória, estabelece as metas e decide sobre os alertas a cada sprint. A gestão opera a interface e as rotinas de dados no dia a dia. A auditoria é independente de ambas, atua por amostragem, reporta ao comitê e tem como objeto o artefato e o processo, nunca o mérito da decisão nem a conduta de quem decide. Por isso a auditoria precisa contar com um componente especialista em tecnologia da informação, apto a verificar vieses e explicabilidade, pois a leitura documental da trilha não alcança, sozinha, o comportamento do modelo.</p>
 
     <h3 style="margin-top:2.5rem;">Probabilidade × impacto</h3>
-    <p>O ISD mede o impacto da decisão sobre direitos e sua irreversibilidade. A ele se soma a probabilidade de que o viés de automação se manifeste, estimada pelo contexto de uso, pelo grau de pressão por produtividade e pela verificabilidade do dado. A combinação das duas dimensões, no formato da gestão de riscos da ABNT NBR ISO 31000:2018, orienta onde o comitê exige o ponto de verificação.</p>
+    <p>O ISD mede o impacto da decisão sobre direitos e sua irreversibilidade. A ele se soma a probabilidade de perda de qualidade, estimada em baixa, média ou alta por seis indicadores de contexto acompanhados por unidade, nunca por magistrado. Cruzadas com o impacto, as duas dimensões formam uma matriz de risco, que antecipa a reavaliação dos usos de risco elevado nas unidades de probabilidade alta. Os limiares são calibrados na Fase 0, e o alerta aciona apoio da gestão, não cobrança.</p>
 
     <h3 style="margin-top:2.5rem;">Quadro de controles por tipo</h3>
     <div class="qgrid">
       <article><h3>Preventivos</h3><ul>
         <li>Classificação por impacto e probabilidade</li>
-        <li>Pré-condições do protocolo (A1 e A2)</li>
+        <li>Pré-condições de representatividade dos dados e de explicabilidade</li>
         <li>Ponto de verificação com forçamento cognitivo</li>
-        <li>Indicadores de qualidade e de risco de perda de qualidade</li>
+        <li>Indicadores de qualidade (resultado, efetividade, fundamentação, experiência e administrativos), com metas qualitativas, sem ranking e por tendência</li>
+        <li>Indicadores de risco de perda de qualidade</li>
         <li>Capacitação</li></ul></article>
       <article><h3>Detectivos</h3><ul>
         <li>Ficha e trilha imutável</li>
@@ -445,12 +446,12 @@
         <li>Sinalização de anomalia</li>
         <li>Alerta e tendência</li></ul></article>
       <article><h3>Corretivos</h3><ul>
-        <li>Decisão do comitê a cada sprint</li>
+        <li>Decisão do comitê a cada sprint (expandir, ajustar ou suspender)</li>
         <li>Critério de parada</li>
         <li>Apoio da gestão</li>
         <li>Plano de suspensão ou reversão</li></ul></article>
       <article><h3>Asseguração</h3><ul>
-        <li>Auditoria independente por amostragem</li>
+        <li>Auditoria automatizada interna, independente, por amostragem</li>
         <li>Componente especialista em TI</li>
         <li>Reporte ao comitê</li>
         <li>Objeto restrito ao artefato e ao processo</li></ul></article>
@@ -526,7 +527,7 @@
 
   <section id="dashboard">
     <h2>Etapa 6: Painel Integrado e Inteligência Aumentada</h2>
-    <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores com meta declarada</b>: integridade das cargas (acima de 99%), tempo médio de recuperação (abaixo de 15 minutos), conformidade decisória (100% das decisões de risco elevado com fundamentação registrada), rastreabilidade (100% dos painéis com linhagem mapeada), assertividade dos alertas preditivos (falsos positivos abaixo de 5%, a partir do piloto do módulo preditivo) e adoção do canal oficial (uso recorrente em pelo menos 80% das unidades do piloto). A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
+    <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores, um por etapa do ciclo</b>: conformidade (decisões de risco elevado com fundamentação registrada), classificação (usos classificados pelo ISD com reavaliação em dia), integridade (cargas validadas com sucesso), recuperação (tempo médio para sanar falhas), rastreabilidade (linhagem mapeada e acessível) e alertas (falsos positivos nos alertas preditivos, a partir do piloto do módulo preditivo). As metas de referência são calibradas pela linha de base da Fase 0. A adoção do canal oficial, apurada nos registros de acesso, é critério de aceite dos sprints. A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
     <p>Sobre a mesma base se apoia a <b>oportunidade preditiva</b>. Os painéis do Tribunal hoje são descritivos: mostram o que já ocorreu, sem antecipar acúmulo de acervo ou risco de descumprimento de meta. Projetar tendência é o passo seguinte, e ele depende do que vem antes, porque um modelo preditivo sobre carga não validada projeta o erro com mais confiança. O magistrado ou gestor submete a projeção ao crivo do ISD antes de agir.</p>
     <p>Os indicadores de comportamento decisório medidos na Fase 0 (taxa de edição, tempo de decisão e consulta à origem) reaparecem no piloto como termo de comparação, para mostrar se a fricção produziu o efeito esperado.</p>
     
