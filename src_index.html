@@ -147,6 +147,34 @@
   .controls-pred input[type=range]::-moz-range-track { width: 100%; height: 6px; cursor: pointer; background: var(--rule); border-radius: 3px; }
   .controls-pred input[type=range]::-moz-range-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--signal); cursor: pointer; border: none; }
 
+
+  /* ---------- painel integrado ---------- */
+  .ip { margin-top: 2rem; background: var(--surface); border: 1px solid var(--rule); }
+  .ip-alert { background: var(--ink); color: #E9EAE6; padding: 1rem 1.25rem; font-size: 0.9rem; line-height: 1.5; border-left: 4px solid var(--signal-tint); }
+  .ip-alert b { color: var(--signal-tint); font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+  .ip-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 48rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .blk:nth-child(odd) { border-right: 1px solid var(--rule); } }
+  .blk { padding: 1.25rem 1.4rem; border-top: 1px solid var(--rule); }
+  .blk .chart-title { margin-bottom: 0.9rem; }
+  .blk .src { font-size: 0.75rem; color: var(--ink-soft); margin: 0.7rem 0 0; }
+  .ip table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+  .ip th, .ip td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .ip th { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); font-weight: 500; }
+  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; padding: 0.1rem 0.4rem; border: 1px solid var(--rule); color: var(--ink-soft); white-space: nowrap; }
+  .chip.ok { background: #EDEEEA; }
+  .chip.warn { background: #EFDDDF; border-color: var(--signal-tint); color: var(--signal); }
+  .chip.hi { background: var(--signal); border-color: var(--signal); color: #F1F2EF; }
+  .spark { display: grid; grid-template-columns: 1fr 6rem 4.5rem; gap: 0.6rem; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-size: 0.8125rem; }
+  .spark svg { width: 100%; height: 1.6rem; }
+  .spark span:last-child { text-align: right; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; }
+  .sprint { margin-bottom: 0.9rem; font-size: 0.8125rem; }
+  .sprint .bar-track { margin-top: 0.25rem; }
+  .qgrid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin-top: 1.5rem; }
+  .qgrid article { background: var(--surface); padding: 1.3rem; }
+  .qgrid article h3 { color: var(--signal); font-size: 0.9375rem; }
+  .qgrid article ul { margin: 0.4rem 0 0; padding-left: 1.1rem; font-size: 0.875rem; color: var(--ink-soft); }
+  .qgrid article li { margin-bottom: 0.25rem; }
+
   /* architecture diagram */
   .diagram{margin:3rem 0 0;background:var(--surface);border:1px solid var(--rule);padding:clamp(1.25rem,4vw,2.25rem);}
   .diagram figcaption{margin-top:1.5rem;font-size:0.875rem;color:var(--ink-soft);max-width:56ch;}
@@ -254,7 +282,7 @@
       </article>
       <article>
         <h3>Três instâncias de controle</h3>
-        <p>Separa quem opera, quem supervisiona e quem audita, de modo que o controle recaia sobre a cadeia decisória e não apenas sobre o aspecto técnico (TI).</p>
+        <p>Separa quem opera, quem supervisiona e quem audita, de modo que o controle recaia sobre a cadeia decisória e não apenas sobre o aspecto técnico (TI). A auditoria é independente e conta com um componente especialista em tecnologia da informação.</p>
       </article>
       <article>
         <h3>Protocolo A1–A6</h3>
@@ -320,7 +348,7 @@
       <article>
         <span class="mn">Etapa 1</span>
         <h3>Governar o uso do painel</h3>
-        <p>Define em quais decisões apoiadas no painel ou na IA se exige ponto de verificação antes de agir.</p>
+        <p>O comitê define em quais decisões apoiadas no painel ou na IA se exige ponto de verificação antes de agir, combinando probabilidade e impacto. A gestão opera a tela de forçamento cognitivo que aplica essa regra.</p>
       </article>
       <article>
         <span class="mn">Etapa 2</span>
@@ -345,7 +373,7 @@
       <article>
         <span class="mn">Etapa 6</span>
         <h3>Avaliar e Projetar (Painel Preditivo)</h3>
-        <p>Compara os indicadores com as metas, exibe o andamento e antecipa gargalos, submetendo a IA ao crivo do usuário. As etapas 1 a 5 estão implementadas em prova de conceito; o componente preditivo é fase posterior.</p>
+        <p>Compara os indicadores com as metas, exibe o andamento e antecipa gargalos, submetendo a IA ao crivo do usuário. Reúne também os indicadores de risco de perda de qualidade e o monitoramento dos sprints. As etapas 1 a 5 estão implementadas em prova de conceito; o componente preditivo é fase posterior.</p>
       </article>
     </div>
 
@@ -362,7 +390,7 @@
           </div>
           <div class="layer">
             <strong>Auditoria Agnóstica</strong>
-            <span>Protocolo A1–A6, independente da tecnologia sob o capô (BI, IA, planilhas).</span>
+            <span>Protocolo A1–A6, independente da tecnologia sob o capô (BI, IA, planilhas). Com especialista em TI para verificar vieses e explicabilidade.</span>
           </div>
         </div>
         <div class="divider">
@@ -376,6 +404,38 @@
       <figcaption>O controle alcança o percurso de uso e a validação humana — nunca o
       mérito isolado do algoritmo ou da ferramenta técnica em si. Estas três instâncias definem <em>quem</em> audita a decisão e <em>como</em> ela é responsabilizada.</figcaption>
     </figure>
+
+    <h3 style="margin-top:3.5rem;">Governança, gestão e auditoria são papéis distintos</h3>
+    <p>A governança, exercida pelo comitê, define onde a verificação é obrigatória, estabelece as metas e decide sobre os alertas a cada sprint. A gestão opera a interface e as rotinas de dados no dia a dia. A auditoria é independente de ambas, atua por amostragem, reporta ao comitê e tem como objeto o artefato e o processo, nunca o mérito da decisão nem a conduta de quem decide. Por isso a auditoria precisa contar com um componente especialista em tecnologia da informação, apto a verificar vieses e explicabilidade, pois a leitura documental da trilha não alcança, sozinha, o comportamento do modelo.</p>
+
+    <h3 style="margin-top:2.5rem;">Probabilidade × impacto</h3>
+    <p>O ISD mede o impacto da decisão sobre direitos e sua irreversibilidade. A ele se soma a probabilidade de que o viés de automação se manifeste, estimada pelo contexto de uso, pelo grau de pressão por produtividade e pela verificabilidade do dado. A combinação das duas dimensões, no formato da gestão de riscos da ABNT NBR ISO 31000:2018, orienta onde o comitê exige o ponto de verificação.</p>
+
+    <h3 style="margin-top:2.5rem;">Quadro de controles por tipo</h3>
+    <div class="qgrid">
+      <article><h3>Preventivos</h3><ul>
+        <li>Classificação por impacto e probabilidade</li>
+        <li>Pré-condições do protocolo (A1 e A2)</li>
+        <li>Ponto de verificação com forçamento cognitivo</li>
+        <li>Indicadores de qualidade e de risco de perda de qualidade</li>
+        <li>Capacitação</li></ul></article>
+      <article><h3>Detectivos</h3><ul>
+        <li>Ficha e trilha imutável</li>
+        <li>Indicadores comportamentais agregados</li>
+        <li>Sinalização de anomalia</li>
+        <li>Alerta e tendência</li></ul></article>
+      <article><h3>Corretivos</h3><ul>
+        <li>Decisão do comitê a cada sprint</li>
+        <li>Critério de parada</li>
+        <li>Apoio da gestão</li>
+        <li>Plano de suspensão ou reversão</li></ul></article>
+      <article><h3>Asseguração</h3><ul>
+        <li>Auditoria independente por amostragem</li>
+        <li>Componente especialista em TI</li>
+        <li>Reporte ao comitê</li>
+        <li>Objeto restrito ao artefato e ao processo</li></ul></article>
+    </div>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Os indicadores de qualidade são preventivos, pois atuam sobre a condição que favorece o viés antes de a perda de qualidade se consolidar. A trilha e a sinalização de anomalia são detectivas. Alinhamento conceitual ao Modelo de Três Linhas do IIA (2020).</p>
   </section>
 
   <section id="demonstracao">
@@ -445,11 +505,76 @@
   </section>
 
   <section id="dashboard">
-    <h2>Etapa 6: Inteligência Aumentada (Painel Preditivo)</h2>
+    <h2>Etapa 6: Painel Integrado e Inteligência Aumentada</h2>
     <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores com meta declarada</b>: integridade das cargas (acima de 99%), tempo médio de recuperação (abaixo de 15 minutos), conformidade decisória (100% das decisões de risco elevado com fundamentação registrada), rastreabilidade (100% dos painéis com linhagem mapeada), assertividade dos alertas preditivos (falsos positivos abaixo de 5%, a partir do piloto do módulo preditivo) e adoção do canal oficial (uso recorrente em pelo menos 80% das unidades do piloto). A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
     <p>Sobre a mesma base se apoia a <b>oportunidade preditiva</b>. Os painéis do Tribunal hoje são descritivos: mostram o que já ocorreu, sem antecipar acúmulo de acervo ou risco de descumprimento de meta. Projetar tendência é o passo seguinte, e ele depende do que vem antes, porque um modelo preditivo sobre carga não validada projeta o erro com mais confiança. O magistrado ou gestor submete a projeção ao crivo do ISD antes de agir.</p>
     <p>Os indicadores de comportamento decisório medidos na Fase 0 (taxa de edição, tempo de decisão e consulta à origem) reaparecem no piloto como termo de comparação, para mostrar se a fricção produziu o efeito esperado.</p>
     
+
+    <h3 style="margin-top:2.5rem;">Interface integrada</h3>
+    <p>Os artefatos compõem uma só interface. Ao lado de cada indicador, o painel lateral mostra a fonte e a atualização do dado, e o painel de controle da carga, a validação da carga. Nas decisões de risco elevado, a tela de forçamento cognitivo pede a justificativa. No topo, o card de alerta consolida desvios e a projeção de acervo, extensão preditiva dos painéis hoje descritivos. O comitê define onde verificar e decide sobre os alertas, e a gestão opera a interface.</p>
+    <p>Os indicadores de qualidade, com metas qualitativas e leitura por tendência em cada unidade, nunca em ranking, convivem com os indicadores de risco de perda de qualidade, que sinalizam a deterioração antes que ela se consolide. O mesmo painel é reutilizado nos sprints seguintes para monitorar o piloto.</p>
+
+    <div class="ip" role="group" aria-label="Mockup ilustrativo do painel integrado">
+      <div class="ip-alert"><b>Alerta consolidado</b>2 desvios de carga detectados hoje (1 em sistema secundário, 1 no armazém). Projeção de acervo em 6 meses acima da capacidade na unidade B. Decisão do comitê pendente no sprint 2.</div>
+      <div class="ip-grid">
+        <div class="blk">
+          <p class="chart-title">Carga, fonte do dado e ponto de verificação</p>
+          <table>
+            <tr><th>Fonte</th><th>Atualização</th><th>Carga</th><th>Verificação</th></tr>
+            <tr><td>Sistema primário</td><td>hoje, 06h</td><td><span class="chip ok">validada</span></td><td>risco elevado</td></tr>
+            <tr><td>Sistema secundário</td><td>ontem, 22h</td><td><span class="chip warn">desvio</span></td><td>risco moderado</td></tr>
+            <tr><td>Armazém (DW/BI)</td><td>hoje, 05h</td><td><span class="chip warn">parcial</span></td><td>risco elevado</td></tr>
+          </table>
+          <p class="src">Painel lateral e painel de controle da carga. Ao abrir um indicador, mostra-se a fonte e a data do dado.</p>
+        </div>
+        <div class="blk">
+          <p class="chart-title">Indicadores de risco de perda de qualidade</p>
+          <table>
+            <tr><th>Indicador (agregado por unidade)</th><th>Situação</th></tr>
+            <tr><td>Aceitação sem consulta à origem do dado</td><td><span class="chip warn">atenção</span></td></tr>
+            <tr><td>Tempo de decisão em risco elevado abaixo do padrão</td><td><span class="chip ok">normal</span></td></tr>
+            <tr><td>Justificativas repetidas em sequência</td><td><span class="chip hi">crítico</span></td></tr>
+          </table>
+          <p class="src">Indicadores preventivos e agregados. Nunca por pessoa.</p>
+        </div>
+        <div class="blk">
+          <p class="chart-title">Qualidade por tendência (sem ranking)</p>
+          <div class="spark"><span>Fundamentação registrada em risco elevado</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,13 12,11 24,9 36,7 48,5 60,3"/></svg><span>em alta</span></div>
+          <div class="spark"><span>Linhagem mapeada dos painéis</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,8 12,8 24,9 36,8 48,8 60,8"/></svg><span>estável</span></div>
+          <div class="spark"><span>Integridade das cargas</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,4 12,5 24,7 36,9 48,11 60,13"/></svg><span>em queda</span></div>
+          <p class="src">Metas qualitativas. A leitura é a direção da série em cada unidade.</p>
+        </div>
+        <div class="blk">
+          <p class="chart-title">Monitoramento dos sprints</p>
+          <div class="sprint">Sprint 1 · concluído<div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+          <div class="sprint">Sprint 2 · em curso<div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
+          <div class="sprint">Sprint 3 · planejado<div class="bar-track"><div class="bar-fill" style="width:8%"></div></div></div>
+          <p class="src">Painel reutilizado nos sprints seguintes, com decisão do comitê a cada fechamento.</p>
+        </div>
+        <div class="blk">
+          <p class="chart-title">Intervenções técnicas por etapa</p>
+          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 3 · dados</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-value">9</div></div>
+          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 4 · registro</div><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><div class="bar-value">3</div></div>
+          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 5 · processo</div><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><div class="bar-value">2</div></div>
+          <p class="src">Reinícios, correções e ajustes por etapa, com responsável e motivo.</p>
+        </div>
+        <div class="blk">
+          <p class="chart-title">Trilha de registros</p>
+          <table>
+            <tr><th>Execução</th><th>Etapa</th><th>Evento</th></tr>
+            <tr><td>#0412</td><td>3</td><td>desvio de carga sinalizado</td></tr>
+            <tr><td>#0413</td><td>3</td><td>reinício por unidade responsável</td></tr>
+            <tr><td>#0414</td><td>4</td><td>decisão de risco elevado, com motivo</td></tr>
+          </table>
+          <p class="src">Trilha encadeada por verificador de integridade, por unidade.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>Mockup ilustrativo do painel integrado, com dados, nomes e números fictícios. A rotina monitorada e a trilha estão implementadas e testadas, mas o consolidado gerencial ainda não roda em produção.</i></p>
+
+    <h3 style="margin-top:3rem;">Componentes interativos</h3>
+
     <div class="dash-container">
       <!-- Cartões -->
       <div class="dash-cards">
