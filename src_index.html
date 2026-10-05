@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simbiose Decisória e Inteligência Aumentada</title>
+<meta name="description" content="Simbiose Decisória: mudar o foco da governança do sistema para a decisão tomada a partir dele. Modelo de Inteligência Aumentada para Tribunais.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23131722'/><text y='72' x='50' text-anchor='middle' font-size='64' fill='%23B8555F' font-family='Georgia,serif'>G</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #131722;
+    --ink-soft: #39404F;
+    --paper: #F1F2EF;
+    --surface: #FAFAF8;
+    --rule: #C9CCC5;
+    --signal: #7A2230;
+    --signal-tint: #B8555F;
+    --measure: 63ch;
+    --gap: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    line-height: 1.62; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: 100%; max-width: 64rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3.5rem); }
+  p { max-width: var(--measure); }
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--signal-tint); }
+  a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- hero ---------- */
+  .hero { background: var(--ink); color: #E9EAE6; padding-block: clamp(3rem, 9vw, 6rem) clamp(2.5rem, 7vw, 4.5rem); }
+  .hero-content { max-width: 52rem; }
+  .kicker { font-size: 0.8125rem; color: #9AA0AC; margin: 0 0 1.75rem; max-width: var(--measure); text-transform: uppercase; letter-spacing: 0.05em; }
+  .hero h1 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.02; letter-spacing: -0.018em; margin: 0 0 1rem; }
+  .hero .lede { font-family: "Newsreader", Georgia, serif; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem); line-height: 1.5; color: #C6C9C3; margin: 0; max-width: 52ch; }
+
+  /* index band */
+  .index { margin-top: clamp(2.5rem, 6vw, 3.5rem); border-top: 1px solid #2E3444; padding-top: 1.75rem; display: grid; gap: 1.5rem; }
+  .index .formula { font-family: "IBM Plex Mono", monospace; font-size: clamp(1rem, 0.85rem + 0.8vw, 1.25rem); color: #F1F2EF; line-height: 1.5; margin: 0; }
+  .index .formula em { font-style: normal; color: var(--signal-tint); }
+  .index .formula small { display: block; font-family: "IBM Plex Sans", sans-serif; font-size: 0.9375rem; color: #9AA0AC; margin-top: 0.8rem; max-width: 65ch; line-height: 1.6;}
+  .dims { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin: 2rem 0 0; padding:0;}
+  .dims div { border-left: 2px solid var(--signal); padding-left: 1.2rem; }
+  .dims dt { font-family: "IBM Plex Mono", monospace; color: var(--signal-tint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem;}
+  .dims dd { margin: 0; color: #E9EAE6; font-size: 0.9375rem; line-height: 1.5; }
+
+  /* ---------- sections ---------- */
+  section { padding-block: var(--gap); border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: 0; }
+  h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.012em; margin: 0 0 1.5rem; }
+  h3 { font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; }
+
+  /* marcador de estágio */
+  .stage { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 2.75rem 0 0.25rem; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+  .stage b { color: var(--signal); font-weight: 500; }
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--rule); color: var(--ink-soft); padding: 0.15rem 0.45rem; margin-left: 0.5rem; vertical-align: 0.15em; }
+  .tag.dev { border-color: var(--signal-tint); color: var(--signal); }
+
+  /* pillar cards */
+  .pillars { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .pillars article { padding: 1.6rem 1.6rem 1.6rem 0; border-bottom: 1px solid var(--rule); }
+  @media (min-width: 52rem) {
+    .pillars article { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+    .pillars article:first-child { border-left: 0; padding-left: 0; }
+  }
+  .pillars p { margin: 0; color: var(--ink-soft); font-size: 0.96rem; }
+  @media (min-width: 72rem) { .pillars-4 { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ---------- demonstração (ISD e Ponto Verificação) ---------- */
+  .demo { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.5rem; }
+  @media (min-width: 48rem) { .demo { grid-template-columns: 1.1fr 1fr; align-items: start; } }
+  .controls { background: var(--surface); border: 1px solid var(--rule); padding: 1.5rem; }
+  .field { margin-bottom: 1.5rem;}
+  .field label { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 0.3rem; }
+  .field .hint { display: block; font-size: 0.8125rem; color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .field select, .field textarea { width: 100%; font: inherit; font-size: 0.9375rem; padding: 0.65rem 0.7rem; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 0; }
+  .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+  .controls button { font: inherit; font-weight: 600; font-size: 0.9375rem; cursor: pointer; background: var(--ink); color: #F1F2EF; border: 0; padding: 0.8rem 1.4rem; width: 100%; transition: opacity 0.2s;}
+  .controls button:hover:not(:disabled) { background: var(--signal); }
+  .controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .readout { background: var(--ink); color: #E9EAE6; padding: 1.75rem; display: flex; flex-direction: column; justify-content: center;}
+  .score { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(3.2rem, 10vw, 4.75rem); line-height: 1; margin: 0; letter-spacing: -0.02em; }
+  .verdict { font-size: 1.0625rem; font-weight: 600; margin: 0.6rem 0 0; color: var(--signal-tint); }
+  .readout ul { margin: 1.4rem 0 0; padding: 0; list-style: none; border-top: 1px solid #2E3444; }
+  .readout li { padding: 0.6rem 0; border-bottom: 1px solid #2E3444; font-size: 0.9rem; color: #C6C9C3; }
+  .readout li b { color: #E9EAE6; font-weight: 600; }
+
+  /* matriz 5x5 */
+  .matrix-wrap { margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--surface); padding: clamp(1.25rem, 4vw, 1.75rem); }
+  .matrix-scroll { overflow-x: auto; }
+  table.matrix { border-collapse: collapse; width: 100%; min-width: 30rem; font-family: "IBM Plex Mono", monospace; font-size: 0.8125rem; margin-top: 1rem;}
+  table.matrix th, table.matrix td { border: 1px solid var(--rule); padding: 0.5rem 0.4rem; text-align: center; }
+  table.matrix th { background: var(--paper); font-weight: 600; }
+  table.matrix td.c1 { background: #EDEEEA; }
+  table.matrix td.c2 { background: #EFDDDF; }
+  table.matrix td.c3 { background: #E2C3C7; }
+  table.matrix td.active { outline: 3px solid var(--signal); outline-offset: -3px; font-weight: 600; }
+  .matrix-note { margin-top: 0.9rem; font-size: 0.8125rem; color: var(--ink-soft); max-width: 66ch; }
+
+  /* ---------- Dashboard Visual ---------- */
+  .dash-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); border: 1px solid var(--rule); background: var(--surface); }
+  .dash-card { padding: 1.5rem 1.25rem; border-bottom: 1px solid var(--rule); }
+  @media(min-width: 48rem) {
+    .dash-cards { grid-template-columns: repeat(4, 1fr); }
+    .dash-card { border-bottom: none; border-right: 1px solid var(--rule); }
+    .dash-card:last-child { border-right: none; }
+  }
+  .dash-card .n { font-family: "Newsreader", Georgia, serif; font-size: 3.2rem; line-height: 1.1; color: var(--signal); display: block; margin-bottom: 0.5rem; letter-spacing: -0.02em;}
+  .dash-card .l { font-size: 0.75rem; color: var(--ink-soft); display: flex; align-items: center; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Bloco Inferior (Barras + Rosca) */
+  .dash-charts { display: flex; flex-wrap: wrap; margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--rule); padding: 2.5rem 2rem; gap: 3rem;}
+  .chart-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink); margin: 0 0 1.5rem; }
+
+  .dash-donut-section { flex: 1; min-width: 200px; }
+  .dash-bar-section { flex: 1.5; min-width: 280px; }
+
+  .bar-row { display: flex; align-items: center; margin-bottom: 1.2rem; }
+  .bar-label { width: 140px; font-size: 0.85rem; color: var(--ink-soft); }
+  .bar-track { flex-grow: 1; background: #E9EAE6; height: 14px; border-radius: 2px; overflow: hidden; display: flex; align-items: center; }
+  .bar-fill { height: 100%; background: var(--signal-tint); border-radius: 2px; }
+  .bar-value { margin-left: 15px; font-size: 0.95rem; font-weight: 600; width: 25px; color: var(--ink); text-align: right;}
+
+  .donut-container { display: flex; align-items: center; gap: 2rem; }
+  #donut-legend { font-size: 0.85rem; line-height: 2.2; color: var(--ink); }
+  .legend-item { display: flex; align-items: center; }
+  .legend-box { display: inline-block; width: 14px; height: 14px; border-radius: 2px; margin-right: 10px; }
+
+  /* Seção Preditiva */
+  .dash-predictive { margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--rule); padding: 2.5rem 2rem; }
+  .pred-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 48rem) { .pred-grid { grid-template-columns: 1fr 1.5fr; align-items: center; } }
+  .controls-pred label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--ink); }
+  .controls-pred input[type=range] { -webkit-appearance: none; width: 100%; margin-bottom: 1.5rem; background: transparent; }
+  .controls-pred input[type=range]:focus { outline: none; }
+  .controls-pred input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: var(--rule); border-radius: 3px; }
+  .controls-pred input[type=range]::-webkit-slider-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--signal); cursor: pointer; -webkit-appearance: none; margin-top: -6px; }
+  .controls-pred input[type=range]::-moz-range-track { width: 100%; height: 6px; cursor: pointer; background: var(--rule); border-radius: 3px; }
+  .controls-pred input[type=range]::-moz-range-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--signal); cursor: pointer; border: none; }
+
+  /* architecture diagram */
+  .diagram{margin:3rem 0 0;background:var(--surface);border:1px solid var(--rule);padding:clamp(1.25rem,4vw,2.25rem);}
+  .diagram figcaption{margin-top:1.5rem;font-size:0.875rem;color:var(--ink-soft);max-width:56ch;}
+  .arch{display:grid;gap:clamp(1.5rem,4vw,2.5rem);grid-template-columns:1fr;}
+  @media (min-width:48rem){.arch{grid-template-columns:1fr 1fr;align-items:center;}}
+  .layers{display:grid;gap:0;}
+  .layer{border:1px solid var(--rule);background:var(--paper);padding:1rem 1.15rem;}
+  .layer + .layer{margin-top:1.5rem;position:relative;}
+  .layer + .layer::before{content:"";position:absolute;left:1.75rem;top:-1.5rem;height:1.5rem;border-left:2px solid var(--signal);}
+  .layer strong{display:block;font-size:0.9375rem;}
+  .layer span{font-size:0.875rem;color:var(--ink-soft);}
+  .outside{border:2px solid var(--signal);padding:1.15rem;background:var(--paper);}
+  .outside strong{display:block;color:var(--signal);font-size:1.0625rem;}
+  .outside span{font-size:0.9375rem;color:var(--ink-soft);}
+  .outside code{display:inline-block;margin-top:0.75rem;font-family:"IBM Plex Mono",monospace;font-size:0.8125rem;color:var(--ink-soft);}
+  .divider{position:relative;}
+  @media (min-width:48rem){.divider::before{content:"";position:absolute;left:calc(-1 * clamp(0.75rem,2vw,1.25rem));top:-1rem;bottom:-1rem;border-left:1px dashed var(--rule);}}
+
+  /* production list & norms */
+  .items, .norms { list-style: none; margin: 0; padding: 0; }
+  .items li, .norms li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; padding-block: 1.25rem; border-top: 1px solid var(--rule); align-items: baseline; }
+  .items li:last-child, .norms li:last-child { border-bottom: 1px solid var(--rule); }
+  .year, .when { font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; color: var(--ink-soft); }
+  .items h3, .norms h3 { margin-bottom: 0.25rem; display: inline; font-size: 1rem;}
+  .items p, .norms p { margin: 0.45rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+  .flag { display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; background: var(--signal); color: #F1F2EF; padding: 0.2rem 0.5rem; margin-left: 0.5rem; vertical-align: 0.15em; }
+
+  /* material cards */
+  .materials { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); margin-top: 2.5rem; }
+  .materials article { background: var(--surface); border: 1px solid var(--rule); padding: 1.6rem; display: flex; flex-direction: column; }
+  .materials p { margin: 0.4rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+
+  /* treinamento modules */
+  .modules{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule); grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:1.5rem;}
+  .modules article{background:var(--surface);padding:1.6rem;}
+  .modules .mn{font-family:"IBM Plex Mono",monospace;font-size:0.8125rem;color:var(--signal);}
+  .modules h3{margin:0.35rem 0 0.4rem;}
+  .modules p{margin:0;font-size:0.9375rem;color:var(--ink-soft);}
+
+  /* identificadores */
+  .ids { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 2.5rem; }
+  .ids a { background: var(--surface); padding: 1.4rem; border-bottom: 0; display: block; }
+  .ids a:hover { background: var(--paper); color: inherit; }
+  .ids a:hover .name { color: var(--signal); }
+  .ids .name { display: block; font-weight: 600; font-size: 1rem; }
+  .ids .handle { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.8125rem; color: var(--signal); margin-top: 0.2rem; word-break: break-all; }
+  .ids .what { display: block; font-size: 0.875rem; color: var(--ink-soft); margin-top: 0.5rem; line-height: 1.55; }
+
+  /* footer */
+  footer { background: var(--ink); color: #9AA0AC; padding-block: clamp(2.5rem, 6vw, 3.75rem); font-size: 0.875rem; line-height: 1.65; }
+  footer p { max-width: 58ch; margin: 0 0 0.9rem; }
+  footer p:last-child { margin-bottom: 0; }
+  footer a { border-bottom-color: #4A5162; }
+  footer a:hover { color: #D9DBD6; border-bottom-color: #9AA0AC; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+        <p class="kicker">Eric Lopes Mello · Pesquisa e Gestão Pública</p>
+        <h1>Simbiose Decisória</h1>
+        <p class="lede">Em vez de tentar abrir a caixa-preta da tecnologia, governamos a decisão humana. Um modelo aplicável de painéis de BI a modelos preditivos.</p>
+    </div>
+
+    <div class="index">
+      <p class="formula">A tensão central: <em>interface fluida</em> vs. <em>supervisão humana</em>
+        <small>Sabemos que é difícil a explicabilidade técnica de sistemas algorítmicos. Mudar o foco da "governança do sistema" para a "governança da decisão" resolve esse problema e devolve o humano ao centro do processo.</small>
+      </p>
+      <dl class="dims">
+        <div><dt>Paradigma</dt><dd>De Inteligência Artificial para Inteligência Aumentada: a máquina amplia a capacidade humana, não a substitui.</dd></div>
+        <div><dt>Foco</dt><dd>Governança da Decisão em vez de tentar realizar a Governança do Sistema.</dd></div>
+        <div><dt>Escopo</dt><dd>Agnóstico: aplicável a planilhas, painéis de BI tradicionais ou IA Generativa.</dd></div>
+        <div><dt>Método e Regra</dt><dd>A Simbiose é o método de trabalho; a Governança é a regra de validação.</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Simbiose Decisória</h2>
+    <p>Quando um Tribunal adota um sistema tecnológico, a literatura de governança foca exaustivamente em tentar abrir a "caixa-preta" do algoritmo. O problema é que, com IA Generativa e modelos complexos, a explicabilidade técnica plena beira o impossível. A proposta do modelo GSD-ISD é pragmática: <b>em vez de tentar governar o sistema, devemos governar as decisões realizadas a partir do sistema.</b></p>
+    <p>Essa abordagem resolve a dificuldade da explicabilidade técnica e reforça a responsabilidade humana, alinhando-se à natureza jurídica da administração pública. Em um Tribunal, toda decisão exige motivação legal; a tecnologia é apenas o meio, mas a autoria final é intransferível e exclusiva do humano (magistrado, diretor ou servidor).</p>
+    
+    <h3 style="margin-top: 2rem;">Agnosticismo, Viés e Foco no Negócio</h3>
+    <p>Estender esse modelo para sistemas tradicionais — como painéis de Business Intelligence (BI) e sistemas de apoio à decisão — não só é possível como estratégico pelos seguintes motivos:</p>
+    <ul style="color: var(--ink-soft); font-size: 0.9375rem; padding-left: 1.2rem; max-width: 63ch;">
+      <li style="margin-bottom: 0.8rem;"><b>Governança agnóstica à tecnologia:</b> O Tribunal cria um framework à prova de futuro. Não importa se a ferramenta é o ChatGPT, um modelo preditivo, um painel do Power BI ou uma planilha em Excel: a regra incide sobre o impacto da decisão final. Isso evita refazer políticas a cada nova inovação.</li>
+      <li style="margin-bottom: 0.8rem;"><b>Mitigação do viés de automação em qualquer ambiente:</b> O "viés de ancoragem" não é exclusivo da IA. Um gráfico de BI mal construído ou com dados não validados pode induzir a um erro grave. Governar a decisão obriga o usuário a validar a informação, independentemente de quão simples seja o sistema emissor.</li>
+      <li><b>Foco no negócio e não apenas na TI:</b> Modelos falham quando viram um "checklist de TI". Governar a decisão transfere a responsabilidade para a área de negócios que efetivamente usa o painel, garantindo que o sistema cumpra seu propósito prático.</li>
+    </ul>
+
+    <h3 style="margin-top: 2.5rem;">Inteligência Aumentada: A Simbiose como Motor</h3>
+    <p>Nesta proposta, a tecnologia não é vista como substituição, mas como <b>Inteligência Aumentada</b>, isto é, ampliação da capacidade humana. A máquina traz a força bruta para processar volumes massivos de dados, identificar padrões ou redigir minutas em escala; o humano traz a empatia, a sabedoria, o senso de equidade e a chancela legal.</p>
+    <p>A Simbiose Decisória é o método (como o trabalho é feito); a governança da decisão é o framework que garante que o humano assumiu de fato a autoria, evitando o simples ato de "apertar o botão aprovar sem ler".</p>
+
+    <p class="stage">O modelo GSD-ISD · <b>especificado e verificado</b></p>
+    <div class="pillars">
+      <article>
+        <h3>Índice de Sensibilidade Decisória</h3>
+        <p>Classifica cada uso do sistema por risco, combinando impacto sobre direitos e irreversibilidade. A supervisão passa a ser sobre a decisão e proporcional ao risco.</p>
+      </article>
+      <article>
+        <h3>Três instâncias de controle</h3>
+        <p>Separa quem opera, quem supervisiona e quem audita, de modo que o controle recaia sobre a cadeia decisória e não apenas sobre o aspecto técnico (TI).</p>
+      </article>
+      <article>
+        <h3>Protocolo A1–A6</h3>
+        <p>Núcleo de seis critérios exigíveis desde o piloto, extraído de um desenho de nove critérios em quatro pilares de conformidade. Os três restantes (A7 a A9) ficam especificados como extensão de maturidade institucional. Pensado para gestores de negócio, sem o jargão de desenvolvimento de software.</p>
+      </article>
+      <article>
+        <h3>Registro de cadeia decisória</h3>
+        <p>A Ficha consigna as etapas e as motivações, materializando a responsabilidade intransferível humana (chancela legal) exigida pelo arcabouço do Tribunal.</p>
+      </article>
+    </div>
+
+    <p class="stage">Extensões da arquitetura · <b>em desenvolvimento e implementado</b></p>
+    <div class="pillars pillars-4">
+      <article>
+        <h3>Fricção de desenho na interface <span class="tag dev">em pesquisa</span></h3>
+        <p>Funções de forçamento cognitivo e microfronteiras apenas em tarefas de alto risco, mitigando o viés de automação em BI ou IA sem engessar a rotina.</p>
+      </article>
+      <article>
+        <h3>Praticabilidade e shadow IA <span class="tag dev">em pesquisa</span></h3>
+        <p>Quando o canal auditado é excessivamente burocrático, o servidor busca soluções externas não declaradas (planilhas soltas, IA genérica). A praticabilidade é vital.</p>
+      </article>
+      <article>
+        <h3>Governança do dado na origem <span class="tag dev">implementado</span></h3>
+        <p>Um painel com carga pela metade induz ao erro. A validação entre etapas e a detecção de desvios separam dados íntegros de parciais na origem do BI.</p>
+      </article>
+      <article>
+        <h3>Rastreamento e controle de metas <span class="tag dev">implementado</span></h3>
+        <p>Cada execução da esteira recebe identificador único, encadeado por verificador de integridade. Dessa trilha saem os indicadores comparados ao padrão histórico. A projeção de tendência é o passo seguinte, ainda não implementado.</p>
+      </article>
+    </div>
+
+    <p class="stage">Fase 0 · <b>diagnóstico baseline, proposta ainda não executada</b></p>
+    <p>Antes de aplicar qualquer fricção, o piloto proposto mede o caminho de menor resistência. O viés de automação é documentado, mas sua prevalência varia por contexto: atrito aplicado sem diagnóstico pode ser excessivo, empurrando o uso para ferramentas externas, ou insuficiente, deixando o viés sem remédio. Por isso, as duas semanas que antecedem o piloto de 12 semanas, organizado em três sprints, servem para medir o comportamento decisório atual e calibrar a fricção ao que for observado.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Fase 0 · 1</span>
+        <h3>Observar</h3>
+        <p>Observação não invasiva de 50 a 100 decisões, sem qualquer intervenção, e leitura de 200 a 300 registros prévios, quando existirem.</p>
+      </article>
+      <article>
+        <span class="mn">Fase 0 · 2</span>
+        <h3>Ouvir</h3>
+        <p>Entrevistas semiestruturadas com 6 a 8 magistrados e assessores sobre incerteza, confiança na recomendação e praticabilidade do protocolo.</p>
+      </article>
+      <article>
+        <span class="mn">Fase 0 · 3</span>
+        <h3>Calibrar</h3>
+        <p>Segmentação por tipo de decisão e por unidade, nunca por pessoa, e um plano que indica onde aplicar fricção e com que intensidade.</p>
+      </article>
+      <article>
+        <span class="mn">Fase 0 · 4</span>
+        <h3>Comparar</h3>
+        <p>Taxa de edição, tempo de decisão e consulta à origem do dado, medidos antes, voltam a ser medidos nos sprints, o que permite comparar antes e depois.</p>
+      </article>
+    </div>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Como o registro da trilha institucional não captura a conduta de quem decide, a Fase 0 é pesquisa à parte, com consentimento informado e resultados agregados.</p>
+
+    <h3 style="margin-top:3.5rem;">O ciclo da Simbiose Decisória</h3>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:0.4rem 0 0;">Depois da Fase 0, os quatro
+    pilares acima se organizam em seis etapas, onde o humano valida o sistema e a governança valida o humano. A etapa 6 reabre a etapa 1: o ciclo é iterativo.</p>
+    
+    <div class="modules">
+      <article>
+        <span class="mn">Etapa 1</span>
+        <h3>Governar o uso do painel</h3>
+        <p>Define em quais decisões apoiadas no painel ou na IA se exige ponto de verificação antes de agir.</p>
+      </article>
+      <article>
+        <span class="mn">Etapa 2</span>
+        <h3>Calcular o risco da decisão</h3>
+        <p>Classifica as decisões tomadas a partir do painel por impacto sobre direitos e reversibilidade (ISD), independentemente da tecnologia adotada.</p>
+      </article>
+      <article>
+        <span class="mn">Etapa 3</span>
+        <h3>Validar os dados</h3>
+        <p>Confere cada carga antes de liberar a seguinte, reinicia falhas e detecta desvios, mitigando viés por erro de insumo.</p>
+      </article>
+      <article>
+        <span class="mn">Etapa 4</span>
+        <h3>Documentar e Rastrear</h3>
+        <p>Registra automaticamente cada execução e a encadeia por verificador de integridade. A intervenção humana exige responsável e motivo. O registro é por unidade, nunca por pessoa.</p>
+      </article>
+      <article>
+        <span class="mn">Etapa 5</span>
+        <h3>Mapear o processo antecedente</h3>
+        <p>Mostra as etapas de dados e os usos de IA anteriores que produziram o indicador, fornecendo contexto para o julgamento humano.</p>
+      </article>
+      <article>
+        <span class="mn">Etapa 6</span>
+        <h3>Avaliar e Projetar (Painel Preditivo)</h3>
+        <p>Compara os indicadores com as metas, exibe o andamento e antecipa gargalos, submetendo a IA ao crivo do usuário. As etapas 1 a 5 estão implementadas em prova de conceito; o componente preditivo é fase posterior.</p>
+      </article>
+    </div>
+
+    <figure class="diagram">
+      <div class="arch">
+        <div class="layers">
+          <div class="layer">
+            <strong>Operação (A Simbiose)</strong>
+            <span>Humano e sistema atuando em conjunto no dia a dia.</span>
+          </div>
+          <div class="layer">
+            <strong>Supervisão da Decisão</strong>
+            <span>Comitê institucional, avaliando o uso a partir da faixa de risco do ISD.</span>
+          </div>
+          <div class="layer">
+            <strong>Auditoria Agnóstica</strong>
+            <span>Protocolo A1–A6, independente da tecnologia sob o capô (BI, IA, planilhas).</span>
+          </div>
+        </div>
+        <div class="divider">
+          <div class="outside">
+            <strong>Decisão Judicial / Administrativa final</strong>
+            <span>Onde a responsabilidade, autoria e motivação humana residem.</span>
+            <code>art. 93, IX, CF</code>
+          </div>
+        </div>
+      </div>
+      <figcaption>O controle alcança o percurso de uso e a validação humana — nunca o
+      mérito isolado do algoritmo ou da ferramenta técnica em si. Estas três instâncias definem <em>quem</em> audita a decisão e <em>como</em> ela é responsabilizada.</figcaption>
+    </figure>
+  </section>
+
+  <section id="demonstracao">
+    <h2>Etapas 1 e 2: Fricção e Cálculo de Risco da Decisão</h2>
+    <p>Defina o risco da <b>decisão a ser tomada</b> com base no painel/IA (ISD) e experimente a fricção cognitiva obrigatória para ações de alto risco. O sistema força o humano a sair do "piloto automático" e assumir a motivação.</p>
+
+    <div class="demo">
+      <!-- Calculadora ISD -->
+      <div class="controls">
+        <h3 style="margin-top:0;">1. Calcule o Risco (ISD)</h3>
+        <div class="field">
+          <label for="d1">D1 — Impacto da decisão a ser tomada</label>
+          <span class="hint">Peso 0,4 no índice (Avalia o efeito no mundo real)</span>
+          <select id="d1">
+            <option value="1">1 — Ação puramente informativa/ordinatória</option>
+            <option value="2">2 — Efeito operacional interno indireto</option>
+            <option value="3" selected>3 — Efeito relevante sobre processos/metas</option>
+            <option value="4">4 — Restrição ou movimentação em lote</option>
+            <option value="5">5 — Impacto direto em direitos fundamentais</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d2">D2 — Irreversibilidade da ação</label>
+          <span class="hint">Peso 0,6 no índice (Avalia a capacidade de correção)</span>
+          <select id="d2">
+            <option value="1">1 — Plenamente reversível de ofício</option>
+            <option value="2">2 — Reversível com rotina simples</option>
+            <option value="3" selected>3 — Reversível com custo administrativo relevante</option>
+            <option value="4">4 — Dificilmente reversível</option>
+            <option value="5">5 — Irreversível na prática</option>
+          </select>
+        </div>
+        
+        <h3 style="margin-top:2rem; border-top:1px solid var(--rule); padding-top:1.5rem;">2. Forçamento Cognitivo e Autoria</h3>
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">O forçamento entra em ação apenas nas decisões de risco elevado (Camada 3) para exigir a motivação legal/gerencial do operador humano.</p>
+        
+        <div class="field">
+          <label for="justificativa">Motivação / Fundamentação para a decisão:</label>
+          <textarea id="justificativa" rows="2" placeholder="Digite ao menos 20 caracteres para assumir a autoria do ato..." style="resize:vertical;"></textarea>
+        </div>
+        
+        <button type="button" id="btn-registrar" disabled>Registrar e Assumir Decisão</button>
+      </div>
+
+      <!-- Readout do ISD -->
+      <div class="readout" aria-live="polite">
+        <p class="score" id="score">60%</p>
+        <p class="verdict" id="verdict">Camada 2 — Risco Moderado</p>
+        <ul>
+          <li><b>Validação Humana (Fricção)</b><br><span id="prot">Registro simples suficiente</span></li>
+          <li><b>Auditoria da Decisão</b><br><span id="rev">Semestral</span></li>
+          <li style="border-bottom: 0;"><b>Status do Botão</b><br><span id="status-btn" style="color:#C9CCC5;">Bloqueado por texto insuficiente</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Matriz de Risco -->
+    <div class="matrix-wrap">
+      <h3 style="margin-bottom:0.5rem;">O espaço completo de classificação (ISD)</h3>
+      <p class="matrix-note" style="margin-top:0.2rem; margin-bottom:1.5rem;">Como D1 e D2 só assumem valores inteiros de 1 a 5, o risco da decisão é inteiramente mapeável: das 25 combinações, 5 resultam em risco baixo, 13 em moderado e 7 em elevado. A célula em destaque acompanha os parâmetros selecionados acima.</p>
+      <div class="matrix-scroll">
+        <table class="matrix" id="matrix">
+          <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Matriz de classificação do ISD por D1 e D2</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard">
+    <h2>Etapa 6: Inteligência Aumentada (Painel Preditivo)</h2>
+    <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores com meta declarada</b>: integridade das cargas (acima de 99%), tempo médio de recuperação (abaixo de 15 minutos), conformidade decisória (100% das decisões de risco elevado com fundamentação registrada), rastreabilidade (100% dos painéis com linhagem mapeada), assertividade dos alertas preditivos (falsos positivos abaixo de 5%, a partir do piloto do módulo preditivo) e adoção do canal oficial (uso recorrente em pelo menos 80% das unidades do piloto). A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
+    <p>Sobre a mesma base se apoia a <b>oportunidade preditiva</b>. Os painéis do Tribunal hoje são descritivos: mostram o que já ocorreu, sem antecipar acúmulo de acervo ou risco de descumprimento de meta. Projetar tendência é o passo seguinte, e ele depende do que vem antes, porque um modelo preditivo sobre carga não validada projeta o erro com mais confiança. O magistrado ou gestor submete a projeção ao crivo do ISD antes de agir.</p>
+    <p>Os indicadores de comportamento decisório medidos na Fase 0 (taxa de edição, tempo de decisão e consulta à origem) reaparecem no piloto como termo de comparação, para mostrar se a fricção produziu o efeito esperado.</p>
+    
+    <div class="dash-container">
+      <!-- Cartões -->
+      <div class="dash-cards">
+        <div class="dash-card">
+          <span class="n" style="color:var(--signal-tint)">99.2%</span>
+          <span class="l">INTEGRIDADE DE CARGA</span>
+        </div>
+        <div class="dash-card">
+          <span class="n" id="p-total">0</span>
+          <span class="l">DECISÕES ASSUMIDAS</span>
+        </div>
+        <div class="dash-card">
+          <span class="n" id="p-c3" style="color:var(--signal)">0</span>
+          <span class="l" style="color:var(--signal)">DECISÕES DE ALTO RISCO</span>
+        </div>
+        <div class="dash-card">
+          <span class="n">14</span>
+          <span class="l">TEMPO MÉDIO RECUP. (MIN)</span>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="dash-charts">
+        <div class="dash-donut-section">
+          <p class="chart-title">Composição do Risco Decisório</p>
+          <div class="donut-container">
+            <svg viewBox="0 0 120 120" width="100" height="100" style="overflow:visible;">
+              <circle id="donut-c1" cx="60" cy="60" r="46" fill="none" stroke="#C9CCC5" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s; transform:rotate(-90deg); transform-origin:center;"/>
+              <circle id="donut-c2" cx="60" cy="60" r="46" fill="none" stroke="#B8555F" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s, stroke-dashoffset .4s; transform:rotate(-90deg); transform-origin:center;"/>
+              <circle id="donut-c3" cx="60" cy="60" r="46" fill="none" stroke="#7A2230" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s, stroke-dashoffset .4s; transform:rotate(-90deg); transform-origin:center;"/>
+            </svg>
+            <div id="donut-legend">
+              <div class="legend-item"><span class="legend-box" style="background:#C9CCC5;"></span>C1: <strong id="dl-c1" style="margin-left:4px;">0%</strong></div>
+              <div class="legend-item"><span class="legend-box" style="background:#B8555F;"></span>C2: <strong id="dl-c2" style="margin-left:4px;">0%</strong></div>
+              <div class="legend-item"><span class="legend-box" style="background:#7A2230;"></span>C3: <strong id="dl-c3" style="margin-left:4px;">0%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-bar-section">
+          <p class="chart-title">Intervenções e Validações Humanas</p>
+          <div class="bar-row">
+            <div class="bar-label">Sistema Primário</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 54%;"></div></div>
+            <div class="bar-value">12</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Sistema Secundário</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 27%;"></div></div>
+            <div class="bar-value">6</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Armazém (DW/BI)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 14%;"></div></div>
+            <div class="bar-value">3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulador Preditivo -->
+      <div class="dash-predictive">
+        <p class="chart-title">Inteligência Aumentada: Projeção de Acervo (6 meses)</p>
+        <p style="font-size: 0.85rem; color: var(--ink-soft); margin-top: -0.5rem; margin-bottom: 1.5rem;">Ajuste as tendências para visualizar como a Inteligência Aumentada auxilia o gestor a antecipar gargalos operacionais em um acervo base de 5.000 processos.</p>
+        <div class="pred-grid">
+          <div class="controls-pred">
+            <label>Distribuição Mensal (Entrada de Dados): <span id="val-vol" style="color:var(--signal);">1500</span></label>
+            <input type="range" id="slide-vol" min="500" max="3000" step="50" value="1800">
+            
+            <label>Capacidade de Baixa Mensal (Saída/Apoio): <span id="val-cap" style="color:var(--ink-soft);">1600</span></label>
+            <input type="range" id="slide-cap" min="500" max="3000" step="50" value="1600">
+          </div>
+          <div class="chart-pred">
+             <svg viewBox="0 0 400 150" id="svg-pred" style="width:100%; height:100%; overflow:visible;">
+               <polygon fill="var(--signal-tint)" opacity="0.15" id="area-pred" points="" style="transition: fill 0.3s;" />
+               <polyline fill="none" stroke="var(--signal)" stroke-width="3" id="line-pred" points="" style="transition: stroke 0.3s;" />
+               <!-- axis base -->
+               <line x1="0" y1="150" x2="400" y2="150" stroke="var(--ink-soft)" />
+             </svg>
+             <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-size:0.75rem; color:var(--ink-soft); font-weight: 600;">
+               <span>Hoje</span><span>Mês 3</span><span>Mês 6</span>
+             </div>
+             <p style="margin-top:1rem; font-size: 0.95rem; font-weight: 600; text-align:right;">
+               Passivo Projetado (Mês 6): <span id="val-passivo" style="color:var(--signal); font-size: 1.2rem;">0</span>
+             </p>
+          </div>
+        </div>
+      </div>
+      
+      <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:1.5rem; border-top: 1px dashed var(--rule); padding-top: 1.5rem;">
+        <i>* Nota: os indicadores de validação, o tempo de recuperação e as barras contêm dados ilustrativos, e o simulador de projeção demonstra a interface de um componente preditivo ainda não implementado. Os cartões de "Decisões", a rosca de composição do risco e o simulador respondem em tempo real à sua interação.</i>
+      </p>
+    </div>
+  </section>
+
+  <section id="objecoes">
+    <h2>Objeções antecipadas</h2>
+    <p>As perguntas que um comitê de governança faz primeiro, e as respostas que o desenho já contém.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Pergunta 1</span>
+        <h3>Isto vigia o servidor ou o magistrado?</h3>
+        <p>O registro é por unidade organizacional, nunca por pessoa. A trilha documenta a execução técnica e os atos da unidade, não o comportamento de quem decide.</p>
+      </article>
+      <article>
+        <span class="mn">Pergunta 2</span>
+        <h3>Isto interfere na decisão?</h3>
+        <p>O ponto de verificação alerta e pede registro, mas não impede nem direciona a escolha. A motivação exigida pelo art. 93, IX, da Constituição não é substituída por nenhum elemento da interface.</p>
+      </article>
+      <article>
+        <span class="mn">Pergunta 3</span>
+        <h3>Isto torna o trabalho mais lento?</h3>
+        <p>O atrito custa segundos e incide apenas nas decisões de risco elevado. Nas etapas de dados, a automação reduz o tempo hoje gasto em conferência manual de cargas.</p>
+      </article>
+      <article>
+        <span class="mn">Pergunta 4</span>
+        <h3>Por que medir antes de agir?</h3>
+        <p>Sem linha de base não se sabe se a fricção funcionou nem se foi proporcional ao problema. A Fase 0 observa sem intervir, e seus resultados seguem a regra de não haver métrica individual.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Produção Acadêmica</h2>
+    <ul class="items">
+      <li><span class="year">2026</span>
+        <div><h3>Viés de Automação e Experiência do Usuário na Decisão Assistida por IA</h3><p>Trabalho de Conclusão de Curso (em andamento)</p></div></li>
+      <li><span class="year">2026</span>
+        <div><h3>Governança algorítmica e simbiose decisória no Poder Judiciário brasileiro</h3><p>Artigo Acadêmico · <a href="https://drive.google.com/file/d/1V4gyIwEcXyzfjgBCHI5q5gtMq0JZQFHd/view" target="_blank">Leia em PDF</a></p></div></li>
+      <li><span class="year">2026</span>
+        <div><h3>Apresentação: Governança Algorítmica (ISD)</h3><p>IV Congresso Nacional de Pesquisa Judiciária · <a href="https://drive.google.com/file/d/17ONCRzz4p0FAWXDrIZqOdhIq7nejnguK/view" target="_blank">Slides</a></p></div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Materiais abertos</h2>
+    <p>Instrumentos e provas de conceito são gratuitos e de acesso livre para replicação governamental.</p>
+    <div class="materials">
+      <article>
+        <div>
+          <h3>Instrumento simplificado do ISD</h3>
+          <p>Planilha de cálculo do índice e formulário de registro, prontos para uso. <br><br><a href="https://zenodo.org/records/22046705" target="_blank">Baixar no Zenodo</a></p>
+        </div>
+      </article>
+      <article>
+        <div>
+          <h3>Prova de conceito</h3>
+          <p>Código e scripts de verificação usados na avaliação do modelo.<br><br><a href="https://github.com/ericlmello" target="_blank">Repositório Github</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="normativo">
+    <h2>Acompanhamento normativo</h2>
+    <ul class="norms">
+      <li>
+        <span class="when">Mar 2025<br>vigor: jul 2025</span>
+        <div>
+          <h3><a href="https://atos.cnj.jus.br/atos/detalhar/6001" target="_blank">Resolução CNJ nº 615/2025</a></h3><span class="flag">Vigente</span>
+          <p>Estabelece normas de desenvolvimento, governança, auditoria e monitoramento de soluções de IA no Judiciário. Classifica o risco em níveis e disciplina o uso de IA externa e painéis.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="identificadores">
+    <h2>Onde encontrar o trabalho</h2>
+    <div class="ids">
+      <a href="https://github.com/ericlmello" target="_blank">
+        <span class="name">GitHub</span><span class="handle">github.com/ericlmello</span>
+        <span class="what">Prova de conceito, scripts de verificação e interface.</span>
+      </a>
+      <a href="https://zenodo.org/records/22046705" target="_blank">
+        <span class="name">Zenodo</span><span class="handle">10.5281/zenodo.22046705</span>
+        <span class="what">Versões do código com preservação de longo prazo e DOI.</span>
+      </a>
+      <a href="https://lattes.cnpq.br/4067922909268264" target="_blank">
+        <span class="name">Currículo Lattes</span><span class="handle">lattes.cnpq.br/4067922909268264</span>
+        <span class="what">Produção acadêmica oficial exigida por programas brasileiros.</span>
+      </a>
+      <a href="https://orcid.org/0009-0004-3962-5283" target="_blank">
+        <span class="name">ORCID</span><span class="handle">0009-0004-3962-5283</span>
+        <span class="what">Identificador internacional para publicações e indexação.</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Projeto de divulgação de conhecimento e inovação pública. Não há oferta ou indicação remunerada de produtos.</p>
+    <p>As opiniões aqui expressas são acadêmico-pessoais e não representam a posição institucional da organização em que atuo.</p>
+    <p><a href="https://github.com/ericlmello" target="_blank">GitHub</a> · <a href="https://zenodo.org/records/22046705" target="_blank">Zenodo</a> · <a href="https://lattes.cnpq.br/4067922909268264" target="_blank">Lattes</a> · <a href="https://www.linkedin.com/in/eric-lopes-mello-32a5567a/" target="_blank">LinkedIn</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Elementos do ISD
+  var d1 = document.getElementById('d1');
+  var d2 = document.getElementById('d2');
+  var textarea = document.getElementById('justificativa');
+  var btnReg = document.getElementById('btn-registrar');
+  
+  var score = document.getElementById('score');
+  var verdict = document.getElementById('verdict');
+  var prot = document.getElementById('prot');
+  var rev = document.getElementById('rev');
+  var statusBtn = document.getElementById('status-btn');
+  var matrix = document.getElementById('matrix');
+
+  var logAvaliacoes = {C1:0, C2:0, C3:0, total:0};
+
+  var CAMADAS = {
+    C1: {nome: 'Camada 1 — Baixo Risco', prot: 'Registro automático na trilha, sem interrupção.', rev: 'Anual'},
+    C2: {nome: 'Camada 2 — Risco Moderado', prot: 'Registro automático na trilha, sem interrupção.', rev: 'Semestral'},
+    C3: {nome: 'Camada 3 — Alto Risco', prot: 'Forçamento cognitivo obrigatório: motivação registrada pelo próprio usuário.', rev: 'Trimestral'}
+  };
+
+  function isd(a,b){ return 8*a + 12*b; }
+
+  function enquadrar(v){
+    var base = v < 50 ? 'C1' : (v < 80 ? 'C2' : 'C3');
+    if(v >= 44 && v < 50) base = 'C2'; 
+    if(v >= 74 && v < 80) base = 'C3'; 
+    return base;
+  }
+
+  function montarMatriz(){
+    var html = '<thead><tr><th scope="col">D2 \\ D1</th>';
+    for(var x=1; x<=5; x++) html += '<th scope="col">'+x+'</th>';
+    html += '</tr></thead><tbody>';
+    for(var y=5; y>=1; y--){
+      html += '<tr><th scope="row">'+y+'</th>';
+      for(var x2=1; x2<=5; x2++){
+        var v = isd(x2,y), camada = enquadrar(v);
+        var cls = camada.toLowerCase();
+        html += '<td class="'+cls+'" data-d1="'+x2+'" data-d2="'+y+'">'+ v.toFixed(0) + '%</td>';
+      }
+      html += '</tr>';
+    }
+    matrix.innerHTML = html + '</tbody>';
+  }
+
+  function destacarMatriz(a,b){
+    Array.prototype.forEach.call(matrix.querySelectorAll('td'), function(td){
+      td.classList.toggle('active', +td.dataset.d1 === a && +td.dataset.d2 === b);
+    });
+  }
+
+  function avaliarFormulario(){
+    var a = +d1.value, b = +d2.value, v = isd(a,b);
+    var camada = enquadrar(v);
+    var c = CAMADAS[camada];
+    
+    score.textContent = v.toFixed(0) + '%';
+    verdict.textContent = c.nome;
+    prot.textContent = c.prot;
+    rev.textContent = c.rev;
+    destacarMatriz(a, b);
+
+    var textoLen = textarea.value.trim().length;
+    var precisaJustificar = (camada === 'C3');
+
+    if(precisaJustificar) {
+      textarea.disabled = false;
+      if(textoLen >= 20) {
+        btnReg.disabled = false;
+        statusBtn.textContent = 'Liberado (Autoria motivada adequadamente)';
+        statusBtn.style.color = '#C9CCC5';
+      } else {
+        btnReg.disabled = true;
+        statusBtn.textContent = 'Bloqueado (Alto Risco exige fundamentação de 20+ caracteres)';
+        statusBtn.style.color = '#B8555F';
+      }
+    } else {
+      textarea.disabled = false;
+      btnReg.disabled = false;
+      statusBtn.textContent = 'Liberado (Camada ' + camada.replace('C','') + ' não exige motivação estrita na interface)';
+      statusBtn.style.color = '#C9CCC5';
+    }
+    return camada;
+  }
+
+  function registrarAvaliacao(){
+    var camada = avaliarFormulario();
+    logAvaliacoes[camada]++;
+    logAvaliacoes.total++;
+    
+    btnReg.textContent = "Decisão Assumida e Registrada!";
+    btnReg.style.background = "var(--rule)";
+    btnReg.style.color = "#131722";
+    setTimeout(function(){
+      btnReg.textContent = "Registrar e Assumir Decisão";
+      btnReg.style.background = "var(--ink)";
+      btnReg.style.color = "#F1F2EF";
+      textarea.value = '';
+      avaliarFormulario();
+    }, 1500);
+
+    atualizarDashboardMetas();
+  }
+
+  function atualizarDashboardMetas() {
+    var t = logAvaliacoes.total;
+    if(t === 0) return;
+    
+    document.getElementById('p-total').textContent = t;
+    document.getElementById('p-c3').textContent = logAvaliacoes.C3;
+
+    var C = 2 * Math.PI * 46; 
+    var offset = 0;
+
+    ['C1','C2','C3'].forEach(function(c, i) {
+      var pct = logAvaliacoes[c] / t;
+      var arc = pct * C;
+      var el = document.getElementById('donut-' + c.toLowerCase());
+      
+      el.setAttribute('stroke-dasharray', arc.toFixed(3) + ' ' + (C - arc).toFixed(3));
+      el.setAttribute('stroke-dashoffset', (-offset).toFixed(3));
+      offset += arc;
+
+      document.getElementById('dl-' + c.toLowerCase()).textContent = Math.round(pct * 100) + '%';
+    });
+  }
+
+  // Lógica do Simulador Preditivo
+  var slideVol = document.getElementById('slide-vol');
+  var slideCap = document.getElementById('slide-cap');
+  var valVol = document.getElementById('val-vol');
+  var valCap = document.getElementById('val-cap');
+  var linePred = document.getElementById('line-pred');
+  var areaPred = document.getElementById('area-pred');
+  var valPassivo = document.getElementById('val-passivo');
+
+  function atualizarPredicao() {
+    var vol = parseInt(slideVol.value);
+    var cap = parseInt(slideCap.value);
+    valVol.textContent = vol;
+    valCap.textContent = cap;
+
+    var meses = 6;
+    var baseAcervo = 5000;
+    var dados = [];
+
+    for(var i=0; i<=meses; i++) {
+      var acervoAtual = baseAcervo + ((vol - cap) * i);
+      dados.push(Math.max(0, acervoAtual));
+    }
+
+    var tendenciaRuim = (vol > cap);
+    valPassivo.style.color = tendenciaRuim ? 'var(--signal)' : 'var(--ink-soft)';
+    valVol.style.color = tendenciaRuim ? 'var(--signal)' : 'inherit';
+    
+    linePred.setAttribute('stroke', tendenciaRuim ? 'var(--signal)' : '#9AA0AC');
+    areaPred.setAttribute('fill', tendenciaRuim ? 'var(--signal-tint)' : '#C9CCC5');
+
+    valPassivo.textContent = dados[6].toLocaleString('pt-BR') + " processos";
+
+    var w = 400;
+    var h = 150;
+    var dx = w / meses;
+    var maxView = Math.max(12000, Math.max.apply(null, dados) * 1.15); 
+
+    var points = [];
+    for(var i=0; i<=meses; i++) {
+      var x = i * dx;
+      var y = h - (dados[i] / maxView) * h;
+      points.push(x.toFixed(1) + "," + y.toFixed(1));
+    }
+
+    linePred.setAttribute("points", points.join(" "));
+    areaPred.setAttribute("points", "0," + h + " " + points.join(" ") + " " + w + "," + h);
+  }
+
+  // Event Listeners
+  d1.addEventListener('change', avaliarFormulario);
+  d2.addEventListener('change', avaliarFormulario);
+  textarea.addEventListener('input', avaliarFormulario);
+  btnReg.addEventListener('click', registrarAvaliacao);
+  slideVol.addEventListener('input', atualizarPredicao);
+  slideCap.addEventListener('input', atualizarPredicao);
+
+  // Inicialização
+  montarMatriz();
+  avaliarFormulario();
+  atualizarPredicao();
+
+  // Estado inicial: desenha a rosca ilustrativa coerente com a legenda,
+  // substituída pelos dados reais assim que a primeira decisão é registrada.
+  if (logAvaliacoes.total === 0) {
+      var ilustrativo = {C1: 60, C2: 30, C3: 10};
+      var Ci = 2 * Math.PI * 46, offi = 0;
+      ['C1','C2','C3'].forEach(function(c) {
+        var arc = (ilustrativo[c] / 100) * Ci;
+        var el = document.getElementById('donut-' + c.toLowerCase());
+        el.setAttribute('stroke-dasharray', arc.toFixed(3) + ' ' + (Ci - arc).toFixed(3));
+        el.setAttribute('stroke-dashoffset', (-offi).toFixed(3));
+        offi += arc;
+        document.getElementById('dl-' + c.toLowerCase()).textContent = ilustrativo[c] + '%';
+      });
+  }
+
+})();
+</script>
+</body>
+</html>
