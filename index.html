@@ -149,26 +149,46 @@
 
 
   /* ---------- painel integrado ---------- */
-  .ip { margin-top: 2rem; background: var(--surface); border: 1px solid var(--rule); }
-  .ip-alert { background: var(--ink); color: #E9EAE6; padding: 1rem 1.25rem; font-size: 0.9rem; line-height: 1.5; border-left: 4px solid var(--signal-tint); }
-  .ip-alert b { color: var(--signal-tint); font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
-  .ip-grid { display: grid; grid-template-columns: 1fr; }
-  @media (min-width: 48rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .blk:nth-child(odd) { border-right: 1px solid var(--rule); } }
-  .blk { padding: 1.25rem 1.4rem; border-top: 1px solid var(--rule); }
-  .blk .chart-title { margin-bottom: 0.9rem; }
-  .blk .src { font-size: 0.75rem; color: var(--ink-soft); margin: 0.7rem 0 0; }
+  .ip { margin-top: 2rem; border: 1px solid var(--rule); background: var(--paper); }
+  .ip-top { background: var(--ink); color: #E9EAE6; padding: 1.1rem 1.4rem; display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; justify-content: space-between; align-items: center; }
+  .ip-top strong { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.35rem; display: block; }
+  .ip-top span.s { font-size: 0.8125rem; color: #9AA0AC; }
+  .ip-top .chips span { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.04em; border: 1px solid #4A5162; padding: 0.25rem 0.6rem; margin-left: 0.4rem; color: #E9EAE6; }
+  .ip-alert { margin: 1rem; padding: 0.8rem 1rem; background: #EFDDDF; border: 1px solid var(--signal-tint); border-left: 5px solid var(--signal); font-size: 0.875rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; justify-content: space-between; }
+  .ip-alert b { color: var(--signal); }
+  .ip-alert i { font-style: normal; color: var(--ink-soft); font-size: 0.8125rem; }
+  .ip-kpis { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 0 1rem 1rem; }
+  .ip-kpi { background: var(--surface); border: 1px solid var(--rule); border-top: 4px solid var(--signal-tint); padding: 0.8rem 1rem; }
+  .ip-kpi small { display: block; font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.35; min-height: 2.2em; }
+  .ip-kpi b { display: block; font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 2.2rem; line-height: 1.15; color: var(--ink); }
+  .ip-kpi em { font-style: normal; font-size: 0.75rem; color: var(--ink-soft); }
+  .ip-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; padding: 0 1rem 1rem; }
+  @media (min-width: 44rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .w2, .ip-grid .w3 { grid-column: 1 / -1; } }
+  @media (min-width: 64rem) { .ip-grid { grid-template-columns: repeat(3, 1fr); } .ip-grid .w2 { grid-column: span 2; } }
+  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; }
+  .blk h4 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.05rem; margin: 0 0 0.15rem; color: var(--signal); }
+  .blk .sub { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
+  .blk .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.8125rem; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
+  .drawer { border: 1px dashed var(--signal-tint); background: var(--paper); padding: 0.65rem 0.8rem; margin-top: 0.8rem; font-size: 0.8125rem; line-height: 1.55; }
   .ip table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
   .ip th, .ip td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
   .ip th { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); font-weight: 500; }
-  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; padding: 0.1rem 0.4rem; border: 1px solid var(--rule); color: var(--ink-soft); white-space: nowrap; }
-  .chip.ok { background: #EDEEEA; }
+  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; padding: 0.05rem 0.4rem; border: 1px solid var(--rule); background: #EDEEEA; color: var(--ink-soft); white-space: nowrap; }
   .chip.warn { background: #EFDDDF; border-color: var(--signal-tint); color: var(--signal); }
   .chip.hi { background: var(--signal); border-color: var(--signal); color: #F1F2EF; }
-  .spark { display: grid; grid-template-columns: 1fr 6rem 4.5rem; gap: 0.6rem; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-size: 0.8125rem; }
-  .spark svg { width: 100%; height: 1.6rem; }
-  .spark span:last-child { text-align: right; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; }
-  .sprint { margin-bottom: 0.9rem; font-size: 0.8125rem; }
-  .sprint .bar-track { margin-top: 0.25rem; }
+  .mx3 { display: grid; grid-template-columns: repeat(3, 2.2rem); gap: 3px; }
+  .mx3 div { height: 2.2rem; }
+  .mx3 .l { background: #EDEEEA; } .mx3 .m { background: #EFDDDF; } .mx3 .h { background: #E2C3C7; }
+  .mx3 .on { outline: 3px solid var(--ink); outline-offset: -3px; background: var(--signal-tint); }
+  .ind { font-size: 0.8125rem; margin-bottom: 0.55rem; }
+  .ind span { float: right; font-weight: 600; }
+  .ind .bar-track { height: 8px; margin-top: 3px; }
+  .modal { border: 2px solid var(--ink); padding: 0.8rem 0.9rem; background: var(--surface); }
+  .modal .ta { border: 1px solid var(--rule); background: var(--paper); height: 3.2rem; margin: 0.5rem 0; padding: 0.4rem; font-size: 0.8125rem; color: var(--ink-soft); }
+  .btn { display: inline-block; padding: 0.4rem 0.9rem; font-size: 0.8125rem; font-weight: 600; }
+  .btn.off { background: #E4E5E1; color: #8B909A; }
+  .btn.on { background: var(--ink); color: #F1F2EF; margin-left: 0.4rem; }
+  .ip-foot { padding: 0 1rem 1rem; font-size: 0.8125rem; color: var(--ink-soft); text-align: center; max-width: none; }
   .qgrid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin-top: 1.5rem; }
   .qgrid article { background: var(--surface); padding: 1.3rem; }
   .qgrid article h3 { color: var(--signal); font-size: 0.9375rem; }
@@ -516,62 +536,107 @@
     <p>Os indicadores de qualidade, com metas qualitativas e leitura por tendência em cada unidade, nunca em ranking, convivem com os indicadores de risco de perda de qualidade, que sinalizam a deterioração antes que ela se consolide. O mesmo painel é reutilizado nos sprints seguintes para monitorar o piloto.</p>
 
     <div class="ip" role="group" aria-label="Mockup ilustrativo do painel integrado">
-      <div class="ip-alert"><b>Alerta consolidado</b>2 desvios de carga detectados hoje (1 em sistema secundário, 1 no armazém). Projeção de acervo em 6 meses acima da capacidade na unidade B. Decisão do comitê pendente no sprint 2.</div>
+      <div class="ip-top">
+        <div><strong>Painel Integrado de Governança da Decisão</strong><span class="s">Inteligência Aumentada · Simbiose Decisória · Vara piloto (fictícia) · Sprint 2 de 6</span></div>
+        <div class="chips"><span>Risco: unidade em probabilidade ALTA</span><span>Comitê Ágil</span></div>
+      </div>
+      <div class="ip-alert"><div><b>Alerta consolidado.</b> Probabilidade de perda de qualidade alta e acervo projetado acima da capacidade no mês 4.</div><i>Aciona apoio da gestão, não cobrança. Dados por unidade, nunca por magistrado.</i></div>
+      <div class="ip-kpis">
+        <div class="ip-kpi"><small>Conformidade (risco elevado, fundamentação registrada)</small><b>92%</b><em>meta: direção de alta</em></div>
+        <div class="ip-kpi"><small>Cargas validadas</small><b>98%</b><em>2 falhas reiniciadas</em></div>
+        <div class="ip-kpi"><small>Alertas ativos</small><b>2</b><em>1 de qualidade, 1 de acervo</em></div>
+        <div class="ip-kpi"><small>Reavaliações em dia (Camada 3)</small><b>5 de 6</b><em>1 antecipada pela matriz</em></div>
+      </div>
       <div class="ip-grid">
-        <div class="blk">
-          <p class="chart-title">Carga, fonte do dado e ponto de verificação</p>
-          <table>
-            <tr><th>Fonte</th><th>Atualização</th><th>Carga</th><th>Verificação</th></tr>
-            <tr><td>Sistema primário</td><td>hoje, 06h</td><td><span class="chip ok">validada</span></td><td>risco elevado</td></tr>
-            <tr><td>Sistema secundário</td><td>ontem, 22h</td><td><span class="chip warn">desvio</span></td><td>risco moderado</td></tr>
-            <tr><td>Armazém (DW/BI)</td><td>hoje, 05h</td><td><span class="chip warn">parcial</span></td><td>risco elevado</td></tr>
-          </table>
-          <p class="src">Painel lateral e painel de controle da carga. Ao abrir um indicador, mostra-se a fonte e a data do dado.</p>
+
+        <div class="blk"><h4>1. Indicador com origem e carga</h4><p class="sub">Painel de controle da carga e painel lateral de fonte</p>
+          <div class="row"><span>Processos solucionados (mês)</span><b>1.240</b></div>
+          <div class="row"><span>Pendentes de decisão</span><b>386</b></div>
+          <div class="row"><span>Carga e-Gestão</span><span class="chip">Validada</span></div>
+          <div class="row"><span>Linhas lidas</span><b>48.312</b></div>
+          <div class="row"><span>Última validação</span><b>06:02</b></div>
+          <div class="drawer"><b>Fonte do dado</b><br>Sistema processual de origem<br>Atualizado hoje, 06:10<br>Etapas: extração, validação, painel</div>
         </div>
-        <div class="blk">
-          <p class="chart-title">Indicadores de risco de perda de qualidade</p>
-          <table>
-            <tr><th>Indicador (agregado por unidade)</th><th>Situação</th></tr>
-            <tr><td>Aceitação sem consulta à origem do dado</td><td><span class="chip warn">atenção</span></td></tr>
-            <tr><td>Tempo de decisão em risco elevado abaixo do padrão</td><td><span class="chip ok">normal</span></td></tr>
-            <tr><td>Justificativas repetidas em sequência</td><td><span class="chip hi">crítico</span></td></tr>
-          </table>
-          <p class="src">Indicadores preventivos e agregados. Nunca por pessoa.</p>
+
+        <div class="blk"><h4>2. Risco de perda de qualidade</h4><p class="sub">Probabilidade (seis indicadores) × impacto (ISD)</p>
+          <div style="display:flex;gap:0.9rem;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap">
+            <div><div class="mx3"><div class="m"></div><div class="h"></div><div class="on"></div><div class="l"></div><div class="m"></div><div class="h"></div><div class="l"></div><div class="l"></div><div class="m"></div></div>
+            <div style="font-size:0.6875rem;color:var(--ink-soft);margin-top:4px">alto à direita: impacto (C3)<br>alto no topo: probabilidade</div></div>
+            <div style="font-size:0.8125rem;line-height:1.7">Probabilidade <span class="chip hi">ALTA</span><br>Impacto <span class="chip hi">Camada 3</span><br><span style="color:var(--ink-soft);font-size:0.75rem">nível consignado pelo comitê na Ficha</span></div>
+          </div>
+          <div class="ind">Pressão de prazo sustentada<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:var(--signal)"></div></div></div>
+          <div class="ind">Aceleração brusca do volume<span>média</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
+          <div class="ind">Decisões concentradas no fim do período<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
+          <div class="ind">Carga por força de trabalho<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--signal)"></div></div></div>
+          <div class="ind">Complexidade do acervo<span>média</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div></div>
+          <div class="ind">Minutas sugeridas por automação<span>baixa</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:#9AA0AC"></div></div></div>
         </div>
-        <div class="blk">
-          <p class="chart-title">Qualidade por tendência (sem ranking)</p>
-          <div class="spark"><span>Fundamentação registrada em risco elevado</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,13 12,11 24,9 36,7 48,5 60,3"/></svg><span>em alta</span></div>
-          <div class="spark"><span>Linhagem mapeada dos painéis</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,8 12,8 24,9 36,8 48,8 60,8"/></svg><span>estável</span></div>
-          <div class="spark"><span>Integridade das cargas</span><svg viewBox="0 0 60 16"><polyline fill="none" stroke="#7A2230" stroke-width="1.5" points="0,4 12,5 24,7 36,9 48,11 60,13"/></svg><span>em queda</span></div>
-          <p class="src">Metas qualitativas. A leitura é a direção da série em cada unidade.</p>
+
+        <div class="blk"><h4>3. Qualidade por tendência, sem ranking</h4><p class="sub">Meta qualitativa como direção, série da própria unidade</p>
+          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Três séries de tendência com projeção tracejada">
+            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Reforma em 2ª instância</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">tendência ↓ (bom)</text></g>
+            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,60 60,52 120,56 180,44 240,40 300,34 360,30"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,30 400,24"/>
+            <g font-size="12"><text x="0" y="104" font-weight="700">Retorno por nulidade</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↑ (atenção)</text></g>
+            <polyline fill="none" stroke="#B8555F" stroke-width="3" points="0,160 60,164 120,156 180,150 240,140 300,130 360,122"/><polyline fill="none" stroke="#B8555F" stroke-width="2" stroke-dasharray="5 4" points="360,122 400,112"/>
+            <g font-size="12"><text x="0" y="194" font-weight="700">Fundamentação (grade objetiva)</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↓ (atenção)</text></g>
+            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,226 60,222 120,228 180,236 240,244 300,250 360,258"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,258 400,268"/>
+            <text x="0" y="282" font-size="11" fill="#39404F">linha tracejada: projeção do risco (predição)</text>
+          </svg>
         </div>
-        <div class="blk">
-          <p class="chart-title">Monitoramento dos sprints</p>
-          <div class="sprint">Sprint 1 · concluído<div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-          <div class="sprint">Sprint 2 · em curso<div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
-          <div class="sprint">Sprint 3 · planejado<div class="bar-track"><div class="bar-fill" style="width:8%"></div></div></div>
-          <p class="src">Painel reutilizado nos sprints seguintes, com decisão do comitê a cada fechamento.</p>
+
+        <div class="blk"><h4>4. Projeção do acervo (6 meses)</h4><p class="sub">Extensão preditiva do painel hoje descritivo</p>
+          <svg width="100%" viewBox="0 0 400 230" role="img" aria-label="Projeção do acervo cruzando a capacidade no mês 4">
+            <line x1="30" y1="190" x2="390" y2="190" stroke="#C9CCC5"/><line x1="30" y1="20" x2="30" y2="190" stroke="#C9CCC5"/>
+            <line x1="30" y1="95" x2="390" y2="95" stroke="#7A2230" stroke-width="2" stroke-dasharray="6 4"/><text x="34" y="88" font-size="12" fill="#7A2230">capacidade de baixa</text>
+            <polygon points="30,150 130,140 230,118 330,92 390,76 390,46 330,66 230,92 130,118 30,132" fill="#B8555F" opacity=".2"/>
+            <polyline fill="none" stroke="#131722" stroke-width="3.5" points="30,141 130,129 230,105 330,79 390,61"/>
+            <g font-size="12" fill="#39404F"><text x="22" y="208">Hoje</text><text x="125" y="208">Mês 2</text><text x="225" y="208">Mês 4</text><text x="325" y="208">Mês 6</text></g>
+            <text x="390" y="40" text-anchor="end" font-size="12" fill="#7A2230" font-weight="700">cruza a capacidade no mês 4</text>
+          </svg>
         </div>
-        <div class="blk">
-          <p class="chart-title">Intervenções técnicas por etapa</p>
-          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 3 · dados</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-value">9</div></div>
-          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 4 · registro</div><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><div class="bar-value">3</div></div>
-          <div class="bar-row"><div class="bar-label" style="width:110px">Etapa 5 · processo</div><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><div class="bar-value">2</div></div>
-          <p class="src">Reinícios, correções e ajustes por etapa, com responsável e motivo.</p>
+
+        <div class="blk"><h4>5. Ponto de verificação (risco elevado)</h4><p class="sub">Forçamento cognitivo, alerta que não condiciona a decisão</p>
+          <div class="modal"><b style="font-size:0.875rem">A recomendação não vem pronta para confirmar.</b>
+            <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px">Registre a fundamentação normativa (texto seu, extensão mínima)</div>
+            <div class="ta">Digite a motivação do ato...</div>
+            <span class="btn off">Confirmar (bloqueado)</span><span class="btn on">Registrar e liberar</span></div>
+          <div class="drawer">Gravado na trilha: responsável, motivo e carimbo de tempo. Sem conteúdo gerado nem identificação do decisor no log restrito a metadados.</div>
         </div>
-        <div class="blk">
-          <p class="chart-title">Trilha de registros</p>
-          <table>
-            <tr><th>Execução</th><th>Etapa</th><th>Evento</th></tr>
-            <tr><td>#0412</td><td>3</td><td>desvio de carga sinalizado</td></tr>
-            <tr><td>#0413</td><td>3</td><td>reinício por unidade responsável</td></tr>
-            <tr><td>#0414</td><td>4</td><td>decisão de risco elevado, com motivo</td></tr>
-          </table>
-          <p class="src">Trilha encadeada por verificador de integridade, por unidade.</p>
+
+        <div class="blk"><h4>6. Monitoramento dos sprints</h4><p class="sub">Painel da Fase 0, reutilizado nos sprints seguintes</p>
+          <table><tr><th>Indicador (agregado)</th><th>Base</th><th>S1</th><th>S2</th></tr>
+            <tr><td>Taxa de edição antes de confirmar</td><td>8%</td><td>17%</td><td>21%</td></tr>
+            <tr><td>Tempo exibição → confirmação</td><td>24 s</td><td>41 s</td><td>47 s</td></tr>
+            <tr><td>Consulta à origem do dado</td><td>12%</td><td>36%</td><td>44%</td></tr>
+            <tr><td>Adoção do canal oficial</td><td>n/d</td><td>71%</td><td>83%</td></tr>
+            <tr><td>Tempo adicional por caso</td><td>0 s</td><td>+19 s</td><td>+14 s</td></tr></table>
+          <p style="margin:0.8rem 0 0;font-size:0.8125rem;line-height:1.6">Critério de parada <span class="chip">dentro do limite</span><br>Decisão do comitê no fim do sprint, <b>expandir, ajustar ou suspender</b></p>
+        </div>
+
+        <div class="blk"><h4>7. Composição de risco das decisões</h4><p class="sub">Classificação pelo ISD, última apuração</p>
+          <div style="display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap">
+            <svg width="110" height="110" viewBox="0 0 42 42" role="img" aria-label="Rosca de composição de risco"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#C9CCC5" stroke-width="7" stroke-dasharray="20 80" stroke-dashoffset="25"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#B8555F" stroke-width="7" stroke-dasharray="52 48" stroke-dashoffset="5"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#7A2230" stroke-width="7" stroke-dasharray="28 72" stroke-dashoffset="-47"/></svg>
+            <div style="font-size:0.8125rem;line-height:1.9"><span style="color:#9AA0AC">■</span> Risco baixo, 20%<br><span style="color:#B8555F">■</span> Moderado, 52%<br><span style="color:#7A2230">■</span> Elevado, 28%</div>
+          </div>
+        </div>
+
+        <div class="blk w2"><h4>8. Intervenções técnicas por etapa</h4><p class="sub">Etapas automáticas (3, 4 e 5), cada intervenção exige responsável e motivo, registrada por unidade</p>
+          <div class="bar-row"><div class="bar-label" style="width:11rem">3. Validar os dados</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-value">5</div></div>
+          <div class="bar-row"><div class="bar-label" style="width:11rem">4. Documentar e rastrear</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-value">2</div></div>
+          <div class="bar-row"><div class="bar-label" style="width:11rem">5. Mapear o processo</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-value">3</div></div>
+        </div>
+
+        <div class="blk w3"><h4>9. Trilha de registros recentes</h4><p class="sub">Tabela selada por cadeia de hash, registro por unidade, nunca por pessoa</p>
+          <div style="overflow-x:auto"><table><tr><th>Quando</th><th>Etapa</th><th>Status</th><th>Descrição</th></tr>
+            <tr><td>10:05</td><td>6. Avaliar</td><td><span class="chip hi">Alerta</span></td><td>Probabilidade alta de perda de qualidade na unidade</td></tr>
+            <tr><td>09:41</td><td>1. Verificar</td><td><span class="chip">Registrada</span></td><td>Justificativa gravada em decisão de risco elevado</td></tr>
+            <tr><td>06:10</td><td>3. Validar</td><td><span class="chip">Validada</span></td><td>Carga e-Gestão concluída, 48.312 linhas lidas</td></tr>
+            <tr><td>06:02</td><td>3. Validar</td><td><span class="chip warn">Reiniciada</span></td><td>Falha de extração tratada, responsável e motivo registrados</td></tr></table></div>
         </div>
       </div>
+      <p class="ip-foot">Mockup ilustrativo com dados fictícios. Linha de base calibrada na Fase 0. Indicadores sempre por unidade, nunca por magistrado, e sem ranking.</p>
     </div>
-    <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>Mockup ilustrativo do painel integrado, com dados, nomes e números fictícios. A rotina monitorada e a trilha estão implementadas e testadas, mas o consolidado gerencial ainda não roda em produção.</i></p>
+    <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>A rotina monitorada e a trilha estão implementadas e testadas, mas o consolidado gerencial ainda não roda em produção.</i></p>
 
     <h3 style="margin-top:3rem;">Componentes interativos</h3>
 
