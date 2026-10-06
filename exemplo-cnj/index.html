@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exemplo com o painel do CNJ</title>
+<meta name="description" content="A proposta Governança da Decisão aplicada ao Painel de Estatísticas do Poder Judiciário (CNJ/DataJud): risco, painel, metas, mapeamento, rastreio e predição por vara. Cenário fictício.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23131722'/><text y='72' x='50' text-anchor='middle' font-size='64' fill='%23B8555F' font-family='Georgia,serif'>G</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#131722;--ink-soft:#39404F;--paper:#F1F2EF;--surface:#FAFAF8;--rule:#C9CCC5;--signal:#7A2230;--signal-tint:#B8555F;--low:#9AA0AC;--measure:66ch}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:1rem;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:68rem;margin-inline:auto;padding-inline:clamp(1.1rem,4vw,3rem)}
+  p{max-width:var(--measure);margin:0 0 1rem}
+  a{color:inherit;text-decoration:none;border-bottom:1px solid var(--signal-tint)}
+  a:hover{color:var(--signal)}
+  a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+  .hero{background:var(--ink);color:#E9EAE6;padding-block:clamp(2.5rem,8vw,5rem) clamp(2rem,5vw,3rem)}
+  .kicker{font-size:.8125rem;color:#9AA0AC;text-transform:uppercase;letter-spacing:.05em;margin:0 0 1.2rem}
+  .hero h1{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.04;letter-spacing:-.018em;margin:0 0 1rem}
+  .lede{font-family:"Newsreader",Georgia,serif;font-size:clamp(1.1rem,1rem+.6vw,1.35rem);line-height:1.5;color:#C6C9C3;max-width:56ch;margin:0}
+  .banner{background:var(--signal);color:#fff;font-size:.875rem;padding:.6rem 0}
+  nav.toc{position:sticky;top:2.9rem;z-index:20;background:var(--surface);border-bottom:1px solid var(--rule)}
+  nav.toc .wrap{display:flex;gap:1.1rem;overflow-x:auto;padding-block:.65rem;white-space:nowrap;font-size:.8125rem}
+  nav.toc a{border:0;color:var(--ink-soft)}
+  nav.toc a:hover{color:var(--signal)}
+  section{padding-block:clamp(2.6rem,6vw,4.5rem);border-top:1px solid var(--rule)}
+  h2{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,1.2rem+1.3vw,2.3rem);line-height:1.15;margin:0 0 1rem}
+  h3{font-weight:600;font-size:1rem;margin:1.6rem 0 .4rem}
+  .stage{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem}
+  .stage b{color:var(--signal);font-weight:500}
+  .note{font-size:.875rem;color:var(--ink-soft)}
+  .card{background:var(--surface);border:1px solid var(--rule);padding:1.1rem 1.2rem}
+  .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+  table{width:100%;border-collapse:collapse;font-size:.875rem}
+  th{text-align:left;font-weight:500;color:var(--ink-soft);font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;padding:.4rem .5rem;border-bottom:2px solid var(--rule)}
+  td{padding:.5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+  .scroll{overflow-x:auto}
+  .chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;padding:.1rem .5rem;border:1px solid var(--rule);background:#EDEEEA;color:var(--ink-soft)}
+  .chip.hi{background:var(--signal);border-color:var(--signal);color:#fff}
+  .chip.mid{background:#EFDDDF;border-color:var(--signal-tint);color:var(--signal)}
+  .kpis{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin:1rem 0}
+  .kpi{background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--ink);padding:.8rem 1rem}
+  .kpi small{display:block;font-size:.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.03em}
+  .kpi b{font-family:"Newsreader",Georgia,serif;font-size:2rem;font-weight:500;line-height:1.1}
+  .kpi em{display:block;font-style:normal;font-size:.75rem;color:var(--ink-soft)}
+  .steps{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:s}
+  .steps>li{counter-increment:s;position:relative;padding:0 0 2.4rem 3.4rem;border-left:1px solid var(--rule);margin-left:1.1rem}
+  .steps>li::before{content:counter(s);position:absolute;left:-1.1rem;top:-.1rem;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:.85rem}
+  .steps>li h3{margin-top:0;font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:1.35rem}
+  .who{font-family:"IBM Plex Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--signal)}
+  .selector{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;background:var(--ink);color:#E9EAE6;padding:.8rem 1rem;margin:1rem 0}
+  .selector label{font-size:.8125rem}
+  select{font:inherit;padding:.35rem .6rem;border:1px solid var(--rule);background:#fff;color:var(--ink)}
+  button{font:inherit;cursor:pointer;padding:.5rem 1rem;border:1px solid var(--ink);background:var(--ink);color:#fff}
+  button.ghost{background:transparent;color:var(--ink)}
+  button:disabled{background:#D9DBD5;border-color:#D9DBD5;color:#80858F;cursor:not-allowed}
+  textarea{width:100%;min-height:5.5rem;font:inherit;padding:.6rem;border:1px solid var(--ink-soft);background:#fff;resize:vertical}
+  .bar{height:.5rem;background:#E3E5DF;position:relative}.bar i{position:absolute;inset:0 auto 0 0}
+  .ind{display:grid;grid-template-columns:1fr auto;gap:.1rem .8rem;font-size:.875rem;margin-bottom:.6rem}
+  .ind .bar{grid-column:1/-1}
+  .mx{display:grid;grid-template-columns:auto repeat(3,3.2rem);gap:3px;font-size:.7rem;align-items:center}
+  .mx div.c{height:2.4rem;display:grid;place-items:center;font-weight:600;color:#fff}
+  .mx .lab{color:var(--ink-soft);text-align:right;padding-right:.3rem}
+  .mx .top{text-align:center;color:var(--ink-soft)}
+  .hash{font-family:"IBM Plex Mono",monospace;font-size:.72rem;word-break:break-all}
+  .ok{color:var(--ink)}.bad{color:var(--signal);font-weight:600}
+  .lineage{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch}
+  .node{border:1px solid var(--ink);background:var(--surface);padding:.55rem .75rem;font-size:.8125rem;min-width:8.5rem;flex:1}
+  .node small{display:block;color:var(--ink-soft);font-size:.7rem}
+  .arrow{align-self:center;color:var(--signal);font-family:"IBM Plex Mono",monospace}
+  .drawer{border:1px dashed var(--signal);background:#fff;padding:.8rem 1rem;margin-top:.8rem;font-size:.875rem}
+  .legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:var(--ink-soft);margin-top:.4rem}
+  footer{background:var(--ink);color:#9AA0AC;padding-block:2rem;font-size:.875rem}
+  footer a{color:#E9EAE6}
+  @media(max-width:40rem){.steps>li{padding-left:2.6rem}}
+  .tabs{background:#0B0E15;border-bottom:1px solid #2E3444;position:sticky;top:0;z-index:50}
+  .tabs .wrap{display:flex;gap:.25rem;align-items:center;overflow-x:auto}
+  .tabs a{border:0;color:#9AA0AC;font-size:.875rem;padding:.8rem 1rem;white-space:nowrap;border-bottom:2px solid transparent}
+  .tabs a:hover{color:#fff}
+  .tabs a[aria-current="page"]{color:#fff;border-bottom-color:#B8555F}
+  .tabs .brand{margin-right:auto;font-family:"Newsreader",Georgia,serif;color:#E9EAE6;padding-left:0}
+</style>
+</head>
+<body>
+<nav class="tabs" aria-label="Páginas do site"><div class="wrap"><a class="brand" href="../">Simbiose Decisória</a><a href="../">Visão geral</a><a href="../exemplo-pai/">Exemplo com o PAI</a><a href="./" aria-current="page">Exemplo com o painel do CNJ</a></div></nav>
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Proposta Artesãos da Inovação · TRT-2 · Eric Lopes Mello</p>
+    <h1>A proposta aplicada ao Painel de Estatísticas do Poder Judiciário</h1>
+    <p class="lede">Um painel público, nacional e descritivo, usado por gestores para decidir. O que a proposta muda não é o painel, e sim a decisão tomada a partir dele: risco, painel, metas, mapeamento, rastreio, predição por vara e indicadores de perda de qualidade.</p>
+  </div>
+</header>
+<div class="banner"><div class="wrap">Os números do painel nacional foram <b>lidos de uma captura de tela de 06/10/2026</b> e devem ser conferidos na fonte. O tribunal, as varas, as decisões e todos os demais números são <b>fictícios</b>. O CNJ não participa nem endossa esta página. <a href="../" style="border-color:#fff">Voltar ao site principal</a></div></div>
+<nav class="toc" aria-label="Seções"><div class="wrap">
+  <a href="#painel-cnj">O painel</a><a href="#leitura">Leitura crítica</a><a href="#ciclo">Seis etapas</a><a href="#confere">Validar os dados</a><a href="#fase0">Fase 0 e calibração</a><a href="#risco">Risco e probabilidade</a><a href="#painel">Painel por vara</a><a href="#verificacao">Ponto de verificação</a><a href="#rastro">Rastreio e mapeamento</a><a href="#sprints">Sprints</a><a href="#limites">Limites</a>
+</div></nav>
+
+<main>
+<section id="painel-cnj"><div class="wrap">
+  <p class="stage"><b>0</b> · O painel</p>
+  <h2>Estatísticas do Poder Judiciário: o que ele mostra</h2>
+  <p>O painel público do CNJ, alimentado pelo DataJud, reúne a produção de todo o Judiciário. Na aba <b>Gestão processual</b>, os cartões trazem o estoque, as entradas e as saídas, com data de corte explícita. Há ainda abas de produtividade, indicadores, tempos, classes, assuntos, temas, conciliação e mapas, e filtros por ramo de Justiça, tribunal, grau, órgão julgador e tipo de unidade.</p>
+  <div class="kpis">
+    <div class="kpi"><small>Pendentes em 31/08/2026</small><b>75.228.969</b><em>16.200.699 suspensos e arquivados prov.</em></div>
+    <div class="kpi"><small>Pendentes líquidos</small><b>59.028.270</b><em>dados até 31/08/2026</em></div>
+    <div class="kpi"><small>Entradas em 2026</small><b>27.903.419</b><em>casos novos</em></div>
+    <div class="kpi"><small>Julgados em 2026</small><b>27.966.804</b><em>saídas (baixados): 27.825.858</em></div>
+    <div class="kpi"><small>Conclusos até 31/08/2026</small><b>12.210.843</b><em>2.378.569 há mais de 120 dias</em></div>
+  </div>
+  <p class="note">Valores lidos da captura de tela de 06/10/2026. O que o painel faz bem: mostra a data de corte, oferece filtros e disponibiliza downloads. O que ele não faz, e nem é seu papel, é governar a decisão de quem o consulta.</p>
+</div></section>
+
+<section id="leitura"><div class="wrap">
+  <p class="stage"><b>1</b> · Leitura crítica</p>
+  <h2>Onde o viés de automação entra em um painel assim</h2>
+  <p>O viés de automação não depende de o sistema recomendar ou prever. Ele se instala sempre que a ferramenta substitui parte da verificação humana. Em um painel descritivo, o número consolidado funciona como recomendação para quem decide sob pressão de prazo.</p>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">O número vem pronto</h3><p class="note" style="margin:0">Quem decide vê "2.378.569 conclusos há mais de 120 dias" e age. A origem, a regra de contagem e a data de corte ficam fora da tela do indicador.</p></div>
+    <div class="card"><h3 style="margin-top:0">A comparação induz ranking</h3><p class="note" style="margin:0">Filtrar por tribunal ou órgão julgador permite comparar unidades. Metas de volume sem contrapeso de qualidade pressionam por prazos cada vez menores, e sob pressão o julgamento recorre a heurísticas.</p></div>
+    <div class="card"><h3 style="margin-top:0">Só produção e prazo</h3><p class="note" style="margin:0">As abas mostram entradas, saídas e tempos. A qualidade da decisão não aparece ao lado, e a velocidade é a única medida visível.</p></div>
+    <div class="card"><h3 style="margin-top:0">Medidas parecidas, significados distintos</h3><p class="note" style="margin:0">"Julgados" (27.966.804) e "Saídas, baixados" (27.825.858) são números próximos que respondem a perguntas diferentes. Usar um pelo outro muda a conclusão.</p></div>
+  </div>
+  <p style="margin-top:1rem">A proposta <b>não altera o painel do CNJ</b>. Ela governa a decisão que um gestor de tribunal toma a partir dele, e é por isso que se aplica a qualquer painel, planilha ou solução de IA.</p>
+</div></section>
+
+<section id="ciclo"><div class="wrap">
+  <p class="stage"><b>2</b> · Cenário e ciclo</p>
+  <h2>Um tribunal fictício decide a partir do painel</h2>
+  <p>A Secretaria de Gestão Estratégica de um tribunal regional fictício usa o painel nacional como referência para três decisões.</p>
+  <div class="scroll"><table>
+    <tr><th>Decisão apoiada no painel</th><th>Impacto (D1)</th><th>Irreversibilidade (D2)</th><th>Camada</th><th>Origem do enquadramento</th><th>Fricção</th></tr>
+    <tr><td><b>A.</b> Relatório mensal de acompanhamento ao colegiado</td><td>1</td><td>1</td><td><span class="chip">C1</span></td><td>Tabela de governança do comitê</td><td>Não</td></tr>
+    <tr><td><b>B.</b> Meta interna de produtividade por Vara, com base na média nacional do ramo</td><td>3</td><td>2</td><td><span class="chip mid">C2</span></td><td>Zona de Precaução: o resultado ficou logo abaixo do limiar e subiu de C1 para C2</td><td>Não</td></tr>
+    <tr><td><b>C.</b> Direcionar força-tarefa e juízes auxiliares para varas com muitos conclusos há mais de 120 dias, adiando outras pautas</td><td>4</td><td>4</td><td><span class="chip hi">C3</span></td><td>Tabela de governança do comitê</td><td><b>Sim</b></td></tr>
+  </table></div>
+  <p class="note" style="margin-top:.8rem">A pontuação é atribuída por pessoa, e classificar de forma automática é vedado. A fricção existe apenas na camada 3, e nas demais a trilha é registrada automaticamente.</p>
+  <ol class="steps">
+    <li><span class="who">Humana · comitê de governança</span><h3>Governar o uso do painel</h3>
+      <p>O comitê decide que a Decisão C, e só ela, exige ponto de verificação antes de agir. A regra incide sobre a decisão, e valeria igual se o dado viesse de uma planilha ou de uma solução de IA.</p>
+      <p class="note">Indicador: <b>conformidade</b>, a proporção das decisões de risco elevado com fundamentação registrada. Valor ilustrativo: <b>90%</b>.</p></li>
+    <li><span class="who">Mista · pessoa pontua, tabela enquadra, comitê consigna</span><h3>Calcular o risco da decisão</h3>
+      <p>As decisões A, B e C recebem D1 e D2, a tabela indica a camada, e o comitê consigna a classificação na ficha, com responsável nominal e data da próxima reavaliação. A probabilidade de perda de qualidade de cada unidade entra na seção <a href="#risco">Risco</a>.</p>
+      <p class="note">Indicador: <b>classificação</b>, a proporção de usos classificados com reavaliação em dia. Valor ilustrativo: <b>4 de 5</b>.</p></li>
+    <li><span class="who">Automática</span><h3>Validar os dados</h3>
+      <p>Antes de o número chegar ao gestor, a carga é conferida. Para um painel externo, isso significa reconciliar totais, conferir a data de corte e sinalizar defasagem. Veja a conferência na seção <a href="#confere">Validar os dados</a>.</p>
+      <p class="note">Indicador: <b>integridade</b>, a proporção de conferências aprovadas. Valor ilustrativo: <b>3 de 4</b>, com 1 pendente de conferência.</p></li>
+    <li><span class="who">Automática · intervenção humana exige responsável e motivo</span><h3>Documentar e rastrear</h3>
+      <p>Cada execução grava identificador, etapa, duração, resultado e um resumo criptográfico, encadeados em uma trilha por unidade, nunca por pessoa.</p>
+      <p class="note">Indicador: <b>recuperação</b>, o tempo médio para sanar falhas. Valor ilustrativo: <b>20 min</b>.</p></li>
+    <li><span class="who">Automática</span><h3>Mapear o processo antecedente</h3>
+      <p>Ao lado do indicador, mostra-se de onde o número veio e quando foi atualizado, incluindo a data de corte do painel de origem.</p>
+      <p class="note">Indicador: <b>rastreabilidade</b>, a proporção de indicadores com linhagem mapeada. Valor ilustrativo: <b>92%</b>.</p></li>
+    <li><span class="who">Mista · alertas automáticos, decisão do comitê</span><h3>Avaliar e projetar</h3>
+      <p>O painel do comitê compara indicadores com metas qualitativas, projeta a tendência por vara e antecipa gargalos. O alerta aciona apoio de gestão, e não cobrança.</p>
+      <p class="note">Indicador: <b>alertas</b>, a taxa de falsos positivos. Valor ilustrativo: 1 em 5.</p></li>
+  </ol>
+</div></section>
+
+<section id="confere"><div class="wrap">
+  <p class="stage"><b>Etapa 3</b> · Validar os dados</p>
+  <h2>Conferir o número antes de decidir</h2>
+  <p>Um painel externo não passa por uma carga do tribunal, mas os números podem ser validados antes de entrar em uma decisão. Este conferidor usa os valores lidos da captura e mostra o que uma validação automática verificaria.</p>
+  <div class="scroll"><table id="chk"></table></div>
+  <p class="note" style="margin-top:.8rem">Se os valores lidos da captura estiverem corretos, o total de conclusos difere da soma das parcelas, e o conferidor aponta isso sem concluir nada: o resultado vai para conferência na fonte. Esse é o papel da etapa 3, que é impedir que o número siga para a decisão sem que alguém saiba o que ficou pendente.</p>
+</div></section>
+
+<section id="fase0"><div class="wrap">
+  <p class="stage"><b>Fase 0</b> · Semanas -2 a 0</p>
+  <h2>Linha de base e calibração, antes de qualquer fricção</h2>
+  <p>Durante duas semanas, observa-se sem intervir: 80 decisões (40 de cada tipo, B e C), 240 registros históricos e 7 entrevistas com gestores e assessores. Tudo é agregado por unidade e tipo de decisão, e a observação direta depende de participação voluntária e consentimento.</p>
+  <h3>Linha de base comportamental</h3>
+  <div class="scroll"><table>
+    <tr><th>Medida</th><th>Decisão B</th><th>Decisão C</th><th>O que se lê</th></tr>
+    <tr><td>Taxa de edição antes de confirmar (ajuste da lista de varas ou da meta sugerida)</td><td>12%</td><td>5%</td><td>Abaixo de 10%, na C, sugere aceitação acrítica</td></tr>
+    <tr><td>Tempo entre exibir e confirmar (mediana)</td><td>61 s</td><td>22 s</td><td>Abaixo de 30 s sugere homologação automática</td></tr>
+    <tr><td>Consulta à origem (conferir data de corte e filtros do painel)</td><td>18%</td><td>9%</td><td>Quase ninguém confere a data de corte</td></tr>
+    <tr><td>Fundamentação (20 decisões da C, grade objetiva)</td><td>,</td><td>13 de 20 só citam "conforme painel do CNJ"</td><td>Aceite sem motivação própria</td></tr></table></div>
+  <p class="note" style="margin-top:.6rem">Os limiares de 10% e 30 s são referências a confirmar na própria Fase 0. Com 40 observações por tipo a linha de base descreve, e não permite inferência estatística.</p>
+  <h3>Plano de calibração</h3>
+  <div class="scroll"><table>
+    <tr><th>Parâmetro</th><th>Valor de partida (hipótese)</th><th>De onde vem</th></tr>
+    <tr><td>Decisões com fricção</td><td>Só a C (camada 3)</td><td>Classificação e linha de base</td></tr>
+    <tr><td>Extensão mínima da motivação</td><td>150 caracteres</td><td>Nível de texto das fundamentações fracas</td></tr>
+    <tr><td>Espera antes de liberar o botão</td><td>10 segundos</td><td>Entrevistas de praticabilidade</td></tr>
+    <tr><td>Teto de custo adicional</td><td>+30 s por caso</td><td>Tolerância declarada pelos entrevistados</td></tr>
+    <tr><td>Pré-requisito de dado</td><td>Data de corte e conferência de totais exibidas ao lado do indicador</td><td>Etapas 3 e 5</td></tr>
+    <tr><td>Corte de probabilidade "alta"</td><td>Regra por indicadores, com limiares da série da própria unidade</td><td>Série histórica do tribunal</td></tr>
+    <tr><td>Metas qualitativas</td><td>Direção (subir ou cair), sem valor absoluto e sem ranking</td><td>Linha de base de cada unidade</td></tr></table></div>
+</div></section>
+
+<section id="risco"><div class="wrap">
+  <p class="stage"><b>Risco</b> · Impacto × probabilidade</p>
+  <h2>Indicadores de risco de perda de qualidade</h2>
+  <p>O Índice mede a gravidade do uso, e não a chance de que o dano ocorra. Seis indicadores de contexto, acompanhados por unidade e nunca por magistrado, estimam a probabilidade, que é cruzada com a camada em uma matriz.</p>
+  <div class="selector"><label for="unit">Unidade (fictícia):</label>
+    <select id="unit"><option value="c">Vara C (piloto)</option><option value="d">Vara D</option><option value="e">Gabinete de apoio E (piloto)</option></select>
+    <span class="note" style="color:#C6C9C3">A escolha vale para esta seção e para o painel abaixo.</span></div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))">
+    <div class="card"><h3 style="margin-top:0">Seis indicadores</h3><div id="inds"></div>
+      <p class="note" style="margin:.4rem 0 0">Regra ilustrativa: <b>alta</b> com 3 ou mais indicadores altos, <b>média</b> com 1 ou 2 altos ou 3 ou mais médios, <b>baixa</b> nos demais. Os limiares são calibrados na Fase 0.</p></div>
+    <div class="card"><h3 style="margin-top:0">Matriz de probabilidade e impacto</h3><div id="matrix"></div>
+      <p id="riskText" style="margin:.8rem 0 0;font-size:.9rem"></p>
+      <p class="note" style="margin:.4rem 0 0">O nível é consignado pelo comitê na ficha. A probabilidade alta antecipa a reavaliação dos usos de camada 3 da unidade, sem alterar o enquadramento.</p></div>
+  </div>
+  <p class="note" style="margin-top:1rem">Esses indicadores são <b>preventivos</b>: atuam sobre a condição que favorece o viés antes de a perda de qualidade se consolidar. A trilha e a sinalização de anomalia são detectivas. O alerta aciona apoio de gestão, e não cobrança.</p>
+</div></section>
+
+<section id="painel"><div class="wrap">
+  <p class="stage"><b>Painel</b> · Metas, tendência e predição</p>
+  <h2>O painel do comitê, ao lado do painel nacional</h2>
+  <p>O painel do CNJ mostra produção e prazo do Judiciário. O painel do comitê acrescenta, por vara e setor, o contrapeso de qualidade, a tendência e a predição. As metas são qualitativas, como direção, e não há ranking: as unidades aparecem em ordem alfabética.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))">
+    <div class="card"><h3 style="margin-top:0">Qualidade por tendência</h3><div id="trends"></div>
+      <div class="legend"><span>Linha cheia: série da própria unidade</span><span>Linha tracejada: projeção do risco (predição)</span></div></div>
+    <div class="card"><h3 style="margin-top:0">Projeção do indicador crítico</h3><div id="acervo"></div><p id="acervoText" style="margin:.6rem 0 0;font-size:.9rem"></p></div>
+  </div>
+  <h3>Visão do comitê, sem ranking</h3>
+  <div class="scroll"><table id="cmp"></table></div>
+  <p class="note" style="margin-top:.6rem">A predição é uma reta ajustada aos pontos da própria série, o suficiente para ilustrar a extensão preditiva. Um modelo de previsão real é objeto do módulo preditivo, e seus alertas passam pelo ponto de verificação.</p>
+</div></section>
+
+<section id="verificacao"><div class="wrap">
+  <p class="stage"><b>Etapa 1</b> · Fricção deliberada</p>
+  <h2>O ponto de verificação da Decisão C</h2>
+  <p>Experimente. O sistema interrompe, a confirmação nasce bloqueada, o usuário escreve a motivação com a extensão mínima, e só então a ação é liberada e gravada na trilha. O desenho alerta, mas não condiciona a decisão, e a escolha continua sendo de quem decide.</p>
+  <div class="card" style="max-width:44rem">
+    <p style="margin:0 0 .3rem"><b>Direcionamento de força-tarefa</b> <span class="chip hi">C3</span></p>
+    <p class="note" style="margin:0 0 .8rem">O painel sugere priorizar as varas com mais conclusos há mais de 120 dias. Dado de origem: painel nacional, corte de 31/08/2026, <b>36 dias de defasagem</b>, 1 conferência pendente.</p>
+    <p style="margin:0 0 .3rem"><b>A recomendação não vem pronta para confirmar.</b></p>
+    <label for="mot" class="note">Registre a fundamentação normativa (texto seu, mínimo de <span id="min">150</span> caracteres)</label>
+    <textarea id="mot" placeholder="Digite a motivação do ato..."></textarea>
+    <p class="note" style="margin:.4rem 0 .8rem"><span id="cnt">0</span> caracteres · espera de 10 s: <span id="wait">aguardando você começar</span></p>
+    <button id="confirm" disabled>Confirmar (bloqueado)</button>
+    <p id="done" class="note" style="margin:.8rem 0 0"></p>
+  </div>
+  <p class="note" style="margin-top:.8rem">A demonstração grava um registro na trilha da seção seguinte. Intensidade e pontos da fricção vêm da calibração da Fase 0.</p>
+</div></section>
+
+<section id="rastro"><div class="wrap">
+  <p class="stage"><b>Etapas 4 e 5</b> · Rastreio e mapeamento</p>
+  <h2>De onde veio o número, e o que aconteceu com ele</h2>
+  <h3 style="margin-top:0">Mapeamento: clique em um indicador do painel nacional</h3>
+  <div class="scroll"><table>
+    <tr><th>Indicador</th><th>Valor lido</th><th></th></tr>
+    <tr><td>Pendentes líquidos</td><td>59.028.270</td><td><button class="ghost" data-ind="pl">Ver origem</button></td></tr>
+    <tr><td>Conclusos há mais de 120 dias</td><td>2.378.569</td><td><button class="ghost" data-ind="c120">Ver origem</button></td></tr>
+    <tr><td>Julgados em 2026</td><td>27.966.804</td><td><button class="ghost" data-ind="jul">Ver origem</button></td></tr></table></div>
+  <div class="drawer" id="drawer">Selecione um indicador para abrir o painel lateral de fonte.</div>
+  <h3>Trilha imutável, encadeada por resumo criptográfico</h3>
+  <p>Cada registro incorpora o resumo do anterior (SHA-256, calculado no seu navegador). Altere um registro e a verificação acusa onde a cadeia rompeu. O registro é por unidade, nunca por pessoa, e restrito a metadados.</p>
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem">
+    <button id="verify">Verificar cadeia</button><button id="tamper" class="ghost">Simular adulteração do 2º registro</button><button id="restore" class="ghost">Restaurar</button></div>
+  <p id="chainStatus" style="margin:0 0 .6rem;font-weight:600">Cadeia não verificada.</p>
+  <div class="scroll"><table id="trail"></table></div>
+</div></section>
+
+<section id="sprints"><div class="wrap">
+  <p class="stage"><b>Piloto</b> · Três sprints de quatro semanas</p>
+  <h2>Sprints, governança e asseguração</h2>
+  <p>Após a Fase 0, o piloto corre em três sprints (semanas 1 a 12), cada um encerrado por decisão do comitê entre <b>expandir, ajustar ou suspender</b>. A mesma medição se repete a cada sprint. Sem grupo de controle, a comparação indica associação e não prova causalidade, e o relatório declara isso. O foco do piloto é medir a diminuição da qualidade das decisões.</p>
+  <div class="scroll"><table>
+    <tr><th>Indicador (agregado, Decisão C)</th><th>Linha de base</th><th>Sprint 1</th><th>Sprint 2</th><th>Sprint 3</th></tr>
+    <tr><td>Taxa de edição antes de confirmar</td><td>5%</td><td>16%</td><td>20%</td><td>a realizar</td></tr>
+    <tr><td>Tempo entre exibir e confirmar</td><td>22 s</td><td>39 s</td><td>45 s</td><td>a realizar</td></tr>
+    <tr><td>Consulta à origem (data de corte e filtros)</td><td>9%</td><td>33%</td><td>41%</td><td>a realizar</td></tr>
+    <tr><td>Tempo adicional por caso</td><td>0 s</td><td>+17 s</td><td>+13 s</td><td>a realizar</td></tr>
+    <tr><td>Fundamentações só com "conforme painel" (amostra de 20)</td><td>13</td><td>6</td><td>4</td><td>a realizar</td></tr></table></div>
+  <h3>Regra de decisão do comitê, escrita antes</h3>
+  <div class="grid">
+    <div class="card"><b>Expandir</b><p class="note" style="margin:.3rem 0 0">Os indicadores de qualidade melhoram e o custo adicional fica dentro do teto de +30 s.</p></div>
+    <div class="card"><b>Ajustar</b><p class="note" style="margin:.3rem 0 0">O custo estoura o teto, ou os indicadores de risco sobem sem melhora nos de qualidade.</p></div>
+    <div class="card"><b>Suspender</b><p class="note" style="margin:.3rem 0 0">Há sinais de contorno do fluxo oficial, ou o critério de parada foi atingido. Plano de suspensão e reversão previsto.</p></div>
+  </div>
+  <h3>Governança separada da gestão</h3>
+  <p>O <b>comitê</b> classifica o risco, define onde a verificação é obrigatória, avalia os indicadores e decide a cada sprint. A <b>gestão</b>, as áreas de negócio e de TI, opera o painel do comitê, as conferências e os pontos de verificação. A <b>auditoria automatizada interna</b> faz a asseguração independente: verifica por amostragem a classificação, a ficha e a integridade da trilha, com componente especialista em TI para vieses e explicabilidade, e reporta ao comitê, sem examinar a conduta nem o mérito da decisão.</p>
+  <h3>Controles por tipo</h3>
+  <div class="scroll"><table>
+    <tr><th>Tipo</th><th>Controles</th></tr>
+    <tr><td><b>Preventivos</b></td><td>Classificação por impacto e probabilidade; conferência de totais e data de corte; ponto de verificação na interface; indicadores de qualidade com metas qualitativas, sem ranking e por tendência; indicadores de risco de perda de qualidade; capacitação continuada.</td></tr>
+    <tr><td><b>Detectivos</b></td><td>Ficha e trilha imutável restrita a metadados; indicadores agregados de comportamento decisório; sinalização de anomalia; alerta consolidado e tendência por unidade.</td></tr>
+    <tr><td><b>Corretivos</b></td><td>Decisão do comitê a cada sprint; critério de parada; apoio da gestão acionado pelo alerta; plano de suspensão e reversão.</td></tr>
+    <tr><td><b>Asseguração</b></td><td>Auditoria automatizada por amostragem, com componente especialista em TI, que reporta ao comitê.</td></tr></table></div>
+</div></section>
+
+<section id="limites"><div class="wrap">
+  <p class="stage"><b>Limites</b></p>
+  <h2>O que esta página não afirma</h2>
+  <p>Os valores do painel nacional foram lidos de uma captura e podem conter erros de leitura, devendo ser conferidos na fonte. Nenhuma observação sobre a metodologia ou a qualidade dos dados do CNJ é feita aqui, e o conferidor apenas ilustra o tipo de verificação que a etapa 3 faria. O tribunal, as unidades, as decisões, as linhas de base e os sprints são fictícios, e não vêm de nenhum piloto. As amostras seriam pequenas e descrevem sem permitir inferência estatística. Sem grupo de controle, qualquer melhora indica associação, não causalidade. Os limiares (10%, 30 s, 150 caracteres, +30 s e os cortes de probabilidade) são hipóteses a calibrar na Fase 0. Não há métrica individual de magistrado ou servidor.</p>
+</div></section>
+</main>
+<footer><div class="wrap">Exemplo ilustrativo da proposta Governança da Decisão. Painel de origem: Estatísticas do Poder Judiciário, CNJ/DataJud. <a href="../">Site principal</a></div></footer>
+
+<script>
+(function(){
+const H='#7A2230',M='#B8555F',L='#9AA0AC',INK='#131722';
+const U={
+ c:{nome:'Vara C (piloto)',camada:'C3',
+  ind:[['Pressão de prazo sustentada','a',80],['Aceleração brusca do volume','a',76],['Decisões concentradas no fim do período','m',58],['Carga por força de trabalho','a',83],['Complexidade do acervo','m',52],['Minutas sugeridas por automação','b',22]],
+  q:[['Conclusos há mais de 120 dias (n)','↓',[18,19,22,26,31,37],''],['Retorno por nulidade','↓',[3.9,4.0,4.4,4.8,5.3,5.7],'%'],['Fundamentação (grade 0 a 10)','↑',[7.3,7.2,7.0,6.6,6.2,5.9],'']],
+  ac:{h:[22,26,31,37],cap:50,nm:'Conclusos há mais de 120 dias',cl:'capacidade de absorção da força-tarefa'},
+  k:[['Conformidade','90%','risco elevado, fundamentação registrada'],['Conferências aprovadas','3 de 4','1 pendente na fonte'],['Alertas ativos','2','1 de qualidade, 1 de prazo'],['Reavaliações em dia (C3)','4 de 5','1 antecipada pela matriz']]},
+ d:{nome:'Vara D',camada:'C2',
+  ind:[['Pressão de prazo sustentada','m',52],['Aceleração brusca do volume','b',30],['Decisões concentradas no fim do período','b',28],['Carga por força de trabalho','m',50],['Complexidade do acervo','m',48],['Minutas sugeridas por automação','b',20]],
+  q:[['Conclusos há mais de 120 dias (n)','↓',[12,11,12,12,11,12],''],['Retorno por nulidade','↓',[3.6,3.7,3.6,3.7,3.6,3.7],'%'],['Fundamentação (grade 0 a 10)','↑',[7.5,7.4,7.5,7.6,7.5,7.5],'']],
+  ac:{h:[12,11,12,12],cap:30,nm:'Conclusos há mais de 120 dias',cl:'capacidade de absorção da força-tarefa'},
+  k:[['Conformidade','94%','risco elevado, fundamentação registrada'],['Conferências aprovadas','4 de 4','sem pendências'],['Alertas ativos','0','sem alertas'],['Reavaliações em dia (C3)','2 de 2','nenhuma antecipada']]},
+ e:{nome:'Gabinete de apoio E (piloto)',camada:'C2',
+  ind:[['Pressão de prazo sustentada','b',26],['Aceleração brusca do volume','b',22],['Decisões concentradas no fim do período','m',46],['Carga por força de trabalho','b',32],['Complexidade do acervo','b',34],['Minutas sugeridas por automação','b',18]],
+  q:[['Minutas devolvidas para revisão','↓',[9,8,8,7,6,6],'%'],['Prazo médio de apoio (dias)','↓',[12,12,11,10,10,9],''],['Fundamentação administrativa (grade 0 a 10)','↑',[6.9,7.0,7.2,7.3,7.5,7.7],'']],
+  ac:{h:[40,38,36,33],cap:60,nm:'Pendências de apoio',cl:'capacidade do gabinete'},
+  k:[['Conformidade','93%','risco elevado, fundamentação registrada'],['Conferências aprovadas','4 de 4','sem pendências'],['Alertas ativos','0','sem alertas'],['Reavaliações em dia (C3)','1 de 1','nenhuma antecipada']]}
+};
+const LV={a:'alta',m:'média',b:'baixa'},COL={a:H,m:M,b:L};
+function prob(u){const a=u.ind.filter(i=>i[1]==='a').length,m=u.ind.filter(i=>i[1]==='m').length;return a>=3?'a':(a>=1||m>=3)?'m':'b'}
+function fit(y){const n=y.length,xs=y.map((_,i)=>i),mx=xs.reduce((s,v)=>s+v,0)/n,my=y.reduce((s,v)=>s+v,0)/n;let nu=0,de=0;xs.forEach((x,i)=>{nu+=(x-mx)*(y[i]-my);de+=(x-mx)**2});const b=nu/de;return{b,a:my-b*mx}}
+const $=id=>document.getElementById(id);
+function line(vals,proj,w,h,pad,mn,mx,col){const n=vals.length+proj.length;const X=i=>pad+i*(w-2*pad)/(n-1),Y=v=>h-pad-(v-mn)/(mx-mn||1)*(h-2*pad);
+ const real=vals.map((v,i)=>X(i)+','+Y(v)).join(' ');const pr=[vals[vals.length-1]].concat(proj).map((v,i)=>X(vals.length-1+i)+','+Y(v)).join(' ');
+ return '<polyline fill="none" stroke="'+col+'" stroke-width="2.5" points="'+real+'"/><polyline fill="none" stroke="'+col+'" stroke-width="2" stroke-dasharray="5 4" points="'+pr+'"/>'}
+function badTrend(q){const y=q[2],ch=(y[y.length-1]-y[0])/y[0];if(Math.abs(ch)<0.05)return null;return ((ch>0)!==(q[1]==='↑'))}
+function render(){
+ const u=U[$('unit').value];
+ $('inds').innerHTML=u.ind.map(i=>'<div class="ind"><span>'+i[0]+'</span><b style="color:'+COL[i[1]]+'">'+LV[i[1]]+'</b><div class="bar"><i style="width:'+i[2]+'%;background:'+COL[i[1]]+'"></i></div></div>').join('');
+ const p=prob(u),ci={C1:0,C2:1,C3:2}[u.camada],ri={a:0,m:1,b:2}[p];
+ let mh='<div class="mx"><div></div><div class="top">C1</div><div class="top">C2</div><div class="top">C3</div>';
+ [['a','Alta'],['m','Média'],['b','Baixa']].forEach((r,ri2)=>{mh+='<div class="lab">'+r[1]+'</div>';for(let c=0;c<3;c++){const sc=(2-ri2)+c;const bg=sc>=3?H:sc===2?M:sc===1?'#C9A5AA':'#B7BBB3';const on=(ri2===ri&&c===ci);mh+='<div class="c" style="background:'+bg+(on?';outline:3px solid '+INK+';outline-offset:-3px':'')+'">'+(on?'●':'')+'</div>'}});
+ mh+='</div><p class="note" style="margin:.3rem 0 0">Linhas: probabilidade. Colunas: impacto (camada do ISD).</p>';$('matrix').innerHTML=mh;
+ $('riskText').innerHTML='<b>'+u.nome+'</b>: probabilidade <b>'+LV[p]+'</b> × impacto <b>'+u.camada+'</b>.'+(p==='a'&&u.camada==='C3'?' Reavaliação dos usos de camada 3 antecipada e alerta consolidado ao comitê.':p==='a'?' Alerta ao comitê.':' Sem antecipação de reavaliação.');
+ $('kpis').innerHTML=u.k.map(k=>'<div class="kpi"><small>'+k[0]+'</small><b>'+k[1]+'</b><em>'+k[2]+'</em></div>').join('');
+ $('trends').innerHTML=u.q.map(q=>{const y=q[2],f=fit(y),proj=[f.a+f.b*y.length,f.a+f.b*(y.length+1)].map(v=>+v.toFixed(2));const all=y.concat(proj),mn=Math.min(...all),mx=Math.max(...all);const ch=(y[y.length-1]-y[0])/y[0];const dir=Math.abs(ch)<0.05?'estável':(ch>0?'sobe':'cai');const bt=badTrend(q);const lab=bt===null?'→ estável':(bt?'tendência de atenção':'tendência favorável');const col=bt===null?M:(bt?H:INK);
+  return '<div style="margin-bottom:.9rem"><div style="display:flex;justify-content:space-between;gap:.5rem;font-size:.875rem"><b>'+q[0]+'</b><span style="color:'+col+';font-weight:600">'+(dir==='sobe'?'↑ ':dir==='cai'?'↓ ':'')+lab+'</span></div><div class="note" style="margin:0">Meta: direção '+q[1]+' · último valor '+y[y.length-1]+q[3]+'</div><svg viewBox="0 0 320 64" width="100%" height="64" role="img" aria-label="'+q[0]+'">'+line(y,proj,320,64,6,mn,mx,col)+'</svg></div>'}).join('');
+ const a=u.ac,fa=fit(a.h),nH=a.h.length,months=6,proj=[];for(let i=0;i<months;i++)proj.push(fa.a+fa.b*(nH+i));
+ const all=a.h.concat(proj).concat([a.cap]),mn=Math.min(...all)*0.9,mx=Math.max(...all)*1.05,W=360,Hh=190,pd=24,n=nH+months;
+ const X=i=>pd+i*(W-pd-8)/(n-1),Y=v=>Hh-pd-(v-mn)/(mx-mn)*(Hh-2*pd);
+ let cross=null;for(let i=0;i<months;i++){if(proj[i]>=a.cap){cross=i+1;break}}
+ const real=a.h.map((v,i)=>X(i)+','+Y(v)).join(' '),pp=[a.h[nH-1]].concat(proj).map((v,i)=>X(nH-1+i)+','+Y(v)).join(' ');
+ $('acervo').innerHTML='<svg viewBox="0 0 '+W+' '+Hh+'" width="100%" role="img" aria-label="Projeção"><line x1="'+pd+'" y1="'+(Hh-pd)+'" x2="'+(W-8)+'" y2="'+(Hh-pd)+'" stroke="#C9CCC5"/><line x1="'+pd+'" y1="'+Y(a.cap)+'" x2="'+(W-8)+'" y2="'+Y(a.cap)+'" stroke="'+H+'" stroke-width="2" stroke-dasharray="6 4"/><text x="'+(pd+4)+'" y="'+(Y(a.cap)-5)+'" font-size="11" fill="'+H+'">'+a.cl+' ('+a.cap+')</text><polyline fill="none" stroke="'+INK+'" stroke-width="3" points="'+real+'"/><polyline fill="none" stroke="'+INK+'" stroke-width="2.5" stroke-dasharray="5 4" points="'+pp+'"/><text x="'+X(0)+'" y="'+(Hh-6)+'" font-size="11" fill="#39404F">Hoje -3</text><text x="'+(X(nH-1)-8)+'" y="'+(Hh-6)+'" font-size="11" fill="#39404F">Hoje</text><text x="'+(X(n-1)-34)+'" y="'+(Hh-6)+'" font-size="11" fill="#39404F">Mês +6</text></svg>';
+ $('acervoText').innerHTML='<b>'+a.nm+'</b>: '+(cross?'a projeção cruza o limite no <b>mês '+cross+'</b>, e o alerta aciona apoio da gestão.':'dentro do limite nos próximos 6 meses, sem alerta.');
+ let t='<tr><th>Unidade (ordem alfabética)</th><th>Probabilidade</th><th>Impacto</th><th>Qualidade, tendência</th></tr>';
+ ['d','e','c'].forEach(k=>{const x=U[k],pp2=prob(x);const bad=x.q.filter(q=>badTrend(q)===true).length;
+  t+='<tr><td><b>'+x.nome+'</b></td><td><span class="chip '+(pp2==='a'?'hi':pp2==='m'?'mid':'')+'">'+LV[pp2]+'</span></td><td><span class="chip '+(x.camada==='C3'?'hi':x.camada==='C2'?'mid':'')+'">'+x.camada+'</span></td><td>'+(bad?bad+' de 3 indicadores com tendência de atenção':'sem tendência de atenção')+'</td></tr>'});
+ $('cmp').innerHTML=t;
+}
+$('unit').addEventListener('change',render);render();
+
+// conferidor
+(function(){
+ const f=n=>n.toLocaleString('pt-BR');
+ const pend=75228969,susp=16200699,liq=59028270,para=2800844,outros=9422389,conc=12210843,ent=27903419,saidas=27825858,jul=27966804;
+ const corte=new Date('2026-08-31'),cons=new Date('2026-10-06'),dias=Math.round((cons-corte)/86400000);
+ const rows=[
+  ['Pendentes − suspensos e arquivados provisoriamente = pendentes líquidos',f(pend)+' − '+f(susp)+' = '+f(pend-susp)+' (painel: '+f(liq)+')',(pend-susp)===liq?['ok','Confere']:['bad','Diverge']],
+  ['Conclusos: para julgamento + outros = total de conclusos',f(para)+' + '+f(outros)+' = '+f(para+outros)+' (painel: '+f(conc)+')',(para+outros)===conc?['ok','Confere']:['bad','Diferença de '+f(Math.abs(para+outros-conc))+', conferir na fonte']],
+  ['Data de corte frente à data da consulta','Corte em 31/08/2026, consulta em 06/10/2026',dias<=7?['ok','Atualizado']:['warn',dias+' dias de defasagem, exibir ao lado do indicador']],
+  ['Entradas e saídas em 2026 (parcial)','Entradas '+f(ent)+', saídas (baixados) '+f(saidas)+', diferença de '+f(ent-saidas),['ok','Informativo']],
+  ['Julgados × baixados','Julgados '+f(jul)+', baixados '+f(saidas),['warn','Medidas distintas: registrar qual é usada na decisão']]
+ ];
+ $('chk').innerHTML='<tr><th>Conferência</th><th>Valores lidos</th><th>Resultado</th></tr>'+rows.map(r=>'<tr><td>'+r[0]+'</td><td class="hash" style="font-size:.8rem">'+r[1]+'</td><td><span class="chip '+(r[2][0]==='ok'?'':'hi')+'" style="'+(r[2][0]==='warn'?'background:#EFDDDF;color:'+H+';border-color:'+M:'')+'">'+r[2][1]+'</span></td></tr>').join('');
+})();
+
+// fricção
+const mot=$('mot'),btn=$('confirm');let t0=null,timer=null,waited=false;const MIN=150;
+function upd(){const n=mot.value.length;$('cnt').textContent=n;btn.disabled=!(n>=MIN&&waited);btn.textContent=btn.disabled?'Confirmar (bloqueado)':'Registrar e liberar'}
+mot.addEventListener('input',()=>{if(!t0){t0=Date.now();let s=10;$('wait').textContent=s+' s restantes';timer=setInterval(()=>{s--;if(s<=0){clearInterval(timer);waited=true;$('wait').textContent='cumprida';upd()}else $('wait').textContent=s+' s restantes'},1000)}upd()});
+
+// trilha
+const enc=new TextEncoder();
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',enc.encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+const seed=[['07:30','3. Validar','Conferência pendente','Totais de conclusos não reconciliados, encaminhado para conferência na fonte'],['07:42','3. Validar','Registrada','Data de corte do painel de origem registrada: 31/08/2026'],['10:15','1. Verificar','Registrada','Justificativa gravada em decisão de risco elevado'],['10:40','6. Avaliar','Alerta','Probabilidade alta de perda de qualidade na unidade']];
+let recs=[],orig=[];
+async function build(rows){const out=[];let prev='0'.repeat(64);for(const r of rows){const h=await sha(prev+'|'+r.join('|'));out.push({r:r.slice(),prev,h});prev=h}return out}
+function draw(broken){let t='<tr><th>#</th><th>Quando</th><th>Etapa</th><th>Status</th><th>Descrição</th><th>Resumo (SHA-256)</th></tr>';
+ recs.forEach((x,i)=>{const bad=broken!=null&&i>=broken;t+='<tr><td>'+(i+1)+'</td><td>'+x.r[0]+'</td><td>'+x.r[1]+'</td><td><span class="chip">'+x.r[2]+'</span></td><td>'+x.r[3]+'</td><td class="hash '+(bad?'bad':'')+'">'+x.h.slice(0,16)+'…'+(bad?' ✗':(broken===-1?' ✓':''))+'</td></tr>'});$('trail').innerHTML=t}
+async function verify(){let prev='0'.repeat(64);for(let i=0;i<recs.length;i++){const h=await sha(prev+'|'+recs[i].r.join('|'));if(h!==recs[i].h){draw(i);$('chainStatus').innerHTML='<span class="bad">Cadeia rompida no registro '+(i+1)+'. O registro e os seguintes não conferem com o resumo gravado.</span>';return}prev=recs[i].h}draw(-1);$('chainStatus').innerHTML='<span class="ok">Cadeia íntegra: '+recs.length+' registros conferidos.</span>'}
+(async()=>{recs=await build(seed);orig=JSON.parse(JSON.stringify(recs));draw(null)})();
+$('verify').onclick=verify;
+$('tamper').onclick=()=>{if(recs.length>1){recs[1].r[3]='Data de corte do painel de origem registrada: 30/09/2026';draw(null);$('chainStatus').textContent='Registro 2 alterado. Clique em Verificar cadeia.'}};
+$('restore').onclick=()=>{recs=JSON.parse(JSON.stringify(orig));draw(null);$('chainStatus').textContent='Cadeia restaurada, não verificada.'};
+btn.onclick=async()=>{const prev=recs.length?recs[recs.length-1].h:'0'.repeat(64);const now=new Date(),hh=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');const row=[hh,'1. Verificar','Registrada','Justificativa gravada em decisão de risco elevado ('+mot.value.length+' caracteres, texto não retido), unidade: Vara C'];const h=await sha(prev+'|'+row.join('|'));recs.push({r:row,prev,h});orig.push({r:row.slice(),prev,h});draw(null);$('done').innerHTML='Ação liberada e <b>gravada na trilha</b> com responsável (função da unidade), motivo e carimbo de tempo, sem conteúdo gerado. <a href="#rastro">Ver o registro na trilha</a>.';btn.disabled=true;mot.value='';upd()};
+
+// linhagem
+const common=['Tribunais (sistemas processuais)','DataJud, base nacional','Painel Estatísticas do Poder Judiciário'];
+const IND={
+ pl:{nm:'Pendentes líquidos',rec:'Pendentes menos suspensos e arquivados provisoriamente, todos os ramos, até 31/08/2026'},
+ c120:{nm:'Conclusos há mais de 120 dias',rec:'Conclusos para julgamento há mais de 120 dias, até 31/08/2026'},
+ jul:{nm:'Julgados em 2026',rec:'Julgados no ano corrente, acumulado até 31/08/2026'}};
+document.querySelectorAll('[data-ind]').forEach(b=>b.addEventListener('click',()=>{const d=IND[b.dataset.ind];$('drawer').innerHTML='<b>Fonte do dado: '+d.nm+'</b><div class="lineage" style="margin-top:.6rem">'+common.map((e,i)=>(i?'<span class="arrow">→</span>':'')+'<div class="node">'+e+'<small>'+(i===2?'consultado em 06/10/2026':'origem informada no painel')+'</small></div>').join('')+'<span class="arrow">→</span><div class="node">Conferência (etapa 3)<small>totais e data de corte, registrada na trilha</small></div><span class="arrow">→</span><div class="node" style="border-color:'+H+'">Decisão C<small>ponto de verificação</small></div></div><p class="note" style="margin:.6rem 0 0">Recorte: '+d.rec+'. Defasagem: 36 dias entre o corte e a consulta, exibida ao lado do indicador. A cadeia acima reproduz o que o painel informa, e os passos intermediários do CNJ não foram verificados aqui.</p>'}));
+})();
+</script>
+</body>
+</html>
