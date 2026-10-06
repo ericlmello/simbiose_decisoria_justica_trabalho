@@ -249,10 +249,17 @@
   footer p:last-child { margin-bottom: 0; }
   footer a { border-bottom-color: #4A5162; }
   footer a:hover { color: #D9DBD6; border-bottom-color: #9AA0AC; }
+  .tabs{background:#0B0E15;border-bottom:1px solid #2E3444;position:sticky;top:0;z-index:50}
+  .tabs .wrap{display:flex;gap:.25rem;align-items:center;overflow-x:auto}
+  .tabs a{border:0;color:#9AA0AC;font-size:.875rem;padding:.8rem 1rem;white-space:nowrap;border-bottom:2px solid transparent}
+  .tabs a:hover{color:#fff}
+  .tabs a[aria-current="page"]{color:#fff;border-bottom-color:#B8555F}
+  .tabs .brand{margin-right:auto;font-family:"Newsreader",Georgia,serif;color:#E9EAE6;padding-left:0}
 </style>
 </head>
 <body>
 
+<nav class="tabs" aria-label="Páginas do site"><div class="wrap"><a class="brand" href="./">Simbiose Decisória</a><a href="./" aria-current="page">Visão geral</a><a href="exemplo-pai/">Exemplo com o PAI</a></div></nav>
 <header class="hero">
   <div class="wrap">
     <div class="hero-content">

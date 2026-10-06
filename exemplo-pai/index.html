@@ -24,7 +24,7 @@
   .hero h1{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.04;letter-spacing:-.018em;margin:0 0 1rem}
   .lede{font-family:"Newsreader",Georgia,serif;font-size:clamp(1.1rem,1rem+.6vw,1.35rem);line-height:1.5;color:#C6C9C3;max-width:56ch;margin:0}
   .banner{background:var(--signal);color:#fff;font-size:.875rem;padding:.6rem 0}
-  nav.toc{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--rule)}
+  nav.toc{position:sticky;top:2.9rem;z-index:20;background:var(--surface);border-bottom:1px solid var(--rule)}
   nav.toc .wrap{display:flex;gap:1.1rem;overflow-x:auto;padding-block:.65rem;white-space:nowrap;font-size:.8125rem}
   nav.toc a{border:0;color:var(--ink-soft)}
   nav.toc a:hover{color:var(--signal)}
@@ -78,9 +78,16 @@
   footer{background:var(--ink);color:#9AA0AC;padding-block:2rem;font-size:.875rem}
   footer a{color:#E9EAE6}
   @media(max-width:40rem){.steps>li{padding-left:2.6rem}}
+  .tabs{background:#0B0E15;border-bottom:1px solid #2E3444;position:sticky;top:0;z-index:50}
+  .tabs .wrap{display:flex;gap:.25rem;align-items:center;overflow-x:auto}
+  .tabs a{border:0;color:#9AA0AC;font-size:.875rem;padding:.8rem 1rem;white-space:nowrap;border-bottom:2px solid transparent}
+  .tabs a:hover{color:#fff}
+  .tabs a[aria-current="page"]{color:#fff;border-bottom-color:#B8555F}
+  .tabs .brand{margin-right:auto;font-family:"Newsreader",Georgia,serif;color:#E9EAE6;padding-left:0}
 </style>
 </head>
 <body>
+<nav class="tabs" aria-label="Páginas do site"><div class="wrap"><a class="brand" href="../">Simbiose Decisória</a><a href="../">Visão geral</a><a href="./" aria-current="page">Exemplo com o PAI</a></div></nav>
 <header class="hero">
   <div class="wrap">
     <p class="kicker">Proposta Artesãos da Inovação · TRT-2 · Eric Lopes Mello</p>
