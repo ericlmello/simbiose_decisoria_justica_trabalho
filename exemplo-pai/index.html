@@ -129,7 +129,7 @@
       <p>O comitê decide que a Decisão B, e só ela, exige ponto de verificação antes de agir. A gestão materializa isso numa tela de forçamento cognitivo. A regra incide sobre a decisão, e por isso valeria igual para uma planilha ou uma solução de IA.</p>
       <p class="note">Indicador: <b>conformidade</b>, a proporção das decisões de risco elevado com fundamentação registrada. Valor ilustrativo: <b>92%</b>.</p></li>
     <li><span class="who">Mista · pessoa pontua, tabela enquadra, comitê consigna</span><h3>Calcular o risco da decisão</h3>
-      <p>Cada decisão recebe D1 e D2 de 1 a 5, e a tabela de governança indica a camada. O enquadramento é consignado na ficha, com o responsável nominal e a data da próxima reavaliação. Aqui entra também a probabilidade de perda de qualidade da unidade, vista na seção <a href="#risco">Risco</a>.</p>
+      <p>Cada decisão recebe D1 e D2 de 1 a 5, e a tabela de governança indica a camada. O enquadramento é consignado na ficha, com o responsável nominal, identificado com nome e cargo, e a data da próxima reavaliação. Toda decisão apoiada pelo sistema tem a pessoa que a assina identificada; a identificação serve à responsabilização e não vira métrica de desempenho. Aqui entra também a probabilidade de perda de qualidade da unidade, vista na seção <a href="#risco">Risco</a>.</p>
       <p class="note">Indicador: <b>classificação</b>, a proporção de usos classificados com reavaliação em dia. Valor ilustrativo: <b>5 de 6</b>, uma delas antecipada pela matriz de probabilidade e impacto.</p></li>
     <li><span class="who">Automática</span><h3>Validar os dados</h3>
       <p>Antes de o PAI ser atualizado, cada carga é conferida, falhas são reiniciadas e desvios detectados. Quem decide só vê o indicador depois que a carga foi validada.</p>
@@ -138,7 +138,7 @@
         <tr><td>Validação de carga</td><td><span class="chip mid">Reiniciada 1×</span></td><td>48.312</td><td>9 min</td></tr>
         <tr><td>Agregação para o PAI</td><td><span class="chip">Validada</span></td><td>1.240 solucionados no mês</td><td>2 min</td></tr></table></div>
       <p class="note">Indicador: <b>integridade</b>, a proporção de cargas validadas com sucesso. Valor ilustrativo: <b>98%</b>, com 2 falhas reiniciadas.</p></li>
-    <li><span class="who">Automática · intervenção humana exige responsável e motivo</span><h3>Documentar e rastrear</h3>
+    <li><span class="who">Automática · intervenção humana exige responsável identificado e motivo</span><h3>Documentar e rastrear</h3>
       <p>Cada execução grava um identificador, a etapa de origem, a duração, o resultado e um resumo criptográfico, sem reter o conteúdo processado. Os registros são encadeados, e alterar um deles rompe a cadeia. A trilha é por unidade, nunca por pessoa. Há uma demonstração na seção <a href="#rastro">Rastreio</a>.</p>
       <p class="note">Indicador: <b>recuperação</b>, o tempo médio para sanar falhas registrado na trilha. Valor ilustrativo: <b>14 min</b>.</p></li>
     <li><span class="who">Automática</span><h3>Mapear o processo antecedente</h3>
@@ -339,7 +339,7 @@ mot.addEventListener('input',()=>{if(!t0){t0=Date.now();let s=10;$('wait').textC
 // ---- trilha ----
 const enc=new TextEncoder();
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',enc.encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-const seed=[['06:02','3. Validar','Reiniciada','Falha de extração tratada, responsável e motivo registrados'],['06:10','3. Validar','Validada','Carga e-Gestão concluída, 48.312 linhas lidas'],['09:41','1. Verificar','Registrada','Justificativa gravada em decisão de risco elevado'],['10:05','6. Avaliar','Alerta','Probabilidade alta de perda de qualidade na unidade']];
+const seed=[['06:02','3. Validar','Reiniciada','Falha de extração tratada, responsável identificado e motivo registrados'],['06:10','3. Validar','Validada','Carga e-Gestão concluída, 48.312 linhas lidas'],['09:41','1. Verificar','Registrada','Justificativa gravada em decisão de risco elevado'],['10:05','6. Avaliar','Alerta','Probabilidade alta de perda de qualidade na unidade']];
 let recs=[],orig=[];
 async function build(rows){const out=[];let prev='0'.repeat(64);for(const r of rows){const payload=r.join('|');const h=await sha(prev+'|'+payload);out.push({r:r.slice(),prev,h});prev=h}return out}
 function draw(broken){let t='<tr><th>#</th><th>Quando</th><th>Etapa</th><th>Status</th><th>Descrição</th><th>Resumo (SHA-256)</th></tr>';
