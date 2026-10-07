@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Symbiosis and Augmented Intelligence</title>
+<meta name="description" content="Decision Symbiosis: shifting the focus of governance from the system to the decision made with it. An Augmented Intelligence model for courts.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23131722'/><text y='72' x='50' text-anchor='middle' font-size='64' fill='%23B8555F' font-family='Georgia,serif'>G</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #131722;
+    --ink-soft: #39404F;
+    --paper: #F1F2EF;
+    --surface: #FAFAF8;
+    --rule: #C9CCC5;
+    --signal: #7A2230;
+    --signal-tint: #B8555F;
+    --measure: 63ch;
+    --gap: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    line-height: 1.62; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: 100%; max-width: 64rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3.5rem); }
+  p { max-width: var(--measure); }
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--signal-tint); }
+  a:hover { border-bottom-color: var(--signal); color: var(--signal); }
+  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- hero ---------- */
+  .hero { background: var(--ink); color: #E9EAE6; padding-block: clamp(3rem, 9vw, 6rem) clamp(2.5rem, 7vw, 4.5rem); }
+  .hero-content { max-width: 52rem; }
+  .kicker { font-size: 0.8125rem; color: #9AA0AC; margin: 0 0 1.75rem; max-width: var(--measure); text-transform: uppercase; letter-spacing: 0.05em; }
+  .hero h1 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.02; letter-spacing: -0.018em; margin: 0 0 1rem; }
+  .hero .lede { font-family: "Newsreader", Georgia, serif; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem); line-height: 1.5; color: #C6C9C3; margin: 0; max-width: 52ch; }
+
+  /* index band */
+  .index { margin-top: clamp(2.5rem, 6vw, 3.5rem); border-top: 1px solid #2E3444; padding-top: 1.75rem; display: grid; gap: 1.5rem; }
+  .index .formula { font-family: "IBM Plex Mono", monospace; font-size: clamp(1rem, 0.85rem + 0.8vw, 1.25rem); color: #F1F2EF; line-height: 1.5; margin: 0; }
+  .index .formula em { font-style: normal; color: var(--signal-tint); }
+  .index .formula small { display: block; font-family: "IBM Plex Sans", sans-serif; font-size: 0.9375rem; color: #9AA0AC; margin-top: 0.8rem; max-width: 65ch; line-height: 1.6;}
+  .dims { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin: 2rem 0 0; padding:0;}
+  .dims div { border-left: 2px solid var(--signal); padding-left: 1.2rem; }
+  .dims dt { font-family: "IBM Plex Mono", monospace; color: var(--signal-tint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem;}
+  .dims dd { margin: 0; color: #E9EAE6; font-size: 0.9375rem; line-height: 1.5; }
+
+  /* ---------- sections ---------- */
+  section { padding-block: var(--gap); border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: 0; }
+  h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.012em; margin: 0 0 1.5rem; }
+  h3 { font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; }
+
+  /* marcador de estágio */
+  .stage { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 2.75rem 0 0.25rem; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+  .stage b { color: var(--signal); font-weight: 500; }
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--rule); color: var(--ink-soft); padding: 0.15rem 0.45rem; margin-left: 0.5rem; vertical-align: 0.15em; }
+  .tag.dev { border-color: var(--signal-tint); color: var(--signal); }
+
+  /* pillar cards */
+  .pillars { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .pillars article { padding: 1.6rem 1.6rem 1.6rem 0; border-bottom: 1px solid var(--rule); }
+  @media (min-width: 52rem) {
+    .pillars article { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+    .pillars article:first-child { border-left: 0; padding-left: 0; }
+  }
+  .pillars p { margin: 0; color: var(--ink-soft); font-size: 0.96rem; }
+  @media (min-width: 72rem) { .pillars-4 { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ---------- demonstração (ISD e Ponto Verificação) ---------- */
+  .demo { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.5rem; }
+  @media (min-width: 48rem) { .demo { grid-template-columns: 1.1fr 1fr; align-items: start; } }
+  .controls { background: var(--surface); border: 1px solid var(--rule); padding: 1.5rem; }
+  .field { margin-bottom: 1.5rem;}
+  .field label { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 0.3rem; }
+  .field .hint { display: block; font-size: 0.8125rem; color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .field select, .field textarea { width: 100%; font: inherit; font-size: 0.9375rem; padding: 0.65rem 0.7rem; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 0; }
+  .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+  .controls button { font: inherit; font-weight: 600; font-size: 0.9375rem; cursor: pointer; background: var(--ink); color: #F1F2EF; border: 0; padding: 0.8rem 1.4rem; width: 100%; transition: opacity 0.2s;}
+  .controls button:hover:not(:disabled) { background: var(--signal); }
+  .controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .readout { background: var(--ink); color: #E9EAE6; padding: 1.75rem; display: flex; flex-direction: column; justify-content: center;}
+  .score { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(3.2rem, 10vw, 4.75rem); line-height: 1; margin: 0; letter-spacing: -0.02em; }
+  .verdict { font-size: 1.0625rem; font-weight: 600; margin: 0.6rem 0 0; color: var(--signal-tint); }
+  .readout ul { margin: 1.4rem 0 0; padding: 0; list-style: none; border-top: 1px solid #2E3444; }
+  .readout li { padding: 0.6rem 0; border-bottom: 1px solid #2E3444; font-size: 0.9rem; color: #C6C9C3; }
+  .readout li b { color: #E9EAE6; font-weight: 600; }
+
+  /* matriz 5x5 */
+  .matrix-wrap { margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--surface); padding: clamp(1.25rem, 4vw, 1.75rem); }
+  .matrix-scroll { overflow-x: auto; }
+  table.matrix { border-collapse: collapse; width: 100%; min-width: 30rem; font-family: "IBM Plex Mono", monospace; font-size: 0.8125rem; margin-top: 1rem;}
+  table.matrix th, table.matrix td { border: 1px solid var(--rule); padding: 0.5rem 0.4rem; text-align: center; }
+  table.matrix th { background: var(--paper); font-weight: 600; }
+  table.matrix td.c1 { background: #EDEEEA; }
+  table.matrix td.c2 { background: #EFDDDF; }
+  table.matrix td.c3 { background: #E2C3C7; }
+  table.matrix td.active { outline: 3px solid var(--signal); outline-offset: -3px; font-weight: 600; }
+  .matrix-note { margin-top: 0.9rem; font-size: 0.8125rem; color: var(--ink-soft); max-width: 66ch; }
+
+  /* ---------- Dashboard Visual ---------- */
+  .dash-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); border: 1px solid var(--rule); background: var(--surface); }
+  .dash-card { padding: 1.5rem 1.25rem; border-bottom: 1px solid var(--rule); }
+  @media(min-width: 48rem) {
+    .dash-cards { grid-template-columns: repeat(4, 1fr); }
+    .dash-card { border-bottom: none; border-right: 1px solid var(--rule); }
+    .dash-card:last-child { border-right: none; }
+  }
+  .dash-card .n { font-family: "Newsreader", Georgia, serif; font-size: 3.2rem; line-height: 1.1; color: var(--signal); display: block; margin-bottom: 0.5rem; letter-spacing: -0.02em;}
+  .dash-card .l { font-size: 0.75rem; color: var(--ink-soft); display: flex; align-items: center; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Bloco Inferior (Barras + Rosca) */
+  .dash-charts { display: flex; flex-wrap: wrap; margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--rule); padding: 2.5rem 2rem; gap: 3rem;}
+  .chart-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink); margin: 0 0 1.5rem; }
+
+  .dash-donut-section { flex: 1; min-width: 200px; }
+  .dash-bar-section { flex: 1.5; min-width: 280px; }
+
+  .bar-row { display: flex; align-items: center; margin-bottom: 1.2rem; }
+  .bar-label { width: 140px; font-size: 0.85rem; color: var(--ink-soft); }
+  .bar-track { flex-grow: 1; background: #E9EAE6; height: 14px; border-radius: 2px; overflow: hidden; display: flex; align-items: center; }
+  .bar-fill { height: 100%; background: var(--signal-tint); border-radius: 2px; }
+  .bar-value { margin-left: 15px; font-size: 0.95rem; font-weight: 600; width: 25px; color: var(--ink); text-align: right;}
+
+  .donut-container { display: flex; align-items: center; gap: 2rem; }
+  #donut-legend { font-size: 0.85rem; line-height: 2.2; color: var(--ink); }
+  .legend-item { display: flex; align-items: center; }
+  .legend-box { display: inline-block; width: 14px; height: 14px; border-radius: 2px; margin-right: 10px; }
+
+  /* Seção Preditiva */
+  .dash-predictive { margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--rule); padding: 2.5rem 2rem; }
+  .pred-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 48rem) { .pred-grid { grid-template-columns: 1fr 1.5fr; align-items: center; } }
+  .controls-pred label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--ink); }
+  .controls-pred input[type=range] { -webkit-appearance: none; width: 100%; margin-bottom: 1.5rem; background: transparent; }
+  .controls-pred input[type=range]:focus { outline: none; }
+  .controls-pred input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: var(--rule); border-radius: 3px; }
+  .controls-pred input[type=range]::-webkit-slider-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--signal); cursor: pointer; -webkit-appearance: none; margin-top: -6px; }
+  .controls-pred input[type=range]::-moz-range-track { width: 100%; height: 6px; cursor: pointer; background: var(--rule); border-radius: 3px; }
+  .controls-pred input[type=range]::-moz-range-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--signal); cursor: pointer; border: none; }
+
+
+  /* ---------- painel integrado ---------- */
+  .ip { margin-top: 2rem; border: 1px solid var(--rule); background: var(--paper); }
+  .ip-top { background: var(--ink); color: #E9EAE6; padding: 1.1rem 1.4rem; display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; justify-content: space-between; align-items: center; }
+  .ip-top strong { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.35rem; display: block; }
+  .ip-top span.s { font-size: 0.8125rem; color: #9AA0AC; }
+  .ip-top .chips span { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.04em; border: 1px solid #4A5162; padding: 0.25rem 0.6rem; margin-left: 0.4rem; color: #E9EAE6; }
+  .ip-alert { margin: 1rem; padding: 0.8rem 1rem; background: #EFDDDF; border: 1px solid var(--signal-tint); border-left: 5px solid var(--signal); font-size: 0.875rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; justify-content: space-between; }
+  .ip-alert b { color: var(--signal); }
+  .ip-alert i { font-style: normal; color: var(--ink-soft); font-size: 0.8125rem; }
+  .ip-kpis { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 0 1rem 1rem; }
+  .ip-kpi { background: var(--surface); border: 1px solid var(--rule); border-top: 4px solid var(--signal-tint); padding: 0.8rem 1rem; }
+  .ip-kpi small { display: block; font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.35; min-height: 2.2em; }
+  .ip-kpi b { display: block; font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 2.2rem; line-height: 1.15; color: var(--ink); }
+  .ip-kpi em { font-style: normal; font-size: 0.75rem; color: var(--ink-soft); }
+  .ip-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; padding: 0 1rem 1rem; }
+  @media (min-width: 44rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .w2, .ip-grid .w3 { grid-column: 1 / -1; } }
+  @media (min-width: 64rem) { .ip-grid { grid-template-columns: repeat(3, 1fr); } .ip-grid .w2 { grid-column: span 2; } }
+  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; }
+  .blk h4 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.05rem; margin: 0 0 0.15rem; color: var(--signal); }
+  .blk .sub { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
+  .blk .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.8125rem; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
+  .drawer { border: 1px dashed var(--signal-tint); background: var(--paper); padding: 0.65rem 0.8rem; margin-top: 0.8rem; font-size: 0.8125rem; line-height: 1.55; }
+  .ip table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+  .ip th, .ip td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .ip th { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); font-weight: 500; }
+  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; padding: 0.05rem 0.4rem; border: 1px solid var(--rule); background: #EDEEEA; color: var(--ink-soft); white-space: nowrap; }
+  .chip.warn { background: #EFDDDF; border-color: var(--signal-tint); color: var(--signal); }
+  .chip.hi { background: var(--signal); border-color: var(--signal); color: #F1F2EF; }
+  .mx3 { display: grid; grid-template-columns: repeat(3, 2.2rem); gap: 3px; }
+  .mx3 div { height: 2.2rem; }
+  .mx3 .l { background: #EDEEEA; } .mx3 .m { background: #EFDDDF; } .mx3 .h { background: #E2C3C7; }
+  .mx3 .on { outline: 3px solid var(--ink); outline-offset: -3px; background: var(--signal-tint); }
+  .ind { font-size: 0.8125rem; margin-bottom: 0.55rem; }
+  .ind span { float: right; font-weight: 600; }
+  .ind .bar-track { height: 8px; margin-top: 3px; }
+  .modal { border: 2px solid var(--ink); padding: 0.8rem 0.9rem; background: var(--surface); }
+  .modal .ta { border: 1px solid var(--rule); background: var(--paper); height: 3.2rem; margin: 0.5rem 0; padding: 0.4rem; font-size: 0.8125rem; color: var(--ink-soft); }
+  .btn { display: inline-block; padding: 0.4rem 0.9rem; font-size: 0.8125rem; font-weight: 600; }
+  .btn.off { background: #E4E5E1; color: #8B909A; }
+  .btn.on { background: var(--ink); color: #F1F2EF; margin-left: 0.4rem; }
+  .ip-foot { padding: 0 1rem 1rem; font-size: 0.8125rem; color: var(--ink-soft); text-align: center; max-width: none; }
+  .qgrid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin-top: 1.5rem; }
+  .qgrid article { background: var(--surface); padding: 1.3rem; }
+  .qgrid article h3 { color: var(--signal); font-size: 0.9375rem; }
+  .qgrid article ul { margin: 0.4rem 0 0; padding-left: 1.1rem; font-size: 0.875rem; color: var(--ink-soft); }
+  .qgrid article li { margin-bottom: 0.25rem; }
+
+  /* architecture diagram */
+  .diagram{margin:3rem 0 0;background:var(--surface);border:1px solid var(--rule);padding:clamp(1.25rem,4vw,2.25rem);}
+  .diagram figcaption{margin-top:1.5rem;font-size:0.875rem;color:var(--ink-soft);max-width:56ch;}
+  .arch{display:grid;gap:clamp(1.5rem,4vw,2.5rem);grid-template-columns:1fr;}
+  @media (min-width:48rem){.arch{grid-template-columns:1fr 1fr;align-items:center;}}
+  .layers{display:grid;gap:0;}
+  .layer{border:1px solid var(--rule);background:var(--paper);padding:1rem 1.15rem;}
+  .layer + .layer{margin-top:1.5rem;position:relative;}
+  .layer + .layer::before{content:"";position:absolute;left:1.75rem;top:-1.5rem;height:1.5rem;border-left:2px solid var(--signal);}
+  .layer strong{display:block;font-size:0.9375rem;}
+  .layer span{font-size:0.875rem;color:var(--ink-soft);}
+  .outside{border:2px solid var(--signal);padding:1.15rem;background:var(--paper);}
+  .outside strong{display:block;color:var(--signal);font-size:1.0625rem;}
+  .outside span{font-size:0.9375rem;color:var(--ink-soft);}
+  .outside code{display:inline-block;margin-top:0.75rem;font-family:"IBM Plex Mono",monospace;font-size:0.8125rem;color:var(--ink-soft);}
+  .divider{position:relative;}
+  @media (min-width:48rem){.divider::before{content:"";position:absolute;left:calc(-1 * clamp(0.75rem,2vw,1.25rem));top:-1rem;bottom:-1rem;border-left:1px dashed var(--rule);}}
+
+  /* production list & norms */
+  .items, .norms { list-style: none; margin: 0; padding: 0; }
+  .items li, .norms li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; padding-block: 1.25rem; border-top: 1px solid var(--rule); align-items: baseline; }
+  .items li:last-child, .norms li:last-child { border-bottom: 1px solid var(--rule); }
+  .year, .when { font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; color: var(--ink-soft); }
+  .items h3, .norms h3 { margin-bottom: 0.25rem; display: inline; font-size: 1rem;}
+  .items p, .norms p { margin: 0.45rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+  .flag { display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; background: var(--signal); color: #F1F2EF; padding: 0.2rem 0.5rem; margin-left: 0.5rem; vertical-align: 0.15em; }
+
+  /* material cards */
+  .materials { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); margin-top: 2.5rem; }
+  .materials article { background: var(--surface); border: 1px solid var(--rule); padding: 1.6rem; display: flex; flex-direction: column; }
+  .materials p { margin: 0.4rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+
+  /* treinamento modules */
+  .modules{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule); grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:1.5rem;}
+  .modules article{background:var(--surface);padding:1.6rem;}
+  .modules .mn{font-family:"IBM Plex Mono",monospace;font-size:0.8125rem;color:var(--signal);}
+  .modules h3{margin:0.35rem 0 0.4rem;}
+  .modules p{margin:0;font-size:0.9375rem;color:var(--ink-soft);}
+
+  /* identificadores */
+  .ids { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 2.5rem; }
+  .ids a { background: var(--surface); padding: 1.4rem; border-bottom: 0; display: block; }
+  .ids a:hover { background: var(--paper); color: inherit; }
+  .ids a:hover .name { color: var(--signal); }
+  .ids .name { display: block; font-weight: 600; font-size: 1rem; }
+  .ids .handle { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.8125rem; color: var(--signal); margin-top: 0.2rem; word-break: break-all; }
+  .ids .what { display: block; font-size: 0.875rem; color: var(--ink-soft); margin-top: 0.5rem; line-height: 1.55; }
+
+  /* footer */
+  footer { background: var(--ink); color: #9AA0AC; padding-block: clamp(2.5rem, 6vw, 3.75rem); font-size: 0.875rem; line-height: 1.65; }
+  footer p { max-width: 58ch; margin: 0 0 0.9rem; }
+  footer p:last-child { margin-bottom: 0; }
+  footer a { border-bottom-color: #4A5162; }
+  footer a:hover { color: #D9DBD6; border-bottom-color: #9AA0AC; }
+  .tabs{background:#0B0E15;border-bottom:1px solid #2E3444;position:sticky;top:0;z-index:50}
+  .tabs .wrap{display:flex;gap:.25rem;align-items:center;overflow-x:auto}
+  .tabs a{border:0;color:#9AA0AC;font-size:.875rem;padding:.8rem 1rem;white-space:nowrap;border-bottom:2px solid transparent}
+  .tabs a:hover{color:#fff}
+  .tabs a[aria-current="page"]{color:#fff;border-bottom-color:#B8555F}
+  .tabs .brand{margin-right:auto;font-family:"Newsreader",Georgia,serif;color:#E9EAE6;padding-left:0}
+</style>
+</head>
+<body>
+
+<nav class="tabs" aria-label="Site pages"><div class="wrap"><a class="brand" href="./">Decision Symbiosis</a><a href="./" aria-current="page">Overview</a><a href="../exemplo-pai/">Example with the PAI (in Portuguese)</a><a href="../exemplo-cnj/">Example with the CNJ dashboard (in Portuguese)</a><a href="../" hreflang="pt-BR">Português</a></div></nav>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+        <p class="kicker">Eric Lopes Mello · Research and Public Management</p>
+        <h1>Decision Symbiosis</h1>
+        <p class="lede">Instead of trying to open the technology black box, we govern the human decision. A model that applies from BI dashboards to predictive models.</p>
+    </div>
+
+    <div class="index">
+      <p class="formula">The central tension: <em>automation</em> vs. <em>human oversight</em>
+        <small>Technical explainability of algorithmic systems is hard to achieve. Shifting the focus from "system governance" to "decision governance" solves this problem and puts the human back at the center of the process.</small>
+      </p>
+      <dl class="dims">
+        <div><dt>Paradigm</dt><dd>From Artificial Intelligence to Augmented Intelligence: the machine extends human capacity, it does not replace it.</dd></div>
+        <div><dt>Focus</dt><dd>Decision Governance instead of attempting System Governance.</dd></div>
+        <div><dt>Scope</dt><dd>Technology-agnostic: applies to spreadsheets, traditional BI dashboards or Generative AI.</dd></div>
+        <div><dt>Method and Rule</dt><dd>Symbiosis is the working method; Governance is the validation rule.</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Decision Symbiosis</h2>
+    <p>When a court adopts a technological system, the governance literature focuses exhaustively on trying to open the algorithm "black box". The problem is that, with Generative AI and complex models, full technical explainability is nearly impossible. The GSD-ISD model takes a pragmatic stance: <b>instead of trying to govern the system, we should govern the decisions made with the system.</b></p>
+    <p>This approach removes the difficulty of technical explainability and reinforces human responsibility, in line with the legal nature of public administration. In a court, every decision requires legal grounds; technology is only the means, but final authorship is non-transferable and belongs exclusively to a human (judge, director or civil servant).</p>
+    
+    <h3 style="margin-top: 2rem;">Technology Neutrality, Bias and Business Focus</h3>
+    <p>Extending this model to traditional systems, such as Business Intelligence (BI) dashboards and decision support systems, is not only possible but strategic, for the following reasons:</p>
+    <ul style="color: var(--ink-soft); font-size: 0.9375rem; padding-left: 1.2rem; max-width: 63ch;">
+      <li style="margin-bottom: 0.8rem;"><b>Technology-agnostic governance:</b> The court builds a future-proof framework. Whether the tool is ChatGPT, a predictive model, a Power BI dashboard or an Excel spreadsheet, the rule applies to the impact of the final decision. This avoids rewriting policies with every new innovation.</li>
+      <li style="margin-bottom: 0.8rem;"><b>Mitigating automation bias in any environment:</b> "Anchoring bias" is not exclusive to AI. A poorly built BI chart, or one fed with unvalidated data, can lead to a serious error. Governing the decision obliges the user to validate the information, however simple the source system may be.</li>
+      <li><b>Focus on the business, not only on IT:</b> Models fail when they become an "IT checklist". Governing the decision places responsibility on the business unit that actually uses the dashboard, ensuring the system serves its practical purpose.</li>
+    </ul>
+
+    <h3 style="margin-top: 2.5rem;">Augmented Intelligence: Symbiosis as the Engine</h3>
+    <p>In this proposal, technology is not seen as a replacement but as <b>Augmented Intelligence</b>, that is, an extension of human capacity. The machine brings the raw power to process massive volumes of data, identify patterns or draft documents at scale; the human brings empathy, judgment, a sense of fairness and the legal seal of approval.</p>
+    <p>Decision Symbiosis is the method (how the work is done); decision governance is the framework that ensures the human has truly taken authorship, preventing the mere act of "pressing approve without reading".</p>
+
+    <p class="stage">The GSD-ISD model · <b>specified and verified</b></p>
+    <div class="pillars">
+      <article>
+        <h3>Decision Sensitivity Index (ISD)</h3>
+        <p>Classifies each use of the system by risk, combining impact on rights and irreversibility. Oversight is applied to the decision and is proportional to risk.</p>
+      </article>
+      <article>
+        <h3>Three control layers</h3>
+        <p>Separates those who operate, those who oversee and those who audit, so that control falls on the decision chain. The audit is automated, internal and run by sprints, sampling the classification, the record sheet and the integrity of the audit trail.</p>
+      </article>
+      <article>
+        <h3>Protocol A1–A6</h3>
+        <p>A core of six criteria required from the pilot onward, drawn from a nine-criteria design across four compliance pillars. The remaining three (A7 to A9) are specified as an institutional maturity extension. Designed for business managers, without software development jargon.</p>
+      </article>
+      <article>
+        <h3>Decision chain record</h3>
+        <p>The Record Sheet logs the steps and the reasons, materializing the non-transferable human responsibility (legal seal of approval) required by the court regulatory framework.</p>
+      </article>
+    </div>
+
+    <p class="stage">Architecture extensions · <b>under development and implemented</b></p>
+    <div class="pillars pillars-4">
+      <article>
+        <h3>Design friction in the interface <span class="tag dev">under research</span></h3>
+        <p>Cognitive forcing functions and micro-boundaries only in high-risk tasks, mitigating automation bias in BI or AI without stiffening the routine.</p>
+      </article>
+      <article>
+        <h3>Practicability and shadow AI <span class="tag dev">under research</span></h3>
+        <p>When the audited channel is overly bureaucratic, staff look for undeclared external solutions (loose spreadsheets, generic AI). Practicability is vital.</p>
+      </article>
+      <article>
+        <h3>Data governance at the source <span class="tag dev">implemented</span></h3>
+        <p>A dashboard with a half-finished load leads to error. Validation between steps and deviation detection separate complete data from partial data at the BI source.</p>
+      </article>
+      <article>
+        <h3>Tracking and goal control <span class="tag dev">implemented</span></h3>
+        <p>Each run of the pipeline receives a unique identifier, chained by an integrity check. The indicators compared with the historical pattern come from this trail. Trend projection is the next step, not yet implemented.</p>
+      </article>
+    </div>
+
+    <p class="stage">Phase 0 · <b>baseline diagnosis, proposal not yet executed</b></p>
+    <p>Before applying any friction, the proposed pilot measures the path of least resistance. Automation bias is documented, but its prevalence varies by context: friction applied without a diagnosis may be excessive, pushing use toward external tools, or insufficient, leaving the bias unaddressed. For this reason, the two weeks that precede the 12-week pilot, organized in three sprints, are used to measure current decision-making behavior and calibrate friction to what is observed.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Phase 0 · 1</span>
+        <h3>Observe</h3>
+        <p>Non-invasive observation of 50 to 100 decisions, with no intervention, and review of 200 to 300 prior records, where they exist.</p>
+      </article>
+      <article>
+        <span class="mn">Phase 0 · 2</span>
+        <h3>Listen</h3>
+        <p>Semi-structured interviews with 6 to 8 judges and clerks about uncertainty, trust in the recommendation and the practicability of the protocol.</p>
+      </article>
+      <article>
+        <span class="mn">Phase 0 · 3</span>
+        <h3>Calibrate</h3>
+        <p>Segmentation by decision type and by unit, never by person, and a plan that indicates where to apply friction and how strongly.</p>
+      </article>
+      <article>
+        <span class="mn">Phase 0 · 4</span>
+        <h3>Compare</h3>
+        <p>Edit rate, decision time and consultation of the data source, measured beforehand, are measured again in the sprints, allowing a before-and-after comparison.</p>
+      </article>
+    </div>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Because the institutional audit trail does not capture the conduct of whoever decides, Phase 0 is a separate study, with informed consent and aggregated results.</p>
+
+    <h3 style="margin-top:3.5rem;">The Decision Symbiosis cycle</h3>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:0.4rem 0 0;">After Phase 0, the four
+    pillars above are organized into six steps, in which the human validates the system and governance validates the human. Step 6 reopens step 1: the cycle is iterative.</p>
+    
+    <div class="modules">
+      <article>
+        <span class="mn">Step 1</span>
+        <h3>Govern the use of the dashboard</h3>
+        <p>The committee defines which decisions supported by the dashboard or by AI require a checkpoint before acting, combining probability and impact. Management operates the cognitive forcing screen that applies this rule.</p>
+      </article>
+      <article>
+        <span class="mn">Step 2</span>
+        <h3>Calculate decision risk</h3>
+        <p>Classifies decisions made from the dashboard by impact on rights and reversibility (ISD), regardless of the technology adopted.</p>
+      </article>
+      <article>
+        <span class="mn">Step 3</span>
+        <h3>Validate the data</h3>
+        <p>Checks each load before releasing the next, restarts failures and detects deviations, mitigating bias caused by input errors.</p>
+      </article>
+      <article>
+        <span class="mn">Step 4</span>
+        <h3>Document and Trace</h3>
+        <p>Automatically records each run and chains it with an integrity check. Human intervention requires an identified person responsible and a reason. Every decision supported by the system has the signing person identified, with name and position; monitoring indicators, however, are by unit, never by person.</p>
+      </article>
+      <article>
+        <span class="mn">Step 5</span>
+        <h3>Map the upstream process</h3>
+        <p>Shows the data steps and earlier AI uses that produced the indicator, providing context for human judgment.</p>
+      </article>
+      <article>
+        <span class="mn">Step 6</span>
+        <h3>Evaluate and Project (Predictive Dashboard)</h3>
+        <p>Compares indicators with goals, shows progress and anticipates bottlenecks, subjecting the AI to the user scrutiny. It also gathers the quality-loss risk indicators and sprint monitoring. Steps 1 to 5 are implemented as a proof of concept; the predictive component is a later phase.</p>
+      </article>
+    </div>
+
+    <figure class="diagram">
+      <div class="arch">
+        <div class="layers">
+          <div class="layer">
+            <strong>Operation (The Symbiosis)</strong>
+            <span>Human and system working together day to day.</span>
+          </div>
+          <div class="layer">
+            <strong>Decision Oversight</strong>
+            <span>Institutional committee, assessing use based on the ISD risk band.</span>
+          </div>
+          <div class="layer">
+            <strong>Internal Automated Audit</strong>
+            <span>Protocol A1–A6, independent of the technology under the hood (BI, AI, spreadsheets). Samples the artifact and the process, never the merits of the decision. Reports to the committee every sprint.</span>
+          </div>
+        </div>
+        <div class="divider">
+          <div class="outside">
+            <strong>Final Judicial / Administrative Decision</strong>
+            <span>Where human responsibility, authorship and reasoning reside.</span>
+            <code>art. 93, IX, CF</code>
+          </div>
+        </div>
+      </div>
+      <figcaption>Control reaches the path of use and the human validation, never the
+      isolated merits of the algorithm or of the technical tool itself. These three layers define <em>who</em> audits the decision and <em>how</em> it is held accountable.</figcaption>
+    </figure>
+
+    <h3 style="margin-top:3.5rem;">Governance, management and audit are distinct roles</h3>
+    <p>Governance, exercised by the committee, defines where verification is mandatory, sets the goals and decides on alerts every sprint. Management operates the interface and the data routines day to day. The internal automated audit is distinct from both, samples every sprint, reports to the committee and has the artifact and the process as its object, never the merits of the decision or the conduct of whoever decides. It checks the risk classification, the integrity of the audit trail and the completeness of the record sheet, ensuring that the decision chain leaves an auditable and irrefutable trace.</p>
+
+    <h3 style="margin-top:2.5rem;">Probability × impact</h3>
+    <p>The ISD measures the impact of the decision on rights and its irreversibility. To it is added the probability of quality loss, rated low, medium or high by six context indicators tracked by unit, never by judge. Crossed with impact, the two dimensions form a risk matrix, which brings forward the reassessment of high-risk uses in high-probability units. Thresholds are calibrated in Phase 0, and the alert triggers support from management, not enforcement.</p>
+
+    <h3 style="margin-top:2.5rem;">Controls by type</h3>
+    <div class="qgrid">
+      <article><h3>Preventive</h3><ul>
+        <li>Classification by impact and probability</li>
+        <li>Preconditions on data representativeness and explainability</li>
+        <li>Checkpoint with cognitive forcing</li>
+        <li>Quality indicators (outcome, effectiveness, reasoning, experience and administrative), with qualitative goals, no ranking and read by trend</li>
+        <li>Quality-loss risk indicators</li>
+        <li>Training</li></ul></article>
+      <article><h3>Detective</h3><ul>
+        <li>Record sheet and immutable audit trail</li>
+        <li>Aggregated behavioral indicators</li>
+        <li>Anomaly flagging</li>
+        <li>Alert and trend</li></ul></article>
+      <article><h3>Corrective</h3><ul>
+        <li>Committee decision every sprint (expand, adjust or suspend)</li>
+        <li>Stop criterion</li>
+        <li>Management support</li>
+        <li>Suspension or reversal plan</li></ul></article>
+      <article><h3>Assurance</h3><ul>
+        <li>Internal automated audit, sampled every sprint</li>
+        <li>Verification of classification, audit trail and record sheet</li>
+        <li>Report to the committee at the end of each sprint</li>
+        <li>Scope limited to the artifact and the process, never the merits of the decision</li></ul></article>
+    </div>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Quality indicators are preventive, since they act on the condition that favors bias before quality loss sets in. The audit trail and anomaly flagging are detective. Conceptually aligned with the IIA Three Lines Model (2020).</p>
+  </section>
+
+  <section id="demonstracao">
+    <h2>Steps 1 and 2: Friction and Decision Risk Calculation</h2>
+    <p>Set the risk of the <b>decision to be made</b> from the dashboard/AI (ISD) and try the mandatory cognitive friction for high-risk actions. The system forces the human out of "autopilot" and into stating the reasons.</p>
+
+    <div class="demo">
+      <!-- Calculadora ISD -->
+      <div class="controls">
+        <h3 style="margin-top:0;">1. Calculate the Risk (ISD)</h3>
+        <div class="field">
+          <label for="d1">D1 — Impact of the decision to be made</label>
+          <span class="hint">Weight 0.4 in the index (assesses real-world effect)</span>
+          <select id="d1">
+            <option value="1">1 — Purely informative/procedural action</option>
+            <option value="2">2 — Indirect internal operational effect</option>
+            <option value="3" selected>3 — Relevant effect on cases/goals</option>
+            <option value="4">4 — Restriction or batch handling</option>
+            <option value="5">5 — Direct impact on fundamental rights</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d2">D2 — Irreversibility of the action</label>
+          <span class="hint">Weight 0.6 in the index (assesses ability to correct)</span>
+          <select id="d2">
+            <option value="1">1 — Fully reversible ex officio</option>
+            <option value="2">2 — Reversible with a simple routine</option>
+            <option value="3" selected>3 — Reversible at a relevant administrative cost</option>
+            <option value="4">4 — Hard to reverse</option>
+            <option value="5">5 — Practically irreversible</option>
+          </select>
+        </div>
+        
+        <h3 style="margin-top:2rem; border-top:1px solid var(--rule); padding-top:1.5rem;">2. Cognitive Forcing and Authorship</h3>
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">Forcing applies only to high-risk decisions (Layer 3) to require the legal/managerial reasoning of the human operator.</p>
+        
+        <div class="field">
+          <label for="justificativa">Reasoning / grounds for the decision:</label>
+          <textarea id="justificativa" rows="2" placeholder="Type at least 20 characters to take authorship of the act..." style="resize:vertical;"></textarea>
+        </div>
+        
+        <button type="button" id="btn-registrar" disabled>Record and Take the Decision</button>
+      </div>
+
+      <!-- Readout do ISD -->
+      <div class="readout" aria-live="polite">
+        <p class="score" id="score">60%</p>
+        <p class="verdict" id="verdict">Layer 2 — Moderate Risk</p>
+        <ul>
+          <li><b>Human Validation (Friction)</b><br><span id="prot">Simple record is enough</span></li>
+          <li><b>Decision Audit</b><br><span id="rev">Semiannual</span></li>
+          <li style="border-bottom: 0;"><b>Button Status</b><br><span id="status-btn" style="color:#C9CCC5;">Locked: text too short</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Matriz de Risco -->
+    <div class="matrix-wrap">
+      <h3 style="margin-bottom:0.5rem;">The full classification space (ISD)</h3>
+      <p class="matrix-note" style="margin-top:0.2rem; margin-bottom:1.5rem;">Because D1 and D2 take only whole values from 1 to 5, decision risk can be fully mapped: of the 25 combinations, 5 yield low risk, 13 moderate and 7 high. The highlighted cell follows the parameters selected above.</p>
+      <div class="matrix-scroll">
+        <table class="matrix" id="matrix">
+          <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">ISD classification matrix by D1 and D2</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard">
+    <h2>Step 6: Integrated Dashboard and Augmented Intelligence</h2>
+    <p>The trail created for auditing makes the oversight regime itself measurable. From it come, with no parallel data collection and no extra input from the operator, <b>six indicators, one per step of the cycle</b>: compliance (high-risk decisions with reasoning recorded), classification (uses classified by ISD with reassessment up to date), integrity (loads successfully validated), recovery (average time to fix failures), traceability (lineage mapped and accessible) and alerts (false positives in predictive alerts, from the pilot of the predictive module). Reference goals are calibrated against the Phase 0 baseline. Measurement stops being a separate project and becomes a by-product of the record.</p>
+    <p>The same base supports the <b>predictive opportunity</b>. Court dashboards today are descriptive: they show what has already happened, without anticipating case backlog build-up or the risk of missing a goal. Projecting trends is the next step, and it depends on what comes before, because a predictive model over unvalidated data projects the error with more confidence. The judge or manager submits the projection to ISD scrutiny before acting.</p>
+    <p>The decision-behavior indicators measured in Phase 0 (edit rate, decision time and consultation of the source) reappear in the pilot as a benchmark, to show whether friction produced the expected effect.</p>
+    
+
+    <h3 style="margin-top:2.5rem;">Integrated interface</h3>
+    <p>The artifacts make up a single interface. Beside each indicator, the side panel shows the source and the data update, and the load control panel shows load validation. In high-risk decisions, the cognitive forcing screen asks for the justification. At the top, the alert card consolidates deviations and the backlog projection, a predictive extension of today descriptive dashboards. The committee defines where to verify and decides on alerts, and management operates the interface.</p>
+    <p>Quality indicators, with qualitative goals and trend reading within each unit, never in a ranking, coexist with the quality-loss risk indicators, which flag deterioration before it sets in. The same dashboard is reused in the following sprints to monitor the pilot.</p>
+
+    <div class="ip" role="group" aria-label="Illustrative mockup of the integrated dashboard">
+      <div class="ip-top">
+        <div><strong>Integrated Decision Governance Dashboard</strong><span class="s">Augmented Intelligence · Decision Symbiosis · Pilot court (fictitious) · Sprint 2 of 3</span></div>
+        <div class="chips"><span>Risk: unit at HIGH probability</span><span>Agile Committee</span></div>
+      </div>
+      <div class="ip-alert"><div><b>Consolidated alert.</b> High probability of quality loss and backlog projected above capacity in month 4.</div><i>Triggers management support, not enforcement. Data by unit, never by judge.</i></div>
+      <div class="ip-kpis">
+        <div class="ip-kpi"><small>Compliance (high risk, reasoning recorded)</small><b>92%</b><em>goal: upward direction</em></div>
+        <div class="ip-kpi"><small>Validated loads</small><b>98%</b><em>2 failures restarted</em></div>
+        <div class="ip-kpi"><small>Active alerts</small><b>2</b><em>1 quality, 1 backlog</em></div>
+        <div class="ip-kpi"><small>Reassessments on time (Layer 3)</small><b>5 of 6</b><em>1 brought forward by the matrix</em></div>
+      </div>
+      <div class="ip-grid">
+
+        <div class="blk"><h4>1. Indicator with source and load</h4><p class="sub">Load control panel and source side panel</p>
+          <div class="row"><span>Cases resolved (month)</span><b>1,240</b></div>
+          <div class="row"><span>Pending decision</span><b>386</b></div>
+          <div class="row"><span>e-Gestão load</span><span class="chip">Validated</span></div>
+          <div class="row"><span>Rows read</span><b>48,312</b></div>
+          <div class="row"><span>Last validation</span><b>06:02</b></div>
+          <div class="drawer"><b>Data source</b><br>Source case management system<br>Updated today, 06:10<br>Steps: extraction, validation, dashboard</div>
+        </div>
+
+        <div class="blk"><h4>2. Quality-loss risk</h4><p class="sub">Probability (six indicators) × impact (ISD)</p>
+          <div style="display:flex;gap:0.9rem;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap">
+            <div><div class="mx3"><div class="m"></div><div class="h"></div><div class="on"></div><div class="l"></div><div class="m"></div><div class="h"></div><div class="l"></div><div class="l"></div><div class="m"></div></div>
+            <div style="font-size:0.6875rem;color:var(--ink-soft);margin-top:4px">high at right: impact (L3)<br>high at top: probability</div></div>
+            <div style="font-size:0.8125rem;line-height:1.7">Probability <span class="chip hi">HIGH</span><br>Impact <span class="chip hi">Layer 3</span><br><span style="color:var(--ink-soft);font-size:0.75rem">level recorded by the committee in the Record Sheet</span></div>
+          </div>
+          <div class="ind">Sustained deadline pressure<span>high</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:var(--signal)"></div></div></div>
+          <div class="ind">Sudden volume acceleration<span>medium</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
+          <div class="ind">Decisions concentrated at period end<span>high</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
+          <div class="ind">Load per workforce<span>high</span><div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--signal)"></div></div></div>
+          <div class="ind">Backlog complexity<span>medium</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div></div>
+          <div class="ind">Drafts suggested by automation<span>low</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:#9AA0AC"></div></div></div>
+        </div>
+
+        <div class="blk"><h4>3. Quality by trend, no ranking</h4><p class="sub">Qualitative goal as direction, the unit own series</p>
+          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Three trend series with dashed projection">
+            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Reversal on appeal</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">trend ↓ (good)</text></g>
+            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,60 60,52 120,56 180,44 240,40 300,34 360,30"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,30 400,24"/>
+            <g font-size="12"><text x="0" y="104" font-weight="700">Remand for nullity</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">trend ↑ (attention)</text></g>
+            <polyline fill="none" stroke="#B8555F" stroke-width="3" points="0,160 60,164 120,156 180,150 240,140 300,130 360,122"/><polyline fill="none" stroke="#B8555F" stroke-width="2" stroke-dasharray="5 4" points="360,122 400,112"/>
+            <g font-size="12"><text x="0" y="194" font-weight="700">Reasoning (objective grid)</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">trend ↓ (attention)</text></g>
+            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,226 60,222 120,228 180,236 240,244 300,250 360,258"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,258 400,268"/>
+            <text x="0" y="282" font-size="11" fill="#39404F">dashed line: risk projection (prediction)</text>
+          </svg>
+        </div>
+
+        <div class="blk"><h4>4. Backlog projection (6 months)</h4><p class="sub">Predictive extension of the currently descriptive dashboard</p>
+          <svg width="100%" viewBox="0 0 400 230" role="img" aria-label="Backlog projection crossing capacity in month 4">
+            <line x1="30" y1="190" x2="390" y2="190" stroke="#C9CCC5"/><line x1="30" y1="20" x2="30" y2="190" stroke="#C9CCC5"/>
+            <line x1="30" y1="95" x2="390" y2="95" stroke="#7A2230" stroke-width="2" stroke-dasharray="6 4"/><text x="34" y="88" font-size="12" fill="#7A2230">clearance capacity</text>
+            <polygon points="30,150 130,140 230,118 330,92 390,76 390,46 330,66 230,92 130,118 30,132" fill="#B8555F" opacity=".2"/>
+            <polyline fill="none" stroke="#131722" stroke-width="3.5" points="30,141 130,129 230,105 330,79 390,61"/>
+            <g font-size="12" fill="#39404F"><text x="22" y="208">Today</text><text x="125" y="208">Month 2</text><text x="225" y="208">Month 4</text><text x="325" y="208">Month 6</text></g>
+            <text x="390" y="40" text-anchor="end" font-size="12" fill="#7A2230" font-weight="700">crosses capacity in month 4</text>
+          </svg>
+        </div>
+
+        <div class="blk"><h4>5. Checkpoint (high risk)</h4><p class="sub">Cognitive forcing, an alert that does not condition the decision</p>
+          <div class="modal"><b style="font-size:0.875rem">The recommendation does not come ready to confirm.</b>
+            <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px">Record the normative grounds (your own text, minimum length)</div>
+            <div class="ta">Type the reasoning for the act...</div>
+            <span class="btn off">Confirm (locked)</span><span class="btn on">Record and release</span></div>
+          <div class="drawer">Written to the trail: identified person responsible, reason and timestamp. The log is restricted to metadata, with no generated content, and identification serves accountability, not performance measurement.</div>
+        </div>
+
+        <div class="blk"><h4>6. Sprint monitoring</h4><p class="sub">Phase 0 dashboard, reused in the following sprints</p>
+          <table><tr><th>Indicator (aggregate)</th><th>Baseline</th><th>S1</th><th>S2</th></tr>
+            <tr><td>Edit rate before confirming</td><td>8%</td><td>17%</td><td>21%</td></tr>
+            <tr><td>Display → confirmation time</td><td>24 s</td><td>41 s</td><td>47 s</td></tr>
+            <tr><td>Consultation of data source</td><td>12%</td><td>36%</td><td>44%</td></tr>
+            <tr><td>Additional time per case</td><td>0 s</td><td>+19 s</td><td>+14 s</td></tr></table>
+          <p style="margin:0.8rem 0 0;font-size:0.8125rem;line-height:1.6">Stop criterion <span class="chip">within limit</span><br>Committee decision at the end of the sprint: <b>expand, adjust or suspend</b></p>
+        </div>
+
+        <div class="blk"><h4>7. Risk composition of decisions</h4><p class="sub">ISD classification, latest assessment</p>
+          <div style="display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap">
+            <svg width="110" height="110" viewBox="0 0 42 42" role="img" aria-label="Risk composition donut"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#C9CCC5" stroke-width="7" stroke-dasharray="20 80" stroke-dashoffset="25"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#B8555F" stroke-width="7" stroke-dasharray="52 48" stroke-dashoffset="5"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#7A2230" stroke-width="7" stroke-dasharray="28 72" stroke-dashoffset="-47"/></svg>
+            <div style="font-size:0.8125rem;line-height:1.9"><span style="color:#9AA0AC">■</span> Low risk, 20%<br><span style="color:#B8555F">■</span> Moderate, 52%<br><span style="color:#7A2230">■</span> High, 28%</div>
+          </div>
+        </div>
+
+        <div class="blk w2"><h4>8. Trend by court and unit, impact × probability</h4><p class="sub">The unit own series, alphabetical order, no ranking between units</p><div style="overflow-x:auto"><table><tr><th>Unit</th><th>Prob.</th><th>Impact</th><th>Matrix</th><th>Quality, 6 months</th><th>Trend</th></tr><tr><td><b>Registry A (pilot)</b></td><td><span class="chip">Low</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#9AA0AC" stroke-width="2.5" points="0,22 24,21 48,19 72,15 96,12 120,8"/></svg></td><td>↑ improving</td></tr><tr><td><b>Court A (pilot)</b></td><td><span class="chip hi">High</span></td><td>C3</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#7A2230"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#7A2230" stroke-width="2.5" points="0,8 24,10 48,13 72,17 96,21 120,25"/></svg></td><td>↓ declining, attention</td></tr><tr><td><b>Court B</b></td><td><span class="chip warn">Medium</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#B8555F" stroke-width="2.5" points="0,15 24,14 48,16 72,15 96,14 120,15"/></svg></td><td>→ stable</td></tr></table></div></div>
+
+        <div class="blk w3"><h4>9. Recent audit trail entries</h4><p class="sub">Table sealed by hash chain, recorded by unit, never by person</p>
+          <div style="overflow-x:auto"><table><tr><th>When</th><th>Step</th><th>Status</th><th>Description</th></tr>
+            <tr><td>10:05</td><td>6. Evaluate</td><td><span class="chip hi">Alert</span></td><td>High probability of quality loss in the unit</td></tr>
+            <tr><td>09:41</td><td>1. Verify</td><td><span class="chip">Recorded</span></td><td>Justification recorded for a high-risk decision</td></tr>
+            <tr><td>06:10</td><td>3. Validate</td><td><span class="chip">Validated</span></td><td>e-Gestão load completed, 48,312 rows read</td></tr>
+            <tr><td>06:02</td><td>3. Validate</td><td><span class="chip warn">Restarted</span></td><td>Extraction failure handled, responsible person identified and reason recorded</td></tr></table></div>
+        </div>
+      </div>
+      <p class="ip-foot"><a href="../exemplo-pai/">See the full end-to-end example with the PAI (in Portuguese)</a>.</p>
+      <p class="ip-foot">Illustrative mockup with fictitious data. Baseline calibrated in Phase 0. Indicators always by unit, never by judge, and without ranking.</p>
+    </div>
+    <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>The monitored routine and the audit trail are implemented and tested, but the managerial roll-up is not yet running in production.</i></p>
+
+    <h3 style="margin-top:3rem;">Interactive components</h3>
+
+    <div class="dash-container">
+      <!-- Cartões -->
+      <div class="dash-cards">
+        <div class="dash-card">
+          <span class="n" style="color:var(--signal-tint)">99.2%</span>
+          <span class="l">LOAD INTEGRITY</span>
+        </div>
+        <div class="dash-card">
+          <span class="n" id="p-total">0</span>
+          <span class="l">DECISIONS TAKEN</span>
+        </div>
+        <div class="dash-card">
+          <span class="n" id="p-c3" style="color:var(--signal)">0</span>
+          <span class="l" style="color:var(--signal)">HIGH-RISK DECISIONS</span>
+        </div>
+        <div class="dash-card">
+          <span class="n">14</span>
+          <span class="l">AVG. RECOVERY TIME (MIN)</span>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="dash-charts">
+        <div class="dash-donut-section">
+          <p class="chart-title">Decision Risk Composition</p>
+          <div class="donut-container">
+            <svg viewBox="0 0 120 120" width="100" height="100" style="overflow:visible;">
+              <circle id="donut-c1" cx="60" cy="60" r="46" fill="none" stroke="#C9CCC5" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s; transform:rotate(-90deg); transform-origin:center;"/>
+              <circle id="donut-c2" cx="60" cy="60" r="46" fill="none" stroke="#B8555F" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s, stroke-dashoffset .4s; transform:rotate(-90deg); transform-origin:center;"/>
+              <circle id="donut-c3" cx="60" cy="60" r="46" fill="none" stroke="#7A2230" stroke-width="22" stroke-dasharray="0 289.03" stroke-dashoffset="0" style="transition:stroke-dasharray .4s, stroke-dashoffset .4s; transform:rotate(-90deg); transform-origin:center;"/>
+            </svg>
+            <div id="donut-legend">
+              <div class="legend-item"><span class="legend-box" style="background:#C9CCC5;"></span>C1: <strong id="dl-c1" style="margin-left:4px;">0%</strong></div>
+              <div class="legend-item"><span class="legend-box" style="background:#B8555F;"></span>C2: <strong id="dl-c2" style="margin-left:4px;">0%</strong></div>
+              <div class="legend-item"><span class="legend-box" style="background:#7A2230;"></span>C3: <strong id="dl-c3" style="margin-left:4px;">0%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-bar-section">
+          <p class="chart-title">Human Interventions and Validations</p>
+          <div class="bar-row">
+            <div class="bar-label">Primary System</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 54%;"></div></div>
+            <div class="bar-value">12</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Secondary System</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 27%;"></div></div>
+            <div class="bar-value">6</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Warehouse (DW/BI)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 14%;"></div></div>
+            <div class="bar-value">3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulador Preditivo -->
+      <div class="dash-predictive">
+        <p class="chart-title">Augmented Intelligence: Backlog Projection (6 months)</p>
+        <p style="font-size: 0.85rem; color: var(--ink-soft); margin-top: -0.5rem; margin-bottom: 1.5rem;">Adjust the trends to see how Augmented Intelligence helps the manager anticipate operational bottlenecks in a base backlog of 5,000 cases.</p>
+        <div class="pred-grid">
+          <div class="controls-pred">
+            <label>Monthly Intake (Data Input): <span id="val-vol" style="color:var(--signal);">1500</span></label>
+            <input type="range" id="slide-vol" min="500" max="3000" step="50" value="1800">
+            
+            <label>Monthly Clearance Capacity (Output/Support): <span id="val-cap" style="color:var(--ink-soft);">1600</span></label>
+            <input type="range" id="slide-cap" min="500" max="3000" step="50" value="1600">
+          </div>
+          <div class="chart-pred">
+             <svg viewBox="0 0 400 150" id="svg-pred" style="width:100%; height:100%; overflow:visible;">
+               <polygon fill="var(--signal-tint)" opacity="0.15" id="area-pred" points="" style="transition: fill 0.3s;" />
+               <polyline fill="none" stroke="var(--signal)" stroke-width="3" id="line-pred" points="" style="transition: stroke 0.3s;" />
+               <!-- axis base -->
+               <line x1="0" y1="150" x2="400" y2="150" stroke="var(--ink-soft)" />
+             </svg>
+             <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-size:0.75rem; color:var(--ink-soft); font-weight: 600;">
+               <span>Today</span><span>Month 3</span><span>Month 6</span>
+             </div>
+             <p style="margin-top:1rem; font-size: 0.95rem; font-weight: 600; text-align:right;">
+               Projected Backlog (Month 6): <span id="val-passivo" style="color:var(--signal); font-size: 1.2rem;">0</span>
+             </p>
+          </div>
+        </div>
+      </div>
+      
+      <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:1.5rem; border-top: 1px dashed var(--rule); padding-top: 1.5rem;">
+        <i>* Note: the validation indicators, recovery time and bars contain illustrative data, and the projection simulator demonstrates the interface of a predictive component not yet implemented. The "Decisions" cards, the risk composition donut and the simulator respond in real time to your interaction.</i>
+      </p>
+    </div>
+  </section>
+
+  <section id="objecoes">
+    <h2>Anticipated objections</h2>
+    <p>The questions a governance committee asks first, and the answers the design already contains.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Question 1</span>
+        <h3>Does this watch the civil servant or the judge?</h3>
+        <p>Recording is by organizational unit, never by person. The trail documents technical execution and the unit acts, not the behavior of whoever decides.</p>
+      </article>
+      <article>
+        <span class="mn">Question 2</span>
+        <h3>Does this interfere with the decision?</h3>
+        <p>The checkpoint alerts and asks for a record, but neither blocks nor steers the choice. The reasoning required by art. 93, IX, of the Brazilian Constitution is not replaced by any element of the interface.</p>
+      </article>
+      <article>
+        <span class="mn">Question 3</span>
+        <h3>Does this slow the work down?</h3>
+        <p>Friction costs seconds and applies only to high-risk decisions. In the data steps, automation reduces the time now spent on manual load checks.</p>
+      </article>
+      <article>
+        <span class="mn">Question 4</span>
+        <h3>Why measure before acting?</h3>
+        <p>Without a baseline, there is no way to know whether friction worked or whether it was proportional to the problem. Phase 0 observes without intervening, and its results follow the rule of no individual metrics.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Academic Output</h2>
+    <ul class="items">
+      <li><span class="year">2026</span>
+        <div><h3>Automation Bias and User Experience in AI-Assisted Decision-Making</h3><p>Final course paper (in progress, in Portuguese)</p></div></li>
+      <li><span class="year">2026</span>
+        <div><h3>Algorithmic governance and decision symbiosis in the Brazilian Judiciary</h3><p>Academic article (in Portuguese) · <a href="https://drive.google.com/file/d/1V4gyIwEcXyzfjgBCHI5q5gtMq0JZQFHd/view" target="_blank">Read the PDF</a></p></div></li>
+      <li><span class="year">2026</span>
+        <div><h3>Presentation: Algorithmic Governance (ISD)</h3><p>IV National Congress of Judicial Research · <a href="https://drive.google.com/file/d/17ONCRzz4p0FAWXDrIZqOdhIq7nejnguK/view" target="_blank">Slides (in Portuguese)</a></p></div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Open materials</h2>
+    <p>Instruments and proofs of concept are free and openly available for government replication.</p>
+    <div class="materials">
+      <article>
+        <div>
+          <h3>Simplified ISD instrument</h3>
+          <p>Index calculation spreadsheet and record form, ready to use. <br><br><a href="https://zenodo.org/records/22046705" target="_blank">Download from Zenodo</a></p>
+        </div>
+      </article>
+      <article>
+        <div>
+          <h3>Proof of concept</h3>
+          <p>Code and verification scripts used to evaluate the model.<br><br><a href="https://github.com/ericlmello" target="_blank">GitHub repository</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="normativo">
+    <h2>Regulatory tracking</h2>
+    <ul class="norms">
+      <li>
+        <span class="when">Mar 2025<br>in force: Jul 2025</span>
+        <div>
+          <h3><a href="https://atos.cnj.jus.br/atos/detalhar/6001" target="_blank">CNJ Resolution No. 615/2025</a></h3><span class="flag">In force</span>
+          <p>Sets rules for the development, governance, auditing and monitoring of AI solutions in the Judiciary. Classifies risk in levels and regulates the use of external AI and dashboards.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="identificadores">
+    <h2>Where to find the work</h2>
+    <div class="ids">
+      <a href="https://github.com/ericlmello" target="_blank">
+        <span class="name">GitHub</span><span class="handle">github.com/ericlmello</span>
+        <span class="what">Proof of concept, verification scripts and interface.</span>
+      </a>
+      <a href="https://zenodo.org/records/22046705" target="_blank">
+        <span class="name">Zenodo</span><span class="handle">10.5281/zenodo.22046705</span>
+        <span class="what">Code versions with long-term preservation and a DOI.</span>
+      </a>
+      <a href="https://lattes.cnpq.br/4067922909268264" target="_blank">
+        <span class="name">Lattes CV</span><span class="handle">lattes.cnpq.br/4067922909268264</span>
+        <span class="what">Official academic record required by Brazilian programs.</span>
+      </a>
+      <a href="https://orcid.org/0009-0004-3962-5283" target="_blank">
+        <span class="name">ORCID</span><span class="handle">0009-0004-3962-5283</span>
+        <span class="what">International identifier for publications and indexing.</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>A knowledge-sharing and public innovation project. There is no paid offer or endorsement of products.</p>
+    <p>The opinions expressed here are personal and academic and do not represent the institutional position of the organization where I work.</p>
+    <p><a href="https://github.com/ericlmello" target="_blank">GitHub</a> · <a href="https://zenodo.org/records/22046705" target="_blank">Zenodo</a> · <a href="https://lattes.cnpq.br/4067922909268264" target="_blank">Lattes</a> · <a href="https://www.linkedin.com/in/eric-lopes-mello-32a5567a/" target="_blank">LinkedIn</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Elementos do ISD
+  var d1 = document.getElementById('d1');
+  var d2 = document.getElementById('d2');
+  var textarea = document.getElementById('justificativa');
+  var btnReg = document.getElementById('btn-registrar');
+  
+  var score = document.getElementById('score');
+  var verdict = document.getElementById('verdict');
+  var prot = document.getElementById('prot');
+  var rev = document.getElementById('rev');
+  var statusBtn = document.getElementById('status-btn');
+  var matrix = document.getElementById('matrix');
+
+  var logAvaliacoes = {C1:0, C2:0, C3:0, total:0};
+
+  var CAMADAS = {
+    C1: {nome: 'Layer 1 — Low Risk', prot: 'Automatic record in the trail, no interruption.', rev: 'Annual'},
+    C2: {nome: 'Layer 2 — Moderate Risk', prot: 'Automatic record in the trail, no interruption.', rev: 'Semiannual'},
+    C3: {nome: 'Layer 3 — High Risk', prot: 'Mandatory cognitive forcing: reasoning recorded by the user.', rev: 'Quarterly'}
+  };
+
+  function isd(a,b){ return 8*a + 12*b; }
+
+  function enquadrar(v){
+    var base = v < 50 ? 'C1' : (v < 80 ? 'C2' : 'C3');
+    if(v >= 44 && v < 50) base = 'C2'; 
+    if(v >= 74 && v < 80) base = 'C3'; 
+    return base;
+  }
+
+  function montarMatriz(){
+    var html = '<thead><tr><th scope="col">D2 \\ D1</th>';
+    for(var x=1; x<=5; x++) html += '<th scope="col">'+x+'</th>';
+    html += '</tr></thead><tbody>';
+    for(var y=5; y>=1; y--){
+      html += '<tr><th scope="row">'+y+'</th>';
+      for(var x2=1; x2<=5; x2++){
+        var v = isd(x2,y), camada = enquadrar(v);
+        var cls = camada.toLowerCase();
+        html += '<td class="'+cls+'" data-d1="'+x2+'" data-d2="'+y+'">'+ v.toFixed(0) + '%</td>';
+      }
+      html += '</tr>';
+    }
+    matrix.innerHTML = html + '</tbody>';
+  }
+
+  function destacarMatriz(a,b){
+    Array.prototype.forEach.call(matrix.querySelectorAll('td'), function(td){
+      td.classList.toggle('active', +td.dataset.d1 === a && +td.dataset.d2 === b);
+    });
+  }
+
+  function avaliarFormulario(){
+    var a = +d1.value, b = +d2.value, v = isd(a,b);
+    var camada = enquadrar(v);
+    var c = CAMADAS[camada];
+    
+    score.textContent = v.toFixed(0) + '%';
+    verdict.textContent = c.nome;
+    prot.textContent = c.prot;
+    rev.textContent = c.rev;
+    destacarMatriz(a, b);
+
+    var textoLen = textarea.value.trim().length;
+    var precisaJustificar = (camada === 'C3');
+
+    if(precisaJustificar) {
+      textarea.disabled = false;
+      if(textoLen >= 20) {
+        btnReg.disabled = false;
+        statusBtn.textContent = 'Released (authorship properly reasoned)';
+        statusBtn.style.color = '#C9CCC5';
+      } else {
+        btnReg.disabled = true;
+        statusBtn.textContent = 'Locked (High Risk requires reasoning of 20+ characters)';
+        statusBtn.style.color = '#B8555F';
+      }
+    } else {
+      textarea.disabled = false;
+      btnReg.disabled = false;
+      statusBtn.textContent = 'Released (Layer ' + camada.replace('C','') + ' does not require strict reasoning in the interface)';
+      statusBtn.style.color = '#C9CCC5';
+    }
+    return camada;
+  }
+
+  function registrarAvaliacao(){
+    var camada = avaliarFormulario();
+    logAvaliacoes[camada]++;
+    logAvaliacoes.total++;
+    
+    btnReg.textContent = "Decision Taken and Recorded!";
+    btnReg.style.background = "var(--rule)";
+    btnReg.style.color = "#131722";
+    setTimeout(function(){
+      btnReg.textContent = "Record and Take the Decision";
+      btnReg.style.background = "var(--ink)";
+      btnReg.style.color = "#F1F2EF";
+      textarea.value = '';
+      avaliarFormulario();
+    }, 1500);
+
+    atualizarDashboardMetas();
+  }
+
+  function atualizarDashboardMetas() {
+    var t = logAvaliacoes.total;
+    if(t === 0) return;
+    
+    document.getElementById('p-total').textContent = t;
+    document.getElementById('p-c3').textContent = logAvaliacoes.C3;
+
+    var C = 2 * Math.PI * 46; 
+    var offset = 0;
+
+    ['C1','C2','C3'].forEach(function(c, i) {
+      var pct = logAvaliacoes[c] / t;
+      var arc = pct * C;
+      var el = document.getElementById('donut-' + c.toLowerCase());
+      
+      el.setAttribute('stroke-dasharray', arc.toFixed(3) + ' ' + (C - arc).toFixed(3));
+      el.setAttribute('stroke-dashoffset', (-offset).toFixed(3));
+      offset += arc;
+
+      document.getElementById('dl-' + c.toLowerCase()).textContent = Math.round(pct * 100) + '%';
+    });
+  }
+
+  // Lógica do Simulador Preditivo
+  var slideVol = document.getElementById('slide-vol');
+  var slideCap = document.getElementById('slide-cap');
+  var valVol = document.getElementById('val-vol');
+  var valCap = document.getElementById('val-cap');
+  var linePred = document.getElementById('line-pred');
+  var areaPred = document.getElementById('area-pred');
+  var valPassivo = document.getElementById('val-passivo');
+
+  function atualizarPredicao() {
+    var vol = parseInt(slideVol.value);
+    var cap = parseInt(slideCap.value);
+    valVol.textContent = vol;
+    valCap.textContent = cap;
+
+    var meses = 6;
+    var baseAcervo = 5000;
+    var dados = [];
+
+    for(var i=0; i<=meses; i++) {
+      var acervoAtual = baseAcervo + ((vol - cap) * i);
+      dados.push(Math.max(0, acervoAtual));
+    }
+
+    var tendenciaRuim = (vol > cap);
+    valPassivo.style.color = tendenciaRuim ? 'var(--signal)' : 'var(--ink-soft)';
+    valVol.style.color = tendenciaRuim ? 'var(--signal)' : 'inherit';
+    
+    linePred.setAttribute('stroke', tendenciaRuim ? 'var(--signal)' : '#9AA0AC');
+    areaPred.setAttribute('fill', tendenciaRuim ? 'var(--signal-tint)' : '#C9CCC5');
+
+    valPassivo.textContent = dados[6].toLocaleString('en-US') + " cases";
+
+    var w = 400;
+    var h = 150;
+    var dx = w / meses;
+    var maxView = Math.max(12000, Math.max.apply(null, dados) * 1.15); 
+
+    var points = [];
+    for(var i=0; i<=meses; i++) {
+      var x = i * dx;
+      var y = h - (dados[i] / maxView) * h;
+      points.push(x.toFixed(1) + "," + y.toFixed(1));
+    }
+
+    linePred.setAttribute("points", points.join(" "));
+    areaPred.setAttribute("points", "0," + h + " " + points.join(" ") + " " + w + "," + h);
+  }
+
+  // Event Listeners
+  d1.addEventListener('change', avaliarFormulario);
+  d2.addEventListener('change', avaliarFormulario);
+  textarea.addEventListener('input', avaliarFormulario);
+  btnReg.addEventListener('click', registrarAvaliacao);
+  slideVol.addEventListener('input', atualizarPredicao);
+  slideCap.addEventListener('input', atualizarPredicao);
+
+  // Inicialização
+  montarMatriz();
+  avaliarFormulario();
+  atualizarPredicao();
+
+  // Estado inicial: desenha a rosca ilustrativa coerente com a legenda,
+  // substituída pelos dados reais assim que a primeira decisão é registrada.
+  if (logAvaliacoes.total === 0) {
+      var ilustrativo = {C1: 60, C2: 30, C3: 10};
+      var Ci = 2 * Math.PI * 46, offi = 0;
+      ['C1','C2','C3'].forEach(function(c) {
+        var arc = (ilustrativo[c] / 100) * Ci;
+        var el = document.getElementById('donut-' + c.toLowerCase());
+        el.setAttribute('stroke-dasharray', arc.toFixed(3) + ' ' + (Ci - arc).toFixed(3));
+        el.setAttribute('stroke-dashoffset', (-offi).toFixed(3));
+        offi += arc;
+        document.getElementById('dl-' + c.toLowerCase()).textContent = ilustrativo[c] + '%';
+      });
+  }
+
+})();
+</script>
+</body>
+</html>
