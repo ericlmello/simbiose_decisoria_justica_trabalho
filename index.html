@@ -165,7 +165,7 @@
   .ip-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; padding: 0 1rem 1rem; }
   @media (min-width: 44rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .w2, .ip-grid .w3 { grid-column: 1 / -1; } }
   @media (min-width: 64rem) { .ip-grid { grid-template-columns: repeat(3, 1fr); } .ip-grid .w2 { grid-column: span 2; } }
-  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; }
+  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; min-width: 0; }
   .blk h4 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.05rem; margin: 0 0 0.15rem; color: var(--signal); }
   .blk .sub { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
   .blk .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.8125rem; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
@@ -265,12 +265,12 @@
     <div class="hero-content">
         <p class="kicker">Eric Lopes Mello · Pesquisa e Gestão Pública</p>
         <h1>Simbiose Decisória</h1>
-        <p class="lede">Uma área de governança de dados para prevenir a perda de qualidade das decisões apoiadas por painéis e IA, sobretudo no fim dos períodos de metas. Em vez de abrir a caixa-preta da tecnologia, governamos a decisão.</p>
+        <p class="lede">Governança de dados para prevenir a perda de qualidade das decisões administrativas apoiadas por painéis, causada pelo excesso de exigência por produtividade. Em vez de abrir a caixa-preta da tecnologia, governamos a decisão.</p>
     </div>
 
     <div class="index">
-      <p class="formula">O dilema do comitê: <em>cada decisão</em> vs. <em>volume e independência</em>
-        <small>Para proteger a qualidade, o comitê precisaria avaliar o risco de cada decisão, o que é impossível pelo volume e invadiria a independência funcional. A saída é avaliar o risco por tipo de decisão, com a probabilidade por unidade e período, e levar ao comitê só as exceções, com uma Área de Governança de Dados.</small>
+      <p class="formula">O dilema do comitê: <em>cada decisão</em> vs. <em>volume</em>
+        <small>Para proteger a qualidade, o comitê precisaria avaliar o risco de cada decisão, o que é impossível pelo volume. A saída é avaliar o risco por tipo de decisão, com a probabilidade de perda de qualidade lida por unidade e período, e levar ao comitê só as exceções.</small>
       </p>
       <dl class="dims">
         <div><dt>Paradigma</dt><dd>De Inteligência Artificial para Inteligência Aumentada: a máquina amplia a capacidade humana, não a substitui.</dd></div>
@@ -286,25 +286,29 @@
 
   <section id="problema">
     <h2>O problema e a proposta</h2>
-    <p>Metas apuradas em datas fixas concentram decisões nas semanas finais de cada período, e é nelas que o viés de automação mais pesa. Sob pressão de prazo, quem decide tende a aceitar o que o painel ou a minuta sugerida exibem sem conferir a origem do dado (Parasuraman; Manzey, 2010). Em uma vara fictícia, a produção semanal passa de 58 para 118 decisões na última semana do mês, e a fundamentação adequada na amostra cai de 91% para 72%. A média mensal esconde o padrão, e um painel que só exibe produtividade registra o resultado como bom desempenho.</p>
-    <p><b>O dilema do comitê.</b> Para proteger a qualidade, o comitê precisaria avaliar o risco de cada decisão, mas revisar decisão por decisão é impossível pelo volume e invadiria a independência funcional. Avaliar apenas o sistema ou o projeto, uma única vez, na aprovação, não enxerga que a mesma decisão fica mais arriscada na última semana do mês. A saída é avaliar o risco <b>por tipo de decisão</b>, combinando o impacto, estável, com a probabilidade de perda de qualidade, que varia por unidade e por período, e levar ao comitê apenas as exceções.</p>
-    <p><b>A oportunidade.</b> Maior tribunal trabalhista do país, o TRT-2 multiplica pelo volume qualquer erro de dado ou de decisão. A Resolução CNJ 615/2025 exige classificação de risco, avaliação de impacto, auditoria e monitoramento das soluções de IA, e instituir a governança dos dados e das decisões antes de criar e usar IA em escala custa menos do que corrigi-la depois.</p>
+    <p>Gestores do Tribunal decidem com base em painéis como o PAI e o e-Gestão, em decisões administrativas como redistribuir a força de trabalho, priorizar tarefas, organizar mutirões e planejar o cumprimento de metas. Os painéis mostram sobretudo a produção já ocorrida, e as metas que acompanham são apuradas em datas fixas. O piloto se limita a essas decisões administrativas, e as decisões judiciais ficam fora desta etapa.</p>
+    <p><b>O problema central: excesso de exigência por produtividade.</b> Metas de volume sem contrapeso de qualidade pressionam por prazos cada vez menores, e sob pressão de tempo o julgamento recorre mais a heurísticas (Guthrie; Rachlinski; Wistrich, 2007). O risco é de perda de qualidade da decisão, e não de falta de produtividade.</p>
+    <p><b>O segundo problema: viés de automação.</b> Sob pressão, o gestor tende a aceitar o número do painel como já verificado, sem conferir a origem nem a atualização do dado. A complacência com a automação se instala sempre que a ferramenta substitui parte da verificação humana, mesmo em painéis que apenas descrevem (Parasuraman; Manzey, 2010).</p>
+    <p><b>Uma hipótese a confirmar: a perda de qualidade no fim do período.</b> Quando a apuração se fecha em datas fixas, o esforço tende a se concentrar perto do prazo, padrão documentado fora do Judiciário (Oyer, 1998). Em uma secretaria fictícia, os atos cumpridos por semana passam de 58 para 118 na última semana do mês, e o retrabalho sobe de 6% para 18%. No TRT-2 esse padrão ainda não foi medido, e um levantamento prévio com dados do e-Gestão e do PAI, seguido da Fase 0, o confirma ou o descarta antes de qualquer controle.</p>
+    <p><b>O dilema do comitê.</b> Para proteger a qualidade, o comitê precisaria avaliar o risco de cada decisão, o que é impossível pelo volume. Avaliar apenas o sistema ou o projeto, uma única vez, na aprovação, não enxerga que a mesma decisão fica mais arriscada na última semana do mês. A saída é avaliar o risco <b>por tipo de decisão</b>, combinando o impacto, estável, com a probabilidade de perda de qualidade, lida por unidade e período, e levar ao comitê apenas as exceções.</p>
+    <p><b>A oportunidade: governança antes da IA.</b> Maior tribunal trabalhista do país, o TRT-2 multiplica pelo volume qualquer erro de dado ou de decisão. A Resolução CNJ 615/2025 exige classificação de risco, avaliação de impacto, auditoria e monitoramento das soluções de IA, e governar os dados e as decisões antes de criar e usar IA em escala custa menos do que corrigi-los depois.</p>
+    <p style="margin-top:2rem;"><b>O que o piloto entrega.</b> Três entregas, em duas unidades com decisões administrativas apoiadas no PAI, e uma regra que vale para todas.</p>
     <div class="pillars pillars-4">
       <article>
-        <h3>Área de Governança de Dados</h3>
-        <p>Integra o comitê e exerce a segunda linha do Modelo de Três Linhas. Responde pela qualidade, pela origem e pela linhagem dos dados dos painéis, mantém a classificação dos tipos de decisão e os indicadores e leva ao comitê só as exceções. Por meio de curadores, faz a ponte entre as demandas dos projetos e a área de negócio, que segue dona da demanda; a execução fica com a TI.</p>
+        <h3>1. Dados governados</h3>
+        <p>Confere cada carga dos painéis antes de liberar a seguinte, reinicia falhas e mostra, ao lado de cada indicador, a origem e a atualização do dado. Indicador: cargas validadas e indicadores com origem visível.</p>
       </article>
       <article>
-        <h3>Risco por tipo de decisão</h3>
-        <p>A Resolução CNJ 615/2025 classifica soluções, e a aprovação de projetos avalia o risco uma vez. Aqui o risco é do tipo de decisão, como uma liberação de valores ou uma redistribuição da força de trabalho, e sobe quando a unidade entra na semana de fechamento.</p>
+        <h3>2. Risco por tipo de decisão</h3>
+        <p>Classifica os tipos de decisão administrativa apoiados no painel, como a redistribuição de servidores entre unidades ou a organização de um mutirão, por impacto e reversibilidade (ISD), e cruza o resultado com a probabilidade de perda de qualidade da unidade. Indicador: tipos classificados com reavaliação em dia.</p>
       </article>
       <article>
-        <h3>Indicadores preventivos e preditivos</h3>
-        <p>Seis indicadores de contexto estimam a probabilidade de perda de qualidade, e a projeção semanal da unidade antecipa a queda antes do fechamento. O alerta aciona apoio da gestão, e não cobrança.</p>
+        <h3>3. Leitura semanal do risco</h3>
+        <p>Acompanha por unidade, nunca por pessoa, os indicadores preventivos e uma tendência simples até o fechamento do período, e aciona apoio da gestão, e não cobrança. Indicador: alertas confirmados pelos dados do período.</p>
       </article>
       <article>
         <h3>Nenhum bloqueio na tela</h3>
-        <p>As exigências recaem sobre os dados, a amostra da fundamentação e a gestão da unidade, e não sobre a tela de quem decide, o que vale igualmente para painéis descritivos e para soluções de IA.</p>
+        <p>As exigências recaem sobre os dados e a gestão da unidade, e não sobre a tela de quem decide, o que vale igualmente para painéis descritivos e, no futuro, para soluções de IA.</p>
       </article>
     </div>
   </section>
@@ -334,11 +338,11 @@
       </article>
       <article>
         <h3>Três instâncias de controle</h3>
-        <p>Separa quem opera, quem governa e quem audita. A Área de Governança de Dados, integrante do comitê, opera a auditoria automatizada a cada sprint, por amostragem sobre a classificação, a ficha e a integridade da trilha, e a auditoria interna do Tribunal permanece na terceira linha.</p>
+        <p>Separa quem opera, quem governa e quem audita. No piloto, a equipe do piloto executa as verificações automatizadas a cada sprint, sobre a classificação, a ficha e a integridade da trilha, o comitê decide sobre as exceções e a auditoria interna do Tribunal permanece na terceira linha.</p>
       </article>
       <article>
-        <h3>Protocolo A1–A6</h3>
-        <p>Núcleo de seis critérios exigíveis desde o piloto, extraído de um desenho de nove critérios em quatro pilares de conformidade. Os três restantes (A7 a A9) ficam especificados como extensão de maturidade institucional. Pensado para gestores de negócio, sem o jargão de desenvolvimento de software.</p>
+        <h3>Indicadores de impacto por projeto</h3>
+        <p>O risco é avaliado por tipo de decisão, e o impacto é medido por projeto. Todo projeto que cria ou altera um painel recebe indicadores sobre os tipos de decisão que apoia, medidos antes e depois: retrabalho, decisões revistas, prazos descumpridos, concentração no fim do período e proporção de indicadores com origem conhecida, com o tempo médio de cumprimento como contrapeso.</p>
       </article>
       <article>
         <h3>Registro de cadeia decisória</h3>
@@ -350,7 +354,7 @@
     <div class="pillars pillars-4">
       <article>
         <h3>Indicadores preventivos e preditivos <span class="tag dev">em pesquisa</span></h3>
-        <p>Indicadores de contexto antecipam a perda de qualidade, e a projeção semanal da unidade sinaliza a queda antes do fechamento do período, sem bloquear a tela de quem decide.</p>
+        <p>Indicadores de contexto antecipam a perda de qualidade, e uma tendência simples da série semanal da unidade sinaliza o pico antes do fechamento do período, sem bloquear a tela de quem decide.</p>
       </article>
       <article>
         <h3>Praticabilidade e shadow IA <span class="tag dev">em pesquisa</span></h3>
@@ -366,28 +370,33 @@
       </article>
     </div>
 
-    <p class="stage">Fase 0 · <b>diagnóstico baseline, proposta ainda não executada</b></p>
-    <p>Antes de fixar exigências e limiares, o piloto proposto mede como se decide hoje. O viés de automação é documentado, mas sua prevalência varia por contexto, e controles fixados sem diagnóstico podem ser excessivos ou insuficientes. Por isso, as duas semanas que antecedem o piloto de 12 semanas, organizado em três sprints, servem para medir a qualidade atual, inclusive por semana do mês, e calibrar os limiares.</p>
+    <p class="stage">Levantamento prévio e Fase 0 · <b>diagnóstico baseline, proposta ainda não executada</b></p>
+    <p>Antes de fixar exigências e limiares, o piloto proposto mede como se decide hoje. O viés de automação é documentado, mas sua prevalência varia por contexto, e controles fixados sem diagnóstico podem ser excessivos ou insuficientes. Por isso, um levantamento prévio com dados já disponíveis e as duas semanas da Fase 0 antecedem o piloto de 12 semanas, organizado em três sprints, e testam a hipótese de concentração no fim do período antes de qualquer controle.</p>
     <div class="modules">
+      <article>
+        <span class="mn">Antes · Levantar</span>
+        <h3>Levantamento prévio</h3>
+        <p>Com dados já disponíveis no e-Gestão e no PAI, verifica se, no TRT-2, a produção e o retrabalho se concentram no fim do período de apuração.</p>
+      </article>
       <article>
         <span class="mn">Fase 0 · 1</span>
         <h3>Observar</h3>
-        <p>Observação não invasiva de 50 a 100 decisões, sem qualquer intervenção, e leitura de 200 a 300 registros prévios, quando existirem.</p>
+        <p>Observação, sem qualquer intervenção, de como as decisões administrativas apoiadas no painel são tomadas hoje.</p>
       </article>
       <article>
         <span class="mn">Fase 0 · 2</span>
         <h3>Ouvir</h3>
-        <p>Entrevistas semiestruturadas com 6 a 8 magistrados e assessores sobre incerteza, confiança na recomendação e praticabilidade do protocolo.</p>
+        <p>Conversas com gestores sobre a confiança no dado do painel e a praticabilidade das exigências.</p>
       </article>
       <article>
         <span class="mn">Fase 0 · 3</span>
         <h3>Calibrar</h3>
-        <p>Segmentação por tipo de decisão e por unidade, nunca por pessoa, e a classificação inicial dos tipos de decisão, com os limiares dos indicadores preventivos e preditivos.</p>
+        <p>Segmentação por tipo de decisão e por unidade, nunca por pessoa, e a classificação inicial dos tipos de decisão, com os limiares dos indicadores preventivos e da tendência.</p>
       </article>
       <article>
         <span class="mn">Fase 0 · 4</span>
-        <h3>Comparar</h3>
-        <p>A fundamentação adequada em amostra e os indicadores de uso (taxa de edição, tempo até a confirmação e consulta à origem do dado), medidos antes, voltam a ser medidos nos sprints. A Fase 0 mede ainda a qualidade por semana do mês, para testar se ela cai perto do fim do período.</p>
+        <h3>Linha de base</h3>
+        <p>Reúne, por unidade e tipo de decisão, os indicadores preventivos, o volume e o retrabalho por semana do mês e a proporção de indicadores com origem e atualização conhecidas. A medição se repete nos sprints, e, sem grupo de controle, a comparação indica associação e não causalidade.</p>
       </article>
     </div>
     <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Como o registro da trilha institucional não captura a conduta de quem decide, a Fase 0 é pesquisa à parte, com consentimento informado e resultados agregados.</p>
@@ -400,12 +409,12 @@
       <article>
         <span class="mn">Etapa 1</span>
         <h3>Governar o uso do painel</h3>
-        <p>O comitê define, por tipo de decisão, as exigências de cada camada de risco, combinando probabilidade e impacto. A Área de Governança de Dados registra a regra na Ficha, e nada na tela bloqueia ou condiciona a decisão.</p>
+        <p>O comitê define, por tipo de decisão, as exigências de cada camada de risco, combinando probabilidade e impacto. A regra é registrada na Ficha, e nada na tela bloqueia ou condiciona a decisão.</p>
       </article>
       <article>
         <span class="mn">Etapa 2</span>
         <h3>Calcular o risco da decisão</h3>
-        <p>Classifica os tipos de decisão tomados a partir do painel ou da IA por impacto sobre direitos e reversibilidade (ISD) e cruza com a probabilidade de perda de qualidade da unidade, independentemente da tecnologia adotada.</p>
+        <p>Classifica os tipos de decisão administrativa tomados a partir do painel por impacto e reversibilidade (ISD) e cruza com a probabilidade de perda de qualidade da unidade, independentemente da tecnologia adotada.</p>
       </article>
       <article>
         <span class="mn">Etapa 3</span>
@@ -425,7 +434,7 @@
       <article>
         <span class="mn">Etapa 6</span>
         <h3>Avaliar e Projetar (Painel Preditivo)</h3>
-        <p>Compara os indicadores com as metas, projeta a qualidade e o volume até o fechamento do período e o acervo dos meses seguintes, e antecipa o risco por unidade, submetendo a projeção ao crivo do comitê. As etapas 1 a 5 estão implementadas em prova de conceito; o componente preditivo é fase posterior.</p>
+        <p>Compara os indicadores com as metas, projeta por uma tendência simples o volume e o retrabalho até o fechamento do período e o acervo dos meses seguintes, e antecipa o risco por unidade, submetendo a projeção ao crivo do comitê. As etapas 1 a 5 estão implementadas em prova de conceito; a tendência simples entra no piloto, e sua utilidade é aferida pelos alertas confirmados.</p>
       </article>
     </div>
 
@@ -438,18 +447,18 @@
           </div>
           <div class="layer">
             <strong>Supervisão da Decisão</strong>
-            <span>Comitê institucional, com a Área de Governança de Dados, avaliando o risco por tipo de decisão e decidindo sobre as exceções.</span>
+            <span>Comitê institucional avaliando o risco por tipo de decisão e decidindo sobre as exceções.</span>
           </div>
           <div class="layer">
-            <strong>Auditoria Automatizada (segunda linha)</strong>
-            <span>Protocolo A1–A6, independente da tecnologia (BI, IA, planilhas). Operada pela Área de Governança de Dados a cada sprint, por amostragem sobre artefato e processo, nunca sobre o mérito da decisão. A auditoria interna do Tribunal segue na terceira linha.</span>
+            <strong>Verificações Automatizadas</strong>
+            <span>Independentes da tecnologia (BI, IA, planilhas). No piloto, executadas pela equipe do piloto a cada sprint sobre artefato e processo, nunca sobre o mérito da decisão. A auditoria interna do Tribunal segue na terceira linha (Resolução CNJ 309/2020).</span>
           </div>
         </div>
         <div class="divider">
           <div class="outside">
-            <strong>Decisão Judicial / Administrativa final</strong>
-            <span>Onde a responsabilidade, autoria e motivação humana residem.</span>
-            <code>art. 93, IX, CF</code>
+            <strong>Decisão administrativa final</strong>
+            <span>Onde a responsabilidade, autoria e motivação humana residem. As decisões judiciais ficam para etapa posterior.</span>
+            <code>autoria humana intransferível</code>
           </div>
         </div>
       </div>
@@ -458,23 +467,30 @@
     </figure>
 
     <h3 style="margin-top:3.5rem;">Governança, gestão e auditoria são papéis distintos</h3>
-    <p>A governança, exercida pelo comitê, fixa as exigências por camada, estabelece as metas e decide sobre as exceções a cada sprint. A gestão opera a interface e as rotinas de dados no dia a dia. A Área de Governança de Dados integra o comitê e faz a ligação entre as demandas dos projetos e a área de negócio: por meio de curadores indicados pelas áreas usuárias, traduz cada necessidade em requisitos de dados e de qualidade, classifica com a área demandante os tipos de decisão que o projeto apoiará e devolve os indicadores em linguagem de gestão. A demanda e o resultado permanecem com a área de negócio, e a execução, com a TI. Como segunda linha, mantém dados, indicadores e a classificação dos tipos de decisão e opera a auditoria automatizada a cada sprint, que verifica a classificação do risco, a integridade da trilha e a completude da ficha, sem examinar o mérito da decisão nem a conduta de quem decide. A unidade de auditoria interna do Tribunal permanece na terceira linha (Resolução CNJ 309/2020) e pode usar a trilha como insumo, sem perder sua independência.</p>
+    <p>A governança, exercida pelo comitê, fixa as exigências por camada, aprova os limiares, decide sobre as exceções e, ao fim de cada sprint, sobre expandir, ajustar ou suspender. A gestão, isto é, a área de negócio e a TI, opera o painel e as cargas no dia a dia, e a responsabilidade pela decisão fica com a área de negócio que usa o painel, e não com a TI. Quem define a intensidade do controle não é quem arca com seu custo. Durante o piloto, a equipe do piloto executa as verificações automatizadas a cada sprint, que conferem a classificação do risco, a integridade da trilha e a completude da ficha, sem examinar o mérito da decisão nem a conduta de quem decide. A unidade de auditoria interna do Tribunal permanece na terceira linha do Modelo de Três Linhas (IIA, 2020; Resolução CNJ 309/2020) e pode usar a trilha como insumo, sem perder sua independência.</p>
 
-    <h3 style="margin-top:2.5rem;">Probabilidade × impacto e indicadores preditivos</h3>
-    <p>O ISD mede o impacto da decisão sobre direitos e sua irreversibilidade. A ele se soma a probabilidade de perda de qualidade, estimada em baixa, média ou alta por seis indicadores de contexto acompanhados por unidade, nunca por magistrado. Cruzadas com o impacto, as duas dimensões formam uma matriz de risco, que antecipa a reavaliação dos tipos de decisão de risco elevado nas unidades de probabilidade alta. Os indicadores preditivos projetam, pela série semanal da própria unidade, a qualidade e o volume até o fechamento do período e disparam o alerta antes da semana crítica, com confiabilidade medida por acerto e falsos positivos. Os limiares são calibrados na Fase 0, e o alerta aciona apoio da gestão, não cobrança.</p>
+    <h3 style="margin-top:2.5rem;">Sugestão de desdobramento: uma área de governança de dados</h3>
+    <p>Se o piloto confirmar o problema e a utilidade da leitura semanal, sugere-se instituir uma área de governança de dados, integrante do comitê, para dar continuidade ao trabalho. Ela responderia pela qualidade, pela origem e pela linhagem dos dados dos painéis, manteria a classificação dos tipos de decisão e os indicadores, definiria com a área demandante os indicadores de impacto de cada projeto e faria a ligação entre as demandas dos projetos e a área de negócio, por meio de curadores indicados pelas áreas usuárias (DAMA International, 2017), com a demanda mantida no negócio e a execução na TI. A criação da área não é objeto desta proposta e dependeria de decisão da administração; os resultados do piloto servem de base para essa decisão.</p>
+
+    <h3 style="margin-top:2.5rem;">Probabilidade × impacto e indicadores preventivos e preditivos</h3>
+    <p>O ISD mede o impacto da decisão e sua irreversibilidade. A ele se soma a probabilidade de perda de qualidade, estimada em baixa, média ou alta por cinco indicadores de contexto acompanhados por unidade, nunca por pessoa: pressão de prazo sustentada, aceleração brusca do volume, concentração de decisões no fim do período, carga por força de trabalho e complexidade do acervo, além da validação das cargas e da atualização dos dados. Cruzadas com o impacto, as duas dimensões formam uma matriz de risco, que antecipa a reavaliação dos tipos de decisão de risco elevado nas unidades de probabilidade alta. O componente preditivo é deliberadamente simples: uma tendência da série semanal da própria unidade projetada até o fechamento do período, sem modelo complexo e sem promessa de acerto, cuja utilidade é aferida no próprio piloto, comparando os alertas com o que de fato ocorreu. Indicadores de resultado já disponíveis, como retrabalho, decisões revistas e prazos descumpridos, constatam a perda depois que ela ocorre, com o tempo médio de cumprimento como contrapeso. Os limiares são calibrados na Fase 0, sem ranking entre unidades, e o alerta aciona apoio da gestão, não cobrança.</p>
+
+    <h3 style="margin-top:2.5rem;">Indicadores de impacto por projeto</h3>
+    <p>O risco é avaliado por tipo de decisão, e o impacto é medido por projeto. Todo projeto que cria ou altera um painel, e no futuro uma solução de IA, recebe, ao ser aprovado, indicadores de impacto sobre os tipos de decisão que apoia, medidos antes e depois: retrabalho, decisões revistas, prazos descumpridos, concentração de decisões no fim do período, proporção de indicadores com origem conhecida e, como contrapeso, tempo médio de cumprimento. Assim o comitê sabe se o projeto melhorou a qualidade das decisões, e não apenas se foi entregue.</p>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);"><b>Fora do piloto, para etapa posterior.</b> Ficam para depois a amostragem da motivação das decisões, as métricas de uso que exigiriam alterar sistemas nacionais, como o PJe (taxa de edição, tempo até a confirmação e consulta à origem), e a extensão às decisões judiciais.</p>
 
     <h3 style="margin-top:2.5rem;">Quadro de controles por tipo</h3>
     <div class="qgrid">
       <article><h3>Preventivos</h3><ul>
         <li>Classificação por tipo de decisão, por impacto e probabilidade</li>
-        <li>Pré-condições de representatividade dos dados e de explicabilidade</li>
+        <li>Confirmação da origem e da atualização do dado antes do uso</li>
         <li>Validação das cargas e distribuição da carga no período</li>
-        <li>Indicadores preventivos de risco de perda de qualidade, por tendência e sem ranking</li>
-        <li>Indicadores preditivos: projeção da qualidade, do volume e do acervo até o fechamento</li>
+        <li>Cinco indicadores preventivos de risco de perda de qualidade, por tendência e sem ranking</li>
+        <li>Preditivo simples: tendência semanal da unidade projetada até o fechamento</li>
         <li>Capacitação</li></ul></article>
       <article><h3>Detectivos</h3><ul>
         <li>Ficha e trilha imutável</li>
-        <li>Amostragem da fundamentação e indicadores agregados de uso</li>
+        <li>Retrabalho, decisões revistas e prazos descumpridos, com o tempo médio de cumprimento como contrapeso</li>
         <li>Sinalização de anomalia</li>
         <li>Alerta e tendência</li></ul></article>
       <article><h3>Corretivos</h3><ul>
@@ -483,18 +499,18 @@
         <li>Apoio da gestão</li>
         <li>Plano de suspensão ou reversão</li></ul></article>
       <article><h3>Asseguração</h3><ul>
-        <li>Auditoria automatizada a cada sprint, operada pela Área de Governança de Dados</li>
+        <li>Verificações automatizadas a cada sprint, executadas pela equipe do piloto</li>
         <li>Verificação da classificação, trilha e ficha</li>
         <li>Reporte ao comitê ao final de cada sprint</li>
         <li>Objeto restrito ao artefato e ao processo, nunca ao mérito da decisão</li>
         <li>Auditoria interna do Tribunal na terceira linha</li></ul></article>
     </div>
-    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Os indicadores de risco e as projeções são preventivos, pois atuam antes de a perda de qualidade se consolidar; a amostragem da fundamentação, a trilha e a sinalização de anomalia são detectivas. Alinhamento conceitual ao Modelo de Três Linhas do IIA (2020).</p>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Os indicadores de risco e a tendência são preventivos, pois atuam antes de a perda de qualidade se consolidar; os indicadores de resultado, a trilha e a sinalização de anomalia são detectivos. A amostragem da motivação das decisões fica para etapa posterior. Alinhamento conceitual ao Modelo de Três Linhas do IIA (2020).</p>
   </section>
 
   <section id="demonstracao">
     <h2>Etapas 1 e 2: Risco por Tipo de Decisão</h2>
-    <p>Classifique um <b>tipo de decisão</b> tomada com base no painel ou na IA pelo ISD e informe a probabilidade de perda de qualidade da unidade no período. O resultado indica as exigências da camada e quando o comitê deve agir, sem bloquear a tela de quem decide.</p>
+    <p>Classifique um <b>tipo de decisão administrativa</b> tomada com base no painel, como a redistribuição de servidores entre unidades, a priorização de tarefas de cumprimento ou a organização de um mutirão, pelo ISD e informe a probabilidade de perda de qualidade da unidade no período. As notas são atribuídas por pessoa, nunca de forma automática. O resultado indica as exigências da camada e quando o comitê deve agir, sem bloquear a tela de quem decide.</p>
 
     <div class="demo">
       <!-- Calculadora ISD -->
@@ -524,7 +540,7 @@
         </div>
         
         <h3 style="margin-top:2rem; border-top:1px solid var(--rule); padding-top:1.5rem;">2. Probabilidade na unidade</h3>
-        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">Estimada pelos seis indicadores preventivos de contexto, por unidade e nunca por pessoa. A mesma decisão sobe de risco na semana de fechamento.</p>
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">Estimada pelos cinco indicadores preventivos de contexto, por unidade e nunca por pessoa. A mesma decisão sobe de risco na semana de fechamento.</p>
         <div class="field">
           <label for="prob">Probabilidade de perda de qualidade</label>
           <select id="prob">
@@ -563,65 +579,79 @@
 
   <section id="dashboard">
     <h2>Etapa 6: Painel Integrado e Inteligência Aumentada</h2>
-    <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores, um por etapa do ciclo</b>: conformidade (tipos de decisão com exigências cumpridas), classificação (tipos de decisão classificados pelo ISD com reavaliação em dia), integridade (cargas validadas com sucesso), recuperação (tempo médio para sanar falhas), rastreabilidade (linhagem mapeada e acessível) e alertas (acerto e falsos positivos dos alertas preditivos, a partir do piloto do módulo preditivo). As metas de referência são calibradas pela linha de base da Fase 0. A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
-    <p>Sobre a mesma base se apoia a <b>oportunidade preditiva</b>. Os painéis do Tribunal hoje são descritivos: mostram o que já ocorreu, sem antecipar acúmulo de acervo ou risco de descumprimento de meta. Projetar tendência é o passo seguinte, e ele depende do que vem antes, porque um modelo preditivo sobre carga não validada projeta o erro com mais confiança. O magistrado ou gestor submete a projeção ao crivo do ISD antes de agir.</p>
-    <p>A fundamentação adequada em amostra e os indicadores de uso medidos na Fase 0 (taxa de edição, tempo até a confirmação e consulta à origem) reaparecem no piloto como termo de comparação, para mostrar se os controles produziram o efeito esperado.</p>
+    <p>A trilha criada para auditar torna mensurável o próprio regime de supervisão. Dela saem, sem coleta paralela e sem preenchimento adicional pelo operador, <b>seis indicadores, um por etapa do ciclo</b>: conformidade (tipos de decisão com exigências cumpridas), classificação (tipos de decisão classificados pelo ISD com reavaliação em dia), integridade (cargas validadas com sucesso), recuperação (tempo médio para sanar falhas), rastreabilidade (linhagem mapeada e acessível) e alertas (alertas de tendência confirmados pelos dados do período). As metas de referência são calibradas pela linha de base da Fase 0. A medição deixa de ser projeto à parte e passa a ser subproduto do registro.</p>
+    <p>Sobre a mesma base se apoia a <b>oportunidade preditiva</b>. Os painéis do Tribunal hoje são descritivos: mostram o que já ocorreu, sem antecipar acúmulo de acervo ou risco de descumprimento de meta. Projetar tendência é o passo seguinte, deliberadamente simples no piloto, e ele depende do que vem antes, porque uma projeção sobre carga não validada projeta o erro com mais confiança. O gestor submete a projeção ao crivo do ISD antes de agir.</p>
+    <p>O retrabalho, as decisões revistas, os prazos descumpridos e a concentração no fim do período, medidos na linha de base, reaparecem nos sprints como termo de comparação, com o tempo médio de cumprimento como contrapeso, para mostrar se a qualidade melhora sem piorar a celeridade.</p>
     
 
     <h3 style="margin-top:2.5rem;">Interface integrada</h3>
-    <p>Os artefatos compõem uma só interface. Ao lado de cada indicador, o painel lateral mostra a fonte e a atualização do dado, e o painel de controle da carga, a validação da carga. No topo, o card de alerta consolida o risco de perda de qualidade da unidade e a projeção da qualidade, do volume e do acervo até o fechamento do período. Nada na tela bloqueia ou condiciona a decisão. O comitê define as exigências e decide sobre as exceções, a Área de Governança de Dados mantém dados e indicadores, e a gestão opera a interface.</p>
-    <p>Os indicadores de qualidade, com metas qualitativas e leitura por tendência em cada unidade, nunca em ranking, convivem com os indicadores de risco de perda de qualidade, que sinalizam a deterioração antes que ela se consolide. O mesmo painel é reutilizado nos sprints seguintes para monitorar o piloto. O controle é feito por sprints, com leitura semanal dos indicadores preventivos e de uso, tendência mensal de qualidade e risco e projeção atualizada a cada sprint.</p>
+    <p>Os artefatos compõem uma só interface. Ao lado de cada indicador, o painel lateral mostra a fonte e a atualização do dado, e o painel de controle da carga, a validação da carga. No topo, o card de alerta consolida o risco de perda de qualidade da unidade e a tendência do volume e do retrabalho até o fechamento do período. Nada na tela bloqueia ou condiciona a decisão. O comitê define as exigências e decide sobre as exceções, a equipe do piloto mantém dados e indicadores, e a gestão opera a interface.</p>
+    <p>Os indicadores de qualidade, com metas qualitativas e leitura por tendência em cada unidade, nunca em ranking, convivem com os indicadores de risco de perda de qualidade, que sinalizam a deterioração antes que ela se consolide. O mesmo painel é reutilizado nos sprints seguintes para monitorar o piloto. O controle é feito por sprints, com leitura semanal dos indicadores preventivos, tendência mensal dos indicadores de resultado e tendência projetada revista a cada sprint.</p>
 
     <div class="ip" role="group" aria-label="Mockup ilustrativo do painel integrado">
       <div class="ip-top">
-        <div><strong>Painel da Área de Governança de Dados</strong><span class="s">Governança da Decisão · Vara piloto (fictícia) · Sprint 2 de 3 · visão do comitê</span></div>
+        <div><strong>Painel de Governança da Decisão</strong><span class="s">Decisões administrativas · Secretaria piloto (fictícia) · Sprint 2 de 3 · visão do comitê</span></div>
         <div class="chips"><span>Risco: unidade em probabilidade ALTA</span><span>Comitê de Governança</span></div>
       </div>
-      <div class="ip-alert"><div><b>Alerta preditivo.</b> A projeção indica queda da fundamentação adequada para 72% na última semana do mês, com 118 decisões previstas.</div><i>Aciona apoio da gestão, não cobrança. Dados por unidade, nunca por magistrado.</i></div>
+      <div class="ip-alert"><div><b>Alerta de tendência.</b> A tendência indica pico de 118 atos e retrabalho de 18% na última semana do mês.</div><i>Aciona apoio da gestão, não cobrança. Dados por unidade, nunca por pessoa.</i></div>
       <div class="ip-kpis">
-        <div class="ip-kpi"><small>Fundamentação adequada (amostra)</small><b>85%</b><em>semana 3 · tendência de queda</em></div>
+        <div class="ip-kpi"><small>Retrabalho</small><b>11%</b><em>semana 3 · tendência de alta</em></div>
         <div class="ip-kpi"><small>Cargas validadas</small><b>98%</b><em>2 falhas reiniciadas</em></div>
-        <div class="ip-kpi"><small>Alertas preditivos ativos</small><b>2</b><em>1 de qualidade, 1 de acervo</em></div>
+        <div class="ip-kpi"><small>Alertas de tendência ativos</small><b>2</b><em>1 de qualidade, 1 de acervo</em></div>
         <div class="ip-kpi"><small>Reavaliações em dia (Camada 3)</small><b>5 de 6</b><em>1 antecipada pela matriz</em></div>
       </div>
       <div class="ip-grid">
 
-        <div class="blk"><h4>1. Indicador com origem e carga</h4><p class="sub">Painel de controle da carga e painel lateral de fonte</p>
+        <div class="blk"><h4>1. Indicador com origem e carga</h4><p class="sub">Preventivo · painel de controle da carga e painel lateral de fonte</p>
           <div class="row"><span>Processos solucionados (mês)</span><b>1.240</b></div>
           <div class="row"><span>Pendentes de decisão</span><b>386</b></div>
           <div class="row"><span>Carga e-Gestão</span><span class="chip">Validada</span></div>
           <div class="row"><span>Linhas lidas</span><b>48.312</b></div>
           <div class="row"><span>Última validação</span><b>06:02</b></div>
-          <div class="drawer"><b>Fonte do dado</b><br>Sistema processual de origem<br>Atualizado hoje, 06:10<br>Etapas: extração, validação, painel</div>
+          <div class="drawer"><b>Fonte do dado</b><br>Sistema processual de origem<br>Atualizado hoje, 06:10<br>Etapas: extração, validação, painel<br>Curadoria: equipe do piloto</div>
         </div>
 
-        <div class="blk"><h4>2. Risco de perda de qualidade</h4><p class="sub">Probabilidade (seis indicadores) × impacto (ISD)</p>
+        <div class="blk"><h4>2. Risco de perda de qualidade</h4><p class="sub">Preventivo · probabilidade (cinco indicadores) × impacto do tipo de decisão (ISD)</p>
           <div style="display:flex;gap:0.9rem;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap">
             <div><div class="mx3"><div class="m"></div><div class="h"></div><div class="on"></div><div class="l"></div><div class="m"></div><div class="h"></div><div class="l"></div><div class="l"></div><div class="m"></div></div>
             <div style="font-size:0.6875rem;color:var(--ink-soft);margin-top:4px">alto à direita: impacto (C3)<br>alto no topo: probabilidade</div></div>
             <div style="font-size:0.8125rem;line-height:1.7">Probabilidade <span class="chip hi">ALTA</span><br>Impacto <span class="chip hi">Camada 3</span><br><span style="color:var(--ink-soft);font-size:0.75rem">tipo de decisão classificado na Ficha</span></div>
           </div>
           <div class="ind">Pressão de prazo sustentada<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:var(--signal)"></div></div></div>
-          <div class="ind">Aceleração brusca do volume<span>média</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
-          <div class="ind">Decisões concentradas no fim do período<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
-          <div class="ind">Carga por força de trabalho<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--signal)"></div></div></div>
+          <div class="ind">Aceleração brusca do volume<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
+          <div class="ind">Decisões concentradas no fim do período<span>alta</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--signal)"></div></div></div>
+          <div class="ind">Carga por força de trabalho<span>média</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
           <div class="ind">Complexidade do acervo<span>média</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div></div>
-          <div class="ind">Minutas sugeridas por automação<span>baixa</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:#9AA0AC"></div></div></div>
         </div>
 
-        <div class="blk"><h4>3. Qualidade por tendência, sem ranking</h4><p class="sub">Meta qualitativa como direção, série da própria unidade</p>
-          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Três séries de tendência com projeção tracejada">
-            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Reforma em 2ª instância</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">tendência ↓ (bom)</text></g>
-            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,60 60,52 120,56 180,44 240,40 300,34 360,30"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,30 400,24"/>
-            <g font-size="12"><text x="0" y="104" font-weight="700">Embargos de declaração acolhidos</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↑ (atenção)</text></g>
+        <div class="blk"><h4>3. Qualidade por tendência</h4><p class="sub">Detectivo · meta qualitativa como direção, série da própria unidade, sem ranking</p>
+          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Prazos descumpridos em queda, decisões revistas e retrabalho em alta, com tendência projetada tracejada">
+            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Prazos descumpridos</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">tendência ↓ (bom)</text></g>
+            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,30 60,36 120,34 180,44 240,48 300,54 360,58"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,58 400,62"/>
+            <g font-size="12"><text x="0" y="104" font-weight="700">Decisões revistas</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↑ (atenção)</text></g>
             <polyline fill="none" stroke="#B8555F" stroke-width="3" points="0,160 60,164 120,156 180,150 240,140 300,130 360,122"/><polyline fill="none" stroke="#B8555F" stroke-width="2" stroke-dasharray="5 4" points="360,122 400,112"/>
-            <g font-size="12"><text x="0" y="194" font-weight="700">Fundamentação (grade objetiva)</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↓ (atenção)</text></g>
-            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,226 60,222 120,228 180,236 240,244 300,250 360,258"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,258 400,268"/>
-            <text x="0" y="282" font-size="11" fill="#39404F">linha tracejada: projeção do risco (predição)</text>
+            <g font-size="12"><text x="0" y="194" font-weight="700">Retrabalho</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">tendência ↑ (atenção)</text></g>
+            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,262 60,260 120,258 180,252 240,246 300,238 360,230"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,230 400,220"/>
+            <text x="0" y="282" font-size="11" fill="#39404F">linha tracejada: tendência projetada</text>
           </svg>
         </div>
 
-        <div class="blk"><h4>4. Projeção do acervo (6 meses)</h4><p class="sub">Extensão preditiva do painel hoje descritivo</p>
+        <div class="blk"><h4>4. Retrabalho até o fechamento</h4><p class="sub">Preditivo · série semanal do mês; tracejado, tendência projetada</p>
+          <svg viewBox="0 0 400 220" width="100%" role="img" aria-label="Atos por semana (58, 61, 74 e 118) e retrabalho (6%, 7%, 11% e 18%), com tendência projetada da semana 4">
+            <line x1="20" y1="180" x2="390" y2="180" stroke="#C9CCC5"/>
+            <g fill="#C9CCC5"><rect x="45" y="122" width="50" height="58"/><rect x="130" y="119" width="50" height="61"/><rect x="215" y="106" width="50" height="74"/></g>
+            <rect x="300" y="62" width="50" height="118" fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4"/>
+            <g font-size="12" text-anchor="middle" fill="#131722" font-weight="700"><text x="70" y="116">58</text><text x="155" y="113">61</text><text x="240" y="100">74</text><text x="325" y="56" fill="#7A2230">118</text></g>
+            <polyline points="70,100 155,94 240,71" fill="none" stroke="#B8555F" stroke-width="3"/><polyline points="240,71 325,30" fill="none" stroke="#B8555F" stroke-width="3" stroke-dasharray="6 5"/>
+            <g fill="#B8555F"><circle cx="70" cy="100" r="4.5"/><circle cx="155" cy="94" r="4.5"/><circle cx="240" cy="71" r="4.5"/></g><circle cx="325" cy="30" r="5" fill="#fff" stroke="#B8555F" stroke-width="2.5"/>
+            <g font-size="12" fill="#7A2230" font-weight="700"><text x="70" y="90" text-anchor="middle">6%</text><text x="155" y="84" text-anchor="middle">7%</text><text x="222" y="64" text-anchor="middle">11%</text><text x="338" y="34">18%</text></g>
+            <line x1="282" y1="20" x2="282" y2="176" stroke="#7A2230" stroke-dasharray="3 4"/><text x="278" y="16" font-size="11" text-anchor="end" fill="#7A2230" font-weight="700">alerta na sem. 3</text>
+            <g font-size="11" fill="#39404F" text-anchor="middle"><text x="70" y="197">Sem. 1</text><text x="155" y="197">Sem. 2</text><text x="240" y="197">Sem. 3</text><text x="325" y="197">Sem. 4</text></g>
+            <g font-size="10.5" fill="#39404F"><rect x="20" y="206" width="10" height="8" fill="#C9CCC5"/><text x="34" y="214">atos por semana</text><line x1="130" y1="210" x2="148" y2="210" stroke="#B8555F" stroke-width="3"/><text x="153" y="214">retrabalho; tracejado, tendência projetada</text></g>
+          </svg>
+        </div>
+
+        <div class="blk"><h4>5. Projeção do acervo (6 meses)</h4><p class="sub">Preditivo · extensão do painel hoje descritivo</p>
           <svg width="100%" viewBox="0 0 400 230" role="img" aria-label="Projeção do acervo cruzando a capacidade no mês 4">
             <line x1="30" y1="190" x2="390" y2="190" stroke="#C9CCC5"/><line x1="30" y1="20" x2="30" y2="190" stroke="#C9CCC5"/>
             <line x1="30" y1="95" x2="390" y2="95" stroke="#7A2230" stroke-width="2" stroke-dasharray="6 4"/><text x="34" y="88" font-size="12" fill="#7A2230">capacidade de baixa</text>
@@ -632,27 +662,13 @@
           </svg>
         </div>
 
-        <div class="blk"><h4>5. Qualidade até o fechamento</h4><p class="sub">Preditivo · série semanal do mês; tracejado, projeção da semana 4</p>
-          <svg viewBox="0 0 400 220" width="100%" role="img" aria-label="Decisões por semana e fundamentação adequada, com projeção da semana 4">
-            <line x1="20" y1="180" x2="390" y2="180" stroke="#C9CCC5"/>
-            <g fill="#C9CCC5"><rect x="45" y="122" width="50" height="58"/><rect x="130" y="119" width="50" height="61"/><rect x="215" y="106" width="50" height="74"/></g>
-            <rect x="300" y="62" width="50" height="118" fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4"/>
-            <g font-size="12" text-anchor="middle" fill="#131722" font-weight="700"><text x="70" y="116">58</text><text x="155" y="113">61</text><text x="240" y="100">74</text><text x="325" y="56" fill="#7A2230">118</text></g>
-            <polyline points="70,30 155,34 240,52" fill="none" stroke="#B8555F" stroke-width="3"/><polyline points="240,52 325,98" fill="none" stroke="#B8555F" stroke-width="3" stroke-dasharray="6 5"/>
-            <g fill="#B8555F"><circle cx="70" cy="30" r="4.5"/><circle cx="155" cy="34" r="4.5"/><circle cx="240" cy="52" r="4.5"/></g><circle cx="325" cy="98" r="5" fill="#fff" stroke="#B8555F" stroke-width="2.5"/>
-            <g font-size="12" fill="#7A2230" font-weight="700"><text x="70" y="20" text-anchor="middle">91%</text><text x="155" y="24" text-anchor="middle">90%</text><text x="240" y="42" text-anchor="middle">85%</text><text x="360" y="102">72%</text></g>
-            <line x1="282" y1="20" x2="282" y2="176" stroke="#7A2230" stroke-dasharray="3 4"/><text x="278" y="16" font-size="11" text-anchor="end" fill="#7A2230" font-weight="700">alerta na sem. 3</text>
-            <g font-size="11" fill="#39404F" text-anchor="middle"><text x="70" y="197">Sem. 1</text><text x="155" y="197">Sem. 2</text><text x="240" y="197">Sem. 3</text><text x="325" y="197">Sem. 4</text></g>
-            <g font-size="10.5" fill="#39404F"><rect x="20" y="206" width="10" height="8" fill="#C9CCC5"/><text x="34" y="214">decisões por semana</text><line x1="170" y1="210" x2="188" y2="210" stroke="#B8555F" stroke-width="3"/><text x="193" y="214">fundamentação adequada</text></g>
-          </svg>
-        </div>
-
-        <div class="blk"><h4>6. Monitoramento dos sprints</h4><p class="sub">Painel da Fase 0, reutilizado nos sprints seguintes</p>
+        <div class="blk"><h4>6. Monitoramento dos sprints</h4><p class="sub">Linha de base da Fase 0, reutilizada nos sprints</p>
           <table><tr><th>Indicador (agregado)</th><th>Base</th><th>S1</th><th>S2</th></tr>
-            <tr><td>Fundamentação adequada, sem. 4</td><td>74%</td><td>79%</td><td>83%</td></tr>
-            <tr><td>Decisões na última semana</td><td>38%</td><td>33%</td><td>29%</td></tr>
-            <tr><td>Acerto dos alertas preditivos</td><td>–</td><td>70%</td><td>78%</td></tr>
-            <tr><td>Homologação sem consulta à origem</td><td>61%</td><td>52%</td><td>44%</td></tr></table>
+            <tr><td>Retrabalho na última semana</td><td>18%</td><td>14%</td><td>11%</td></tr>
+            <tr><td>Atos na última semana</td><td>38%</td><td>33%</td><td>29%</td></tr>
+            <tr><td>Cargas validadas</td><td>91%</td><td>96%</td><td>98%</td></tr>
+            <tr><td>Alertas confirmados</td><td>–</td><td>7 de 10</td><td>8 de 10</td></tr>
+            <tr><td>Indicadores com origem visível</td><td>40%</td><td>85%</td><td>96%</td></tr></table>
           <p style="margin:0.8rem 0 0;font-size:0.8125rem;line-height:1.6">Critério de parada <span class="chip">dentro do limite</span><br>Decisão do comitê no fim do sprint, <b>expandir, ajustar ou suspender</b></p>
         </div>
 
@@ -663,18 +679,18 @@
           </div>
         </div>
 
-        <div class="blk w2"><h4>8. Tendência por vara e setor, impacto × probabilidade</h4><p class="sub">Série da própria unidade, ordem alfabética, sem ranking entre unidades</p><div style="overflow-x:auto"><table><tr><th>Unidade</th><th>Probab.</th><th>Impacto</th><th>Matriz</th><th>Qualidade, 6 meses</th><th>Tendência</th></tr><tr><td><b>Secretaria A (piloto)</b></td><td><span class="chip">Baixa</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#9AA0AC" stroke-width="2.5" points="0,22 24,21 48,19 72,15 96,12 120,8"/></svg></td><td>↑ melhora</td></tr><tr><td><b>Vara A (piloto)</b></td><td><span class="chip hi">Alta</span></td><td>C3</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#7A2230"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#7A2230" stroke-width="2.5" points="0,8 24,10 48,13 72,17 96,21 120,25"/></svg></td><td>↓ queda, atenção</td></tr><tr><td><b>Vara B</b></td><td><span class="chip warn">Média</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#B8555F" stroke-width="2.5" points="0,15 24,14 48,16 72,15 96,14 120,15"/></svg></td><td>→ estável</td></tr></table></div></div>
+        <div class="blk w2"><h4>8. Tendência por vara e setor, impacto × probabilidade</h4><p class="sub">Série da própria unidade, ordem alfabética, sem ranking entre unidades</p><div style="overflow-x:auto"><table><tr><th>Unidade</th><th>Probab.</th><th>Impacto</th><th>Matriz</th><th>Qualidade, 6 meses</th><th>Tendência</th></tr><tr><td><b>Secretaria A (piloto)</b></td><td><span class="chip">Baixa</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#9AA0AC" stroke-width="2.5" points="0,22 24,21 48,19 72,15 96,12 120,8"/></svg></td><td>↑ melhora</td></tr><tr><td><b>Vara A, secretaria (piloto)</b></td><td><span class="chip hi">Alta</span></td><td>C3</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#7A2230"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#7A2230" stroke-width="2.5" points="0,8 24,10 48,13 72,17 96,21 120,25"/></svg></td><td>↑ pico no fechamento</td></tr><tr><td><b>Vara B</b></td><td><span class="chip warn">Média</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#B8555F" stroke-width="2.5" points="0,15 24,14 48,16 72,15 96,14 120,15"/></svg></td><td>→ estável</td></tr></table></div></div>
 
         <div class="blk w3"><h4>9. Trilha de registros recentes</h4><p class="sub">Tabela selada por cadeia de hash, registro por unidade, nunca por pessoa</p>
           <div style="overflow-x:auto"><table><tr><th>Quando</th><th>Etapa</th><th>Status</th><th>Descrição</th></tr>
-            <tr><td>10:05</td><td>6. Projetar</td><td><span class="chip hi">Alerta</span></td><td>Projeção de queda da fundamentação no fechamento do mês na unidade</td></tr>
-            <tr><td>09:41</td><td>2. Classificar</td><td><span class="chip">Reavaliada</span></td><td>Tipo de decisão reavaliado pela área e consignado na Ficha (Camada 3)</td></tr>
-            <tr><td>06:10</td><td>3. Validar</td><td><span class="chip">Validada</span></td><td>Carga e-Gestão concluída, 48.312 linhas lidas</td></tr>
-            <tr><td>06:02</td><td>3. Validar</td><td><span class="chip warn">Reiniciada</span></td><td>Falha de extração tratada, responsável identificado e motivo registrados</td></tr></table></div>
+            <tr><td>10:05</td><td>Leitura semanal</td><td><span class="chip hi">Alerta</span></td><td>Tendência indica pico de retrabalho no fechamento do mês na unidade</td></tr>
+            <tr><td>09:41</td><td>Classificação</td><td><span class="chip">Reavaliada</span></td><td>Redistribuição de servidores reavaliada pelo comitê (Camada 3)</td></tr>
+            <tr><td>06:10</td><td>Validação</td><td><span class="chip">Validada</span></td><td>Carga e-Gestão concluída, 48.312 linhas lidas</td></tr>
+            <tr><td>06:02</td><td>Validação</td><td><span class="chip warn">Reiniciada</span></td><td>Falha de extração tratada, responsável e motivo registrados</td></tr></table></div>
         </div>
       </div>
       <p class="ip-foot"><a href="exemplo-pai/">Veja o exemplo completo com o PAI, de ponta a ponta</a>.</p>
-      <p class="ip-foot">Mockup ilustrativo com dados fictícios. Linha de base calibrada na Fase 0. Indicadores sempre por unidade, nunca por magistrado, e sem ranking.</p>
+      <p class="ip-foot">Mockup ilustrativo com dados, nomes e números fictícios. Linha de base calibrada na Fase 0. Indicadores sempre por unidade, nunca por pessoa, e sem ranking.</p>
     </div>
     <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>A rotina monitorada e a trilha estão implementadas e testadas, mas o consolidado gerencial ainda não roda em produção.</i></p>
 
@@ -774,27 +790,79 @@
     </div>
   </section>
 
+  <section id="vantagens">
+    <h2>Vantagens esperadas</h2>
+    <p>O foco do piloto é medir a perda de qualidade das decisões administrativas apoiadas por painéis. As vantagens abaixo são esperadas e serão confirmadas por essa medição, com o tempo médio de cumprimento usado como contrapeso.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Vantagem 1</span>
+        <h3>Menos retrabalho</h3>
+        <p>Decisões de melhor qualidade poupam o tempo hoje gasto refazendo tarefas, revendo decisões e recuperando prazos perdidos.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 2</span>
+        <h3>Carga mais bem distribuída no mês</h3>
+        <p>Ao antecipar o pico do fechamento, a gestão redistribui a carga antes da última semana e reduz filas e gargalos.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 3</span>
+        <h3>Menos conferência manual de dados</h3>
+        <p>A validação automática das cargas e a origem visível do dado poupam a conferência à mão e evitam decidir sobre número desatualizado.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 4</span>
+        <h3>Nenhuma etapa a mais para quem decide</h3>
+        <p>Nada bloqueia ou atrasa a decisão, e o custo do controle recai sobre a gestão, e não sobre quem decide.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 5</span>
+        <h3>Qualidade sem perda de celeridade</h3>
+        <p>O tempo médio de cumprimento, medido antes e depois, mostra se a qualidade melhora sem piorar a duração, em linha com a razoável duração do processo (Constituição, art. 5º, LXXVIII).</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 6</span>
+        <h3>Risco de qualidade antecipado</h3>
+        <p>A leitura semanal por unidade, sem ranking, sinaliza a semana em que a velocidade pode custar qualidade, e o alerta aciona apoio, e não cobrança.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 7</span>
+        <h3>Governança antes da IA</h3>
+        <p>A classificação dos tipos de decisão e os dados governados preparam o Tribunal para usar IA em conformidade com a Resolução CNJ 615/2025.</p>
+      </article>
+      <article>
+        <span class="mn">Vantagem 8</span>
+        <h3>Efeito mensurável por projeto</h3>
+        <p>Os indicadores de impacto de cada projeto permitem comparar antes e depois, nas decisões que o projeto apoia.</p>
+      </article>
+    </div>
+  </section>
+
   <section id="objecoes">
     <h2>Objeções antecipadas</h2>
     <p>As perguntas que um comitê de governança faz primeiro, e as respostas que o desenho já contém.</p>
     <div class="modules">
       <article>
         <span class="mn">Pergunta 1</span>
-        <h3>Isto vigia o servidor ou o magistrado?</h3>
-        <p>O registro é por unidade organizacional, nunca por pessoa. A trilha documenta a execução técnica e os atos da unidade, não o comportamento de quem decide.</p>
+        <h3>Isto vigia o servidor?</h3>
+        <p>Não. Os indicadores são por unidade organizacional, sem métrica individual e sem captura de conteúdo. A trilha documenta a execução técnica e os atos da unidade, não o comportamento de quem decide.</p>
       </article>
       <article>
         <span class="mn">Pergunta 2</span>
         <h3>Isto interfere na decisão?</h3>
-        <p>Nada na tela bloqueia, atrasa ou direciona a escolha. Os controles recaem sobre os dados, a amostra e as condições de trabalho da unidade, e a motivação exigida pelo art. 93, IX, da Constituição permanece integralmente com quem decide.</p>
+        <p>Não. Nada na tela bloqueia, atrasa ou direciona a escolha. Os controles recaem sobre os dados e as condições de trabalho da unidade, e a autoria e a motivação permanecem integralmente com quem decide.</p>
       </article>
       <article>
         <span class="mn">Pergunta 3</span>
         <h3>Isto torna o trabalho mais lento?</h3>
-        <p>Não há etapa adicional na tela de quem decide. O custo recai sobre a Área de Governança de Dados e sobre a gestão, e nas etapas de dados a automação reduz o tempo hoje gasto em conferência manual de cargas.</p>
+        <p>Não há etapa adicional para quem decide. O custo recai sobre a equipe do piloto e a gestão, e a validação automática das cargas reduz o tempo hoje gasto em conferência manual.</p>
       </article>
       <article>
         <span class="mn">Pergunta 4</span>
+        <h3>E se o padrão de fim de mês não aparecer?</h3>
+        <p>O levantamento prévio e a Fase 0 existem para isso. Mesmo sem o padrão, os dados governados e a classificação dos tipos de decisão seguem úteis para preparar o Tribunal para a IA, em conformidade com a Resolução CNJ 615/2025.</p>
+      </article>
+      <article>
+        <span class="mn">Pergunta 5</span>
         <h3>Por que medir antes de agir?</h3>
         <p>Sem linha de base não se sabe se os controles funcionaram nem se foram proporcionais ao problema. A Fase 0 observa sem intervir, e seus resultados seguem a regra de não haver métrica individual.</p>
       </article>
@@ -896,8 +964,8 @@
 
   var CAMADAS = {
     C1: {nome: 'Camada 1 — Baixo Risco', prot: 'Registro automático na trilha.', rev: 'Anual'},
-    C2: {nome: 'Camada 2 — Risco Moderado', prot: 'Mapa de representatividade dos dados, amostragem regular da fundamentação e plano de contingência.', rev: 'Semestral'},
-    C3: {nome: 'Camada 3 — Alto Risco', prot: 'Amostragem ampliada da fundamentação, reavaliação antecipada e capacitação obrigatória. Nada bloqueia a tela.', rev: 'Trimestral'}
+    C2: {nome: 'Camada 2 — Risco Moderado', prot: 'Confirmação da origem e da atualização do dado antes do uso e plano de contingência.', rev: 'Semestral'},
+    C3: {nome: 'Camada 3 — Alto Risco', prot: 'Exigências da Camada 2 e reavaliação do tipo de decisão antecipada nas semanas de fechamento das unidades de probabilidade alta, com apoio da gestão e capacitação. Nada bloqueia a tela de quem decide.', rev: 'Trimestral'}
   };
 
   function isd(a,b){ return 8*a + 12*b; }
@@ -945,7 +1013,7 @@
     var p = +prob.value, nivel = (camada === 'C3' ? 3 : camada === 'C2' ? 2 : 1);
     var leitura;
     if (p === 3 && nivel === 3) { leitura = 'Exceção ao comitê: reavaliação antecipada e apoio da gestão antes do fechamento'; statusBtn.style.color = '#B8555F'; }
-    else if (p === 3 || (p === 2 && nivel === 3)) { leitura = 'Alerta preditivo ativo: leitura semanal reforçada e apoio da gestão'; statusBtn.style.color = '#B8555F'; }
+    else if (p === 3 || (p === 2 && nivel === 3)) { leitura = 'Alerta de tendência ativo: leitura semanal reforçada e apoio da gestão'; statusBtn.style.color = '#B8555F'; }
     else { leitura = 'Monitoramento semanal, sem exceção ao comitê'; statusBtn.style.color = '#C9CCC5'; }
     statusBtn.textContent = leitura;
     return camada;

@@ -165,7 +165,7 @@
   .ip-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; padding: 0 1rem 1rem; }
   @media (min-width: 44rem) { .ip-grid { grid-template-columns: 1fr 1fr; } .ip-grid .w2, .ip-grid .w3 { grid-column: 1 / -1; } }
   @media (min-width: 64rem) { .ip-grid { grid-template-columns: repeat(3, 1fr); } .ip-grid .w2 { grid-column: span 2; } }
-  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; }
+  .blk { background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; min-width: 0; }
   .blk h4 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: 1.05rem; margin: 0 0 0.15rem; color: var(--signal); }
   .blk .sub { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
   .blk .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.8125rem; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
@@ -265,12 +265,12 @@
     <div class="hero-content">
         <p class="kicker">Eric Lopes Mello · Research and Public Management</p>
         <h1>Decision Symbiosis</h1>
-        <p class="lede">A data governance area to prevent the loss of quality in decisions supported by dashboards and AI, especially at the end of goal periods. Instead of opening the technology black box, we govern the decision.</p>
+        <p class="lede">Data governance to prevent the loss of quality in dashboard-supported administrative decisions caused by excessive productivity demands. Instead of opening the technology black box, we govern the decision.</p>
     </div>
 
     <div class="index">
-      <p class="formula">The committee's dilemma: <em>every decision</em> vs. <em>volume and independence</em>
-        <small>To protect quality, the committee would have to assess the risk of every decision, which is impossible given the volume and would encroach on judicial independence. The way out is to assess risk by decision type, with probability by unit and period, and to bring only the exceptions to the committee, through a Data Governance Area.</small>
+      <p class="formula">The committee's dilemma: <em>every decision</em> vs. <em>volume</em>
+        <small>To protect quality, the committee would have to assess the risk of every decision, which is impossible given the volume. The way out is to assess risk by decision type, with the probability of quality loss read by unit and period, and to bring only the exceptions to the committee.</small>
       </p>
       <dl class="dims">
         <div><dt>Paradigm</dt><dd>From Artificial Intelligence to Augmented Intelligence: the machine extends human capacity, it does not replace it.</dd></div>
@@ -286,25 +286,29 @@
 
   <section id="problema">
     <h2>The problem and the proposal</h2>
-    <p>Goals measured on fixed dates concentrate decisions in the final weeks of each period, and that is when automation bias weighs most. Under deadline pressure, decision-makers tend to accept what the dashboard or the suggested draft displays without checking where the data comes from (Parasuraman; Manzey, 2010). In a fictitious court, weekly output rises from 58 to 118 decisions in the last week of the month, and adequate reasoning in the sample falls from 91% to 72%. The monthly average hides the pattern, and a dashboard that shows only productivity records the result as good performance.</p>
-    <p><b>The committee's dilemma.</b> To protect quality, the committee would have to assess the risk of every decision, but reviewing decision by decision is impossible given the volume and would encroach on judicial independence. Assessing only the system or the project, once, at approval, misses the fact that the same decision becomes riskier in the last week of the month. The way out is to assess risk <b>by decision type</b>, combining impact, which is stable, with the probability of quality loss, which varies by unit and by period, and to bring only the exceptions to the committee.</p>
-    <p><b>The opportunity.</b> As the largest labor court in Brazil, TRT-2 multiplies any data or decision error by its volume. CNJ Resolution 615/2025 requires risk classification, impact assessment, auditing and monitoring of AI solutions, and establishing governance of data and decisions before creating and using AI at scale costs less than fixing it afterwards.</p>
+    <p>Court managers make decisions based on dashboards such as the PAI and e-Gestão, in administrative decisions such as reallocating the workforce, prioritizing tasks, organizing task forces and planning how to meet goals. The dashboards mostly show output that has already happened, and the goals they track are measured on fixed dates. The pilot is limited to these administrative decisions, and judicial decisions are outside this stage.</p>
+    <p><b>The central problem: excessive productivity demands.</b> Volume goals with no quality counterweight push for ever shorter deadlines, and under time pressure judgment relies more on heuristics (Guthrie; Rachlinski; Wistrich, 2007). The risk is a loss of decision quality, not a lack of productivity.</p>
+    <p><b>The second problem: automation bias.</b> Under pressure, managers tend to accept the dashboard figure as already verified, without checking the source or how recent the data is. Complacency with automation sets in whenever the tool replaces part of human verification, even in dashboards that only describe (Parasuraman; Manzey, 2010).</p>
+    <p><b>A hypothesis to confirm: quality loss at the end of the period.</b> When measurement closes on fixed dates, effort tends to bunch up near the deadline, a pattern documented outside the Judiciary (Oyer, 1998). In a fictitious administrative office, the acts completed per week rise from 58 to 118 in the last week of the month, and rework climbs from 6% to 18%. At TRT-2 this pattern has not yet been measured, and a prior survey of e-Gestão and PAI data, followed by Phase 0, confirms or rules it out before any control is applied.</p>
+    <p><b>The committee's dilemma.</b> To protect quality, the committee would have to assess the risk of every decision, which is impossible given the volume. Assessing only the system or the project, once, at approval, misses the fact that the same decision becomes riskier in the last week of the month. The way out is to assess risk <b>by decision type</b>, combining impact, which is stable, with the probability of quality loss, read by unit and period, and to bring only the exceptions to the committee.</p>
+    <p><b>The opportunity: governance before AI.</b> As the largest labor court in Brazil, TRT-2 multiplies any data or decision error by its volume. CNJ Resolution 615/2025 requires risk classification, impact assessment, auditing and monitoring of AI solutions, and governing data and decisions before creating and using AI at scale costs less than fixing them afterwards.</p>
+    <p style="margin-top:2rem;"><b>What the pilot delivers.</b> Three deliverables, in two units with administrative decisions supported by the PAI, and one rule that applies to all of them.</p>
     <div class="pillars pillars-4">
       <article>
-        <h3>Data Governance Area</h3>
-        <p>Sits on the committee and acts as the second line of the Three Lines Model. It is responsible for the quality, provenance and lineage of dashboard data, maintains the classification of decision types and the indicators, and brings only the exceptions to the committee. Through data stewards, it bridges project demands and the business area, which keeps ownership of the demand; execution stays with IT.</p>
+        <h3>1. Governed data</h3>
+        <p>Checks each dashboard load before releasing the next, restarts failures and shows, beside each indicator, where the data comes from and when it was updated. Indicator: validated loads and indicators with a visible source.</p>
       </article>
       <article>
-        <h3>Risk by decision type</h3>
-        <p>CNJ Resolution 615/2025 classifies solutions, and project approval assesses risk once. Here risk belongs to the decision type, such as a release of funds or a reallocation of the workforce, and it rises when the unit enters the closing week.</p>
+        <h3>2. Risk by decision type</h3>
+        <p>Classifies the administrative decision types supported by the dashboard, such as reallocating staff between units or organizing a task force, by impact and reversibility (ISD), and crosses the result with the unit's probability of quality loss. Indicator: types classified with reassessment up to date.</p>
       </article>
       <article>
-        <h3>Preventive and predictive indicators</h3>
-        <p>Six context indicators estimate the probability of quality loss, and the unit's weekly projection anticipates the drop before the period closes. The alert triggers management support, not enforcement.</p>
+        <h3>3. Weekly risk reading</h3>
+        <p>Tracks, by unit and never by person, the preventive indicators and a simple trend up to the close of the period, and triggers management support, not enforcement. Indicator: alerts confirmed by the period's data.</p>
       </article>
       <article>
         <h3>No blocking on screen</h3>
-        <p>The requirements fall on the data, the reasoning sample and the unit's management, not on the decision-maker's screen, and this applies equally to descriptive dashboards and to AI solutions.</p>
+        <p>The requirements fall on the data and the unit's management, not on the decision-maker's screen, and this applies equally to descriptive dashboards and, in the future, to AI solutions.</p>
       </article>
     </div>
   </section>
@@ -334,11 +338,11 @@
       </article>
       <article>
         <h3>Three control layers</h3>
-        <p>Separates those who operate, those who govern and those who audit. The Data Governance Area, a member of the committee, runs the automated audit every sprint, sampling the classification, the record sheet and the integrity of the audit trail, while the court's internal audit remains in the third line.</p>
+        <p>Separates those who operate, those who govern and those who audit. In the pilot, the pilot team runs the automated checks every sprint on the classification, the record sheet and the integrity of the audit trail, the committee decides on exceptions, and the court's internal audit remains in the third line.</p>
       </article>
       <article>
-        <h3>Protocol A1–A6</h3>
-        <p>A core of six criteria required from the pilot onward, drawn from a nine-criteria design across four compliance pillars. The remaining three (A7 to A9) are specified as an institutional maturity extension. Designed for business managers, without software development jargon.</p>
+        <h3>Impact indicators per project</h3>
+        <p>Risk is assessed by decision type, and impact is measured by project. Every project that creates or changes a dashboard gets indicators on the decision types it supports, measured before and after: rework, revised decisions, missed deadlines, concentration at period end and the share of indicators with a known source, with average completion time as a counterweight.</p>
       </article>
       <article>
         <h3>Decision chain record</h3>
@@ -350,7 +354,7 @@
     <div class="pillars pillars-4">
       <article>
         <h3>Preventive and predictive indicators <span class="tag dev">under research</span></h3>
-        <p>Context indicators anticipate quality loss, and the unit's weekly projection signals the drop before the period closes, without blocking the decision-maker's screen.</p>
+        <p>Context indicators anticipate quality loss, and a simple trend of the unit's weekly series signals the peak before the period closes, without blocking the decision-maker's screen.</p>
       </article>
       <article>
         <h3>Practicability and shadow AI <span class="tag dev">under research</span></h3>
@@ -366,28 +370,33 @@
       </article>
     </div>
 
-    <p class="stage">Phase 0 · <b>baseline diagnosis, proposal not yet executed</b></p>
-    <p>Before setting requirements and thresholds, the proposed pilot measures how decisions are made today. Automation bias is documented, but its prevalence varies by context, and controls set without a diagnosis may be excessive or insufficient. For this reason, the two weeks that precede the 12-week pilot, organized in three sprints, are used to measure current quality, including by week of the month, and to calibrate the thresholds.</p>
+    <p class="stage">Prior survey and Phase 0 · <b>baseline diagnosis, proposal not yet executed</b></p>
+    <p>Before setting requirements and thresholds, the proposed pilot measures how decisions are made today. Automation bias is documented, but its prevalence varies by context, and controls set without a diagnosis may be excessive or insufficient. For this reason, a prior survey of data already available and the two weeks of Phase 0 precede the 12-week pilot, organized in three sprints, and test the end-of-period concentration hypothesis before any control is applied.</p>
     <div class="modules">
+      <article>
+        <span class="mn">Before · Survey</span>
+        <h3>Prior survey</h3>
+        <p>Using data already available in e-Gestão and the PAI, checks whether, at TRT-2, output and rework bunch up at the end of the measurement period.</p>
+      </article>
       <article>
         <span class="mn">Phase 0 · 1</span>
         <h3>Observe</h3>
-        <p>Non-invasive observation of 50 to 100 decisions, with no intervention, and review of 200 to 300 prior records, where they exist.</p>
+        <p>Observation, with no intervention, of how dashboard-supported administrative decisions are made today.</p>
       </article>
       <article>
         <span class="mn">Phase 0 · 2</span>
         <h3>Listen</h3>
-        <p>Semi-structured interviews with 6 to 8 judges and clerks about uncertainty, trust in the recommendation and the practicability of the protocol.</p>
+        <p>Conversations with managers about trust in the dashboard data and the practicability of the requirements.</p>
       </article>
       <article>
         <span class="mn">Phase 0 · 3</span>
         <h3>Calibrate</h3>
-        <p>Segmentation by decision type and by unit, never by person, and the initial classification of decision types, with the thresholds for the preventive and predictive indicators.</p>
+        <p>Segmentation by decision type and by unit, never by person, and the initial classification of decision types, with the thresholds for the preventive indicators and the trend.</p>
       </article>
       <article>
         <span class="mn">Phase 0 · 4</span>
-        <h3>Compare</h3>
-        <p>Adequate reasoning in a sample and the usage indicators (edit rate, time to confirmation and consultation of the data source), measured beforehand, are measured again in the sprints. Phase 0 also measures quality by week of the month, to test whether it drops near the end of the period.</p>
+        <h3>Baseline</h3>
+        <p>Brings together, by unit and decision type, the preventive indicators, volume and rework by week of the month, and the share of indicators with a known source and update date. Measurement is repeated in the sprints, and, with no control group, the comparison shows association, not causation.</p>
       </article>
     </div>
     <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Because the institutional audit trail does not capture the conduct of whoever decides, Phase 0 is a separate study, with informed consent and aggregated results.</p>
@@ -400,12 +409,12 @@
       <article>
         <span class="mn">Step 1</span>
         <h3>Govern the use of the dashboard</h3>
-        <p>The committee defines, by decision type, the requirements of each risk layer, combining probability and impact. The Data Governance Area records the rule in the Record Sheet, and nothing on the screen blocks or conditions the decision.</p>
+        <p>The committee defines, by decision type, the requirements of each risk layer, combining probability and impact. The rule is recorded in the Record Sheet, and nothing on the screen blocks or conditions the decision.</p>
       </article>
       <article>
         <span class="mn">Step 2</span>
         <h3>Calculate decision risk</h3>
-        <p>Classifies the decision types made from the dashboard or from AI by impact on rights and reversibility (ISD) and crosses them with the unit's probability of quality loss, regardless of the technology adopted.</p>
+        <p>Classifies the administrative decision types made from the dashboard by impact and reversibility (ISD) and crosses them with the unit's probability of quality loss, regardless of the technology adopted.</p>
       </article>
       <article>
         <span class="mn">Step 3</span>
@@ -425,7 +434,7 @@
       <article>
         <span class="mn">Step 6</span>
         <h3>Evaluate and Project (Predictive Dashboard)</h3>
-        <p>Compares indicators with goals, projects quality and volume up to the close of the period and the backlog for the following months, and anticipates risk by unit, subjecting the projection to the committee's scrutiny. Steps 1 to 5 are implemented as a proof of concept; the predictive component is a later phase.</p>
+        <p>Compares indicators with goals, uses a simple trend to project volume and rework up to the close of the period and the backlog for the following months, and anticipates risk by unit, subjecting the projection to the committee's scrutiny. Steps 1 to 5 are implemented as a proof of concept; the simple trend enters the pilot, and its usefulness is checked against confirmed alerts.</p>
       </article>
     </div>
 
@@ -438,18 +447,18 @@
           </div>
           <div class="layer">
             <strong>Decision Oversight</strong>
-            <span>Institutional committee, with the Data Governance Area, assessing risk by decision type and deciding on exceptions.</span>
+            <span>Institutional committee assessing risk by decision type and deciding on exceptions.</span>
           </div>
           <div class="layer">
-            <strong>Automated Audit (second line)</strong>
-            <span>Protocol A1–A6, independent of the technology (BI, AI, spreadsheets). Run by the Data Governance Area every sprint, sampling the artifact and the process, never the merits of the decision. The court's internal audit remains in the third line.</span>
+            <strong>Automated Checks</strong>
+            <span>Independent of the technology (BI, AI, spreadsheets). In the pilot, run by the pilot team every sprint on the artifact and the process, never the merits of the decision. The court's internal audit remains in the third line (CNJ Resolution 309/2020).</span>
           </div>
         </div>
         <div class="divider">
           <div class="outside">
-            <strong>Final Judicial / Administrative Decision</strong>
-            <span>Where human responsibility, authorship and reasoning reside.</span>
-            <code>art. 93, IX, CF</code>
+            <strong>Final administrative decision</strong>
+            <span>Where human responsibility, authorship and reasoning reside. Judicial decisions are left for a later stage.</span>
+            <code>non-transferable human authorship</code>
           </div>
         </div>
       </div>
@@ -458,23 +467,30 @@
     </figure>
 
     <h3 style="margin-top:3.5rem;">Governance, management and audit are distinct roles</h3>
-    <p>Governance, exercised by the committee, sets the requirements for each layer, sets the goals and decides on exceptions every sprint. Management operates the interface and the data routines day to day. The Data Governance Area sits on the committee and links project demands to the business area: through data stewards appointed by the user areas, it translates each need into data and quality requirements, classifies with the requesting area the decision types the project will support, and returns the indicators in management language. The demand and the outcome remain with the business area, and execution with IT. As the second line, it maintains the data, the indicators and the classification of decision types and runs the automated audit every sprint, which checks the risk classification, the integrity of the audit trail and the completeness of the record sheet, without examining the merits of the decision or the conduct of whoever decides. The court's internal audit unit remains in the third line (CNJ Resolution 309/2020) and may use the trail as input without losing its independence.</p>
+    <p>Governance, exercised by the committee, sets the requirements for each layer, approves the thresholds, decides on exceptions and, at the end of each sprint, whether to expand, adjust or suspend. Management, that is, the business area and IT, operates the dashboard and the loads day to day, and responsibility for the decision lies with the business area that uses the dashboard, not with IT. Whoever sets the intensity of control is not whoever bears its cost. During the pilot, the pilot team runs the automated checks every sprint, which verify the risk classification, the integrity of the audit trail and the completeness of the record sheet, without examining the merits of the decision or the conduct of whoever decides. The court's internal audit unit remains in the third line of the Three Lines Model (IIA, 2020; CNJ Resolution 309/2020) and may use the trail as input without losing its independence.</p>
 
-    <h3 style="margin-top:2.5rem;">Probability × impact and predictive indicators</h3>
-    <p>The ISD measures the impact of the decision on rights and its irreversibility. To it is added the probability of quality loss, rated low, medium or high by six context indicators tracked by unit, never by judge. Crossed with impact, the two dimensions form a risk matrix, which brings forward the reassessment of high-risk decision types in high-probability units. The predictive indicators project, from the unit's own weekly series, quality and volume up to the close of the period and trigger the alert before the critical week, with reliability measured by hit rate and false positives. Thresholds are calibrated in Phase 0, and the alert triggers support from management, not enforcement.</p>
+    <h3 style="margin-top:2.5rem;">Suggested follow-up: a data governance area</h3>
+    <p>If the pilot confirms the problem and the usefulness of the weekly reading, the proposal suggests setting up a data governance area, sitting on the committee, to carry the work forward. It would be responsible for the quality, provenance and lineage of dashboard data, maintain the classification of decision types and the indicators, define with the requesting area the impact indicators of each project, and link project demands to the business area through data stewards appointed by the user areas (DAMA International, 2017), with the demand kept in the business and execution in IT. Creating the area is not part of this proposal and would depend on a decision by the court administration; the pilot results provide the basis for that decision.</p>
+
+    <h3 style="margin-top:2.5rem;">Probability × impact and preventive and predictive indicators</h3>
+    <p>The ISD measures the impact of the decision and its irreversibility. To it is added the probability of quality loss, rated low, medium or high by five context indicators tracked by unit, never by person: sustained deadline pressure, sudden volume acceleration, concentration of decisions at period end, load per workforce and backlog complexity, plus load validation and data freshness. Crossed with impact, the two dimensions form a risk matrix, which brings forward the reassessment of high-risk decision types in high-probability units. The predictive component is deliberately simple: a trend of the unit's own weekly series projected to the close of the period, with no complex model and no promised accuracy, whose usefulness is checked in the pilot itself by comparing the alerts with what actually happened. Outcome indicators already available, such as rework, revised decisions and missed deadlines, detect the loss after it occurs, with average completion time as a counterweight. Thresholds are calibrated in Phase 0, with no ranking between units, and the alert triggers support from management, not enforcement.</p>
+
+    <h3 style="margin-top:2.5rem;">Impact indicators per project</h3>
+    <p>Risk is assessed by decision type, and impact is measured by project. Every project that creates or changes a dashboard, and in the future an AI solution, receives on approval impact indicators on the decision types it supports, measured before and after: rework, revised decisions, missed deadlines, concentration of decisions at period end, share of indicators with a known source and, as a counterweight, average completion time. This way the committee knows whether the project improved the quality of decisions, and not only whether it was delivered.</p>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);"><b>Outside the pilot, for a later stage.</b> Sampling of the reasoning behind decisions, usage metrics that would require changing national systems such as PJe (edit rate, time to confirmation and consultation of the source), and extension to judicial decisions are left for later.</p>
 
     <h3 style="margin-top:2.5rem;">Controls by type</h3>
     <div class="qgrid">
       <article><h3>Preventive</h3><ul>
         <li>Classification by decision type, by impact and probability</li>
-        <li>Preconditions on data representativeness and explainability</li>
+        <li>Confirmation of the data source and update before use</li>
         <li>Load validation and distribution of the workload across the period</li>
-        <li>Preventive quality-loss risk indicators, read by trend and with no ranking</li>
-        <li>Predictive indicators: projection of quality, volume and backlog up to the close</li>
+        <li>Five preventive quality-loss risk indicators, read by trend and with no ranking</li>
+        <li>Simple predictive: the unit's weekly trend projected to the close</li>
         <li>Training</li></ul></article>
       <article><h3>Detective</h3><ul>
         <li>Record sheet and immutable audit trail</li>
-        <li>Reasoning sampling and aggregated usage indicators</li>
+        <li>Rework, revised decisions and missed deadlines, with average completion time as a counterweight</li>
         <li>Anomaly flagging</li>
         <li>Alert and trend</li></ul></article>
       <article><h3>Corrective</h3><ul>
@@ -483,18 +499,18 @@
         <li>Management support</li>
         <li>Suspension or reversal plan</li></ul></article>
       <article><h3>Assurance</h3><ul>
-        <li>Automated audit every sprint, run by the Data Governance Area</li>
+        <li>Automated checks every sprint, run by the pilot team</li>
         <li>Verification of classification, audit trail and record sheet</li>
         <li>Report to the committee at the end of each sprint</li>
         <li>Scope limited to the artifact and the process, never the merits of the decision</li>
         <li>The court's internal audit in the third line</li></ul></article>
     </div>
-    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Risk indicators and projections are preventive, since they act before quality loss sets in; reasoning sampling, the audit trail and anomaly flagging are detective. Conceptually aligned with the IIA Three Lines Model (2020).</p>
+    <p style="font-size:0.9375rem;color:var(--ink-soft);margin:1rem 0 0;">Risk indicators and the trend are preventive, since they act before quality loss sets in; outcome indicators, the audit trail and anomaly flagging are detective. Sampling of decision reasoning is left for a later stage. Conceptually aligned with the IIA Three Lines Model (2020).</p>
   </section>
 
   <section id="demonstracao">
     <h2>Steps 1 and 2: Risk by Decision Type</h2>
-    <p>Classify a <b>decision type</b> made from the dashboard or AI using the ISD and enter the unit's probability of quality loss in the period. The result shows the requirements of the layer and when the committee should act, without blocking the decision-maker's screen.</p>
+    <p>Classify an <b>administrative decision type</b> made from the dashboard, such as reallocating staff between units, prioritizing enforcement tasks or organizing a task force, using the ISD and enter the unit's probability of quality loss in the period. Scores are assigned by a person, never automatically. The result shows the requirements of the layer and when the committee should act, without blocking the decision-maker's screen.</p>
 
     <div class="demo">
       <!-- Calculadora ISD -->
@@ -524,7 +540,7 @@
         </div>
         
         <h3 style="margin-top:2rem; border-top:1px solid var(--rule); padding-top:1.5rem;">2. Probability in the unit</h3>
-        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">Estimated by the six preventive context indicators, by unit and never by person. The same decision rises in risk in the closing week.</p>
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem; margin-bottom: 1rem;">Estimated by the five preventive context indicators, by unit and never by person. The same decision rises in risk in the closing week.</p>
         <div class="field">
           <label for="prob">Probability of quality loss</label>
           <select id="prob">
@@ -563,65 +579,79 @@
 
   <section id="dashboard">
     <h2>Step 6: Integrated Dashboard and Augmented Intelligence</h2>
-    <p>The trail created for auditing makes the oversight regime itself measurable. From it come, with no parallel data collection and no extra input from the operator, <b>six indicators, one per step of the cycle</b>: compliance (decision types with requirements met), classification (decision types classified by ISD with reassessment up to date), integrity (loads successfully validated), recovery (average time to fix failures), traceability (lineage mapped and accessible) and alerts (hit rate and false positives of predictive alerts, from the pilot of the predictive module). Reference goals are calibrated against the Phase 0 baseline. Measurement stops being a separate project and becomes a by-product of the record.</p>
-    <p>The same base supports the <b>predictive opportunity</b>. Court dashboards today are descriptive: they show what has already happened, without anticipating case backlog build-up or the risk of missing a goal. Projecting trends is the next step, and it depends on what comes before, because a predictive model over unvalidated data projects the error with more confidence. The judge or manager submits the projection to ISD scrutiny before acting.</p>
-    <p>Adequate reasoning in a sample and the usage indicators measured in Phase 0 (edit rate, time to confirmation and consultation of the source) reappear in the pilot as a benchmark, to show whether the controls produced the expected effect.</p>
+    <p>The trail created for auditing makes the oversight regime itself measurable. From it come, with no parallel data collection and no extra input from the operator, <b>six indicators, one per step of the cycle</b>: compliance (decision types with requirements met), classification (decision types classified by ISD with reassessment up to date), integrity (loads successfully validated), recovery (average time to fix failures), traceability (lineage mapped and accessible) and alerts (trend alerts confirmed by the period's data). Reference goals are calibrated against the Phase 0 baseline. Measurement stops being a separate project and becomes a by-product of the record.</p>
+    <p>The same base supports the <b>predictive opportunity</b>. Court dashboards today are descriptive: they show what has already happened, without anticipating case backlog build-up or the risk of missing a goal. Projecting trends is the next step, deliberately simple in the pilot, and it depends on what comes before, because a projection over unvalidated data projects the error with more confidence. The manager submits the projection to ISD scrutiny before acting.</p>
+    <p>Rework, revised decisions, missed deadlines and concentration at period end, measured in the baseline, reappear in the sprints as a benchmark, with average completion time as a counterweight, to show whether quality improves without slowing things down.</p>
     
 
     <h3 style="margin-top:2.5rem;">Integrated interface</h3>
-    <p>The artifacts make up a single interface. Beside each indicator, the side panel shows the source and the data update, and the load control panel shows load validation. At the top, the alert card consolidates the unit's risk of quality loss and the projection of quality, volume and backlog up to the close of the period. Nothing on the screen blocks or conditions the decision. The committee sets the requirements and decides on exceptions, the Data Governance Area maintains the data and indicators, and management operates the interface.</p>
-    <p>Quality indicators, with qualitative goals and trend reading within each unit, never in a ranking, coexist with the quality-loss risk indicators, which flag deterioration before it sets in. The same dashboard is reused in the following sprints to monitor the pilot. Control is done by sprints, with a weekly reading of the preventive and usage indicators, a monthly trend of quality and risk and a projection updated every sprint.</p>
+    <p>The artifacts make up a single interface. Beside each indicator, the side panel shows the source and the data update, and the load control panel shows load validation. At the top, the alert card consolidates the unit's risk of quality loss and the trend in volume and rework up to the close of the period. Nothing on the screen blocks or conditions the decision. The committee sets the requirements and decides on exceptions, the pilot team maintains the data and indicators, and management operates the interface.</p>
+    <p>Quality indicators, with qualitative goals and trend reading within each unit, never in a ranking, coexist with the quality-loss risk indicators, which flag deterioration before it sets in. The same dashboard is reused in the following sprints to monitor the pilot. Control is done by sprints, with a weekly reading of the preventive indicators, a monthly trend of the outcome indicators and a projected trend reviewed every sprint.</p>
 
     <div class="ip" role="group" aria-label="Illustrative mockup of the integrated dashboard">
       <div class="ip-top">
-        <div><strong>Data Governance Area Dashboard</strong><span class="s">Decision Governance · Pilot court (fictitious) · Sprint 2 of 3 · committee view</span></div>
+        <div><strong>Decision Governance Dashboard</strong><span class="s">Administrative decisions · Pilot office (fictitious) · Sprint 2 of 3 · committee view</span></div>
         <div class="chips"><span>Risk: unit at HIGH probability</span><span>Governance Committee</span></div>
       </div>
-      <div class="ip-alert"><div><b>Predictive alert.</b> The projection shows adequate reasoning falling to 72% in the last week of the month, with 118 decisions forecast.</div><i>Triggers management support, not enforcement. Data by unit, never by judge.</i></div>
+      <div class="ip-alert"><div><b>Trend alert.</b> The trend points to a peak of 118 acts and 18% rework in the last week of the month.</div><i>Triggers management support, not enforcement. Data by unit, never by person.</i></div>
       <div class="ip-kpis">
-        <div class="ip-kpi"><small>Adequate reasoning (sample)</small><b>85%</b><em>week 3 · downward trend</em></div>
+        <div class="ip-kpi"><small>Rework</small><b>11%</b><em>week 3 · upward trend</em></div>
         <div class="ip-kpi"><small>Validated loads</small><b>98%</b><em>2 failures restarted</em></div>
-        <div class="ip-kpi"><small>Active predictive alerts</small><b>2</b><em>1 quality, 1 backlog</em></div>
+        <div class="ip-kpi"><small>Active trend alerts</small><b>2</b><em>1 quality, 1 backlog</em></div>
         <div class="ip-kpi"><small>Reassessments on time (Layer 3)</small><b>5 of 6</b><em>1 brought forward by the matrix</em></div>
       </div>
       <div class="ip-grid">
 
-        <div class="blk"><h4>1. Indicator with source and load</h4><p class="sub">Load control panel and source side panel</p>
+        <div class="blk"><h4>1. Indicator with source and load</h4><p class="sub">Preventive · load control panel and source side panel</p>
           <div class="row"><span>Cases resolved (month)</span><b>1,240</b></div>
           <div class="row"><span>Pending decision</span><b>386</b></div>
           <div class="row"><span>e-Gestão load</span><span class="chip">Validated</span></div>
           <div class="row"><span>Rows read</span><b>48,312</b></div>
           <div class="row"><span>Last validation</span><b>06:02</b></div>
-          <div class="drawer"><b>Data source</b><br>Source case management system<br>Updated today, 06:10<br>Steps: extraction, validation, dashboard</div>
+          <div class="drawer"><b>Data source</b><br>Source case management system<br>Updated today, 06:10<br>Steps: extraction, validation, dashboard<br>Stewardship: pilot team</div>
         </div>
 
-        <div class="blk"><h4>2. Quality-loss risk</h4><p class="sub">Probability (six indicators) × impact (ISD)</p>
+        <div class="blk"><h4>2. Quality-loss risk</h4><p class="sub">Preventive · probability (five indicators) × impact of the decision type (ISD)</p>
           <div style="display:flex;gap:0.9rem;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap">
             <div><div class="mx3"><div class="m"></div><div class="h"></div><div class="on"></div><div class="l"></div><div class="m"></div><div class="h"></div><div class="l"></div><div class="l"></div><div class="m"></div></div>
             <div style="font-size:0.6875rem;color:var(--ink-soft);margin-top:4px">high at right: impact (L3)<br>high at top: probability</div></div>
             <div style="font-size:0.8125rem;line-height:1.7">Probability <span class="chip hi">HIGH</span><br>Impact <span class="chip hi">Layer 3</span><br><span style="color:var(--ink-soft);font-size:0.75rem">decision type classified in the Record Sheet</span></div>
           </div>
           <div class="ind">Sustained deadline pressure<span>high</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:var(--signal)"></div></div></div>
-          <div class="ind">Sudden volume acceleration<span>medium</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
-          <div class="ind">Decisions concentrated at period end<span>high</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
-          <div class="ind">Load per workforce<span>high</span><div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--signal)"></div></div></div>
+          <div class="ind">Sudden volume acceleration<span>high</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--signal)"></div></div></div>
+          <div class="ind">Decisions concentrated at period end<span>high</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--signal)"></div></div></div>
+          <div class="ind">Load per workforce<span>medium</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
           <div class="ind">Backlog complexity<span>medium</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div></div>
-          <div class="ind">Drafts suggested by automation<span>low</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:#9AA0AC"></div></div></div>
         </div>
 
-        <div class="blk"><h4>3. Quality by trend, no ranking</h4><p class="sub">Qualitative goal as direction, the unit own series</p>
-          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Three trend series with dashed projection">
-            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Reversal on appeal</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">trend ↓ (good)</text></g>
-            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,60 60,52 120,56 180,44 240,40 300,34 360,30"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,30 400,24"/>
-            <g font-size="12"><text x="0" y="104" font-weight="700">Motions for clarification upheld</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">trend ↑ (attention)</text></g>
+        <div class="blk"><h4>3. Quality by trend</h4><p class="sub">Detective · qualitative goal as direction, the unit's own series, no ranking</p>
+          <svg width="100%" viewBox="0 0 400 285" role="img" aria-label="Missed deadlines falling, revised decisions and rework rising, with dashed projected trend">
+            <g font-size="12" fill="#131722"><text x="0" y="14" font-weight="700">Missed deadlines</text><text x="400" y="14" text-anchor="end" fill="#39404F" font-weight="700">trend ↓ (good)</text></g>
+            <polyline fill="none" stroke="#39404F" stroke-width="3" points="0,30 60,36 120,34 180,44 240,48 300,54 360,58"/><polyline fill="none" stroke="#39404F" stroke-width="2" stroke-dasharray="5 4" points="360,58 400,62"/>
+            <g font-size="12"><text x="0" y="104" font-weight="700">Revised decisions</text><text x="400" y="104" text-anchor="end" fill="#7A2230" font-weight="700">trend ↑ (attention)</text></g>
             <polyline fill="none" stroke="#B8555F" stroke-width="3" points="0,160 60,164 120,156 180,150 240,140 300,130 360,122"/><polyline fill="none" stroke="#B8555F" stroke-width="2" stroke-dasharray="5 4" points="360,122 400,112"/>
-            <g font-size="12"><text x="0" y="194" font-weight="700">Reasoning (objective grid)</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">trend ↓ (attention)</text></g>
-            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,226 60,222 120,228 180,236 240,244 300,250 360,258"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,258 400,268"/>
-            <text x="0" y="282" font-size="11" fill="#39404F">dashed line: risk projection (prediction)</text>
+            <g font-size="12"><text x="0" y="194" font-weight="700">Rework</text><text x="400" y="194" text-anchor="end" fill="#7A2230" font-weight="700">trend ↑ (attention)</text></g>
+            <polyline fill="none" stroke="#7A2230" stroke-width="3" points="0,262 60,260 120,258 180,252 240,246 300,238 360,230"/><polyline fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4" points="360,230 400,220"/>
+            <text x="0" y="282" font-size="11" fill="#39404F">dashed line: projected trend</text>
           </svg>
         </div>
 
-        <div class="blk"><h4>4. Backlog projection (6 months)</h4><p class="sub">Predictive extension of the currently descriptive dashboard</p>
+        <div class="blk"><h4>4. Rework up to the close</h4><p class="sub">Predictive · weekly series for the month; dashed, projected trend</p>
+          <svg viewBox="0 0 400 220" width="100%" role="img" aria-label="Acts per week (58, 61, 74 and 118) and rework (6%, 7%, 11% and 18%), with week 4 projected trend">
+            <line x1="20" y1="180" x2="390" y2="180" stroke="#C9CCC5"/>
+            <g fill="#C9CCC5"><rect x="45" y="122" width="50" height="58"/><rect x="130" y="119" width="50" height="61"/><rect x="215" y="106" width="50" height="74"/></g>
+            <rect x="300" y="62" width="50" height="118" fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4"/>
+            <g font-size="12" text-anchor="middle" fill="#131722" font-weight="700"><text x="70" y="116">58</text><text x="155" y="113">61</text><text x="240" y="100">74</text><text x="325" y="56" fill="#7A2230">118</text></g>
+            <polyline points="70,100 155,94 240,71" fill="none" stroke="#B8555F" stroke-width="3"/><polyline points="240,71 325,30" fill="none" stroke="#B8555F" stroke-width="3" stroke-dasharray="6 5"/>
+            <g fill="#B8555F"><circle cx="70" cy="100" r="4.5"/><circle cx="155" cy="94" r="4.5"/><circle cx="240" cy="71" r="4.5"/></g><circle cx="325" cy="30" r="5" fill="#fff" stroke="#B8555F" stroke-width="2.5"/>
+            <g font-size="12" fill="#7A2230" font-weight="700"><text x="70" y="90" text-anchor="middle">6%</text><text x="155" y="84" text-anchor="middle">7%</text><text x="222" y="64" text-anchor="middle">11%</text><text x="338" y="34">18%</text></g>
+            <line x1="282" y1="20" x2="282" y2="176" stroke="#7A2230" stroke-dasharray="3 4"/><text x="278" y="16" font-size="11" text-anchor="end" fill="#7A2230" font-weight="700">alert in wk. 3</text>
+            <g font-size="11" fill="#39404F" text-anchor="middle"><text x="70" y="197">Wk. 1</text><text x="155" y="197">Wk. 2</text><text x="240" y="197">Wk. 3</text><text x="325" y="197">Wk. 4</text></g>
+            <g font-size="10.5" fill="#39404F"><rect x="20" y="206" width="10" height="8" fill="#C9CCC5"/><text x="34" y="214">acts per week</text><line x1="120" y1="210" x2="138" y2="210" stroke="#B8555F" stroke-width="3"/><text x="143" y="214">rework; dashed, projected trend</text></g>
+          </svg>
+        </div>
+
+        <div class="blk"><h4>5. Backlog projection (6 months)</h4><p class="sub">Predictive · extension of the currently descriptive dashboard</p>
           <svg width="100%" viewBox="0 0 400 230" role="img" aria-label="Backlog projection crossing capacity in month 4">
             <line x1="30" y1="190" x2="390" y2="190" stroke="#C9CCC5"/><line x1="30" y1="20" x2="30" y2="190" stroke="#C9CCC5"/>
             <line x1="30" y1="95" x2="390" y2="95" stroke="#7A2230" stroke-width="2" stroke-dasharray="6 4"/><text x="34" y="88" font-size="12" fill="#7A2230">clearance capacity</text>
@@ -632,27 +662,13 @@
           </svg>
         </div>
 
-        <div class="blk"><h4>5. Quality up to the close</h4><p class="sub">Predictive · weekly series for the month; dashed, week 4 projection</p>
-          <svg viewBox="0 0 400 220" width="100%" role="img" aria-label="Decisions per week and adequate reasoning, with week 4 projection">
-            <line x1="20" y1="180" x2="390" y2="180" stroke="#C9CCC5"/>
-            <g fill="#C9CCC5"><rect x="45" y="122" width="50" height="58"/><rect x="130" y="119" width="50" height="61"/><rect x="215" y="106" width="50" height="74"/></g>
-            <rect x="300" y="62" width="50" height="118" fill="none" stroke="#7A2230" stroke-width="2" stroke-dasharray="5 4"/>
-            <g font-size="12" text-anchor="middle" fill="#131722" font-weight="700"><text x="70" y="116">58</text><text x="155" y="113">61</text><text x="240" y="100">74</text><text x="325" y="56" fill="#7A2230">118</text></g>
-            <polyline points="70,30 155,34 240,52" fill="none" stroke="#B8555F" stroke-width="3"/><polyline points="240,52 325,98" fill="none" stroke="#B8555F" stroke-width="3" stroke-dasharray="6 5"/>
-            <g fill="#B8555F"><circle cx="70" cy="30" r="4.5"/><circle cx="155" cy="34" r="4.5"/><circle cx="240" cy="52" r="4.5"/></g><circle cx="325" cy="98" r="5" fill="#fff" stroke="#B8555F" stroke-width="2.5"/>
-            <g font-size="12" fill="#7A2230" font-weight="700"><text x="70" y="20" text-anchor="middle">91%</text><text x="155" y="24" text-anchor="middle">90%</text><text x="240" y="42" text-anchor="middle">85%</text><text x="360" y="102">72%</text></g>
-            <line x1="282" y1="20" x2="282" y2="176" stroke="#7A2230" stroke-dasharray="3 4"/><text x="278" y="16" font-size="11" text-anchor="end" fill="#7A2230" font-weight="700">alert in wk. 3</text>
-            <g font-size="11" fill="#39404F" text-anchor="middle"><text x="70" y="197">Wk. 1</text><text x="155" y="197">Wk. 2</text><text x="240" y="197">Wk. 3</text><text x="325" y="197">Wk. 4</text></g>
-            <g font-size="10.5" fill="#39404F"><rect x="20" y="206" width="10" height="8" fill="#C9CCC5"/><text x="34" y="214">decisions per week</text><line x1="170" y1="210" x2="188" y2="210" stroke="#B8555F" stroke-width="3"/><text x="193" y="214">adequate reasoning</text></g>
-          </svg>
-        </div>
-
-        <div class="blk"><h4>6. Sprint monitoring</h4><p class="sub">Phase 0 dashboard, reused in the following sprints</p>
+        <div class="blk"><h4>6. Sprint monitoring</h4><p class="sub">Phase 0 baseline, reused in the sprints</p>
           <table><tr><th>Indicator (aggregate)</th><th>Baseline</th><th>S1</th><th>S2</th></tr>
-            <tr><td>Adequate reasoning, wk. 4</td><td>74%</td><td>79%</td><td>83%</td></tr>
-            <tr><td>Decisions in the last week</td><td>38%</td><td>33%</td><td>29%</td></tr>
-            <tr><td>Predictive alert hit rate</td><td>–</td><td>70%</td><td>78%</td></tr>
-            <tr><td>Approval without consulting the source</td><td>61%</td><td>52%</td><td>44%</td></tr></table>
+            <tr><td>Rework in the last week</td><td>18%</td><td>14%</td><td>11%</td></tr>
+            <tr><td>Acts in the last week</td><td>38%</td><td>33%</td><td>29%</td></tr>
+            <tr><td>Validated loads</td><td>91%</td><td>96%</td><td>98%</td></tr>
+            <tr><td>Confirmed alerts</td><td>–</td><td>7 of 10</td><td>8 of 10</td></tr>
+            <tr><td>Indicators with visible source</td><td>40%</td><td>85%</td><td>96%</td></tr></table>
           <p style="margin:0.8rem 0 0;font-size:0.8125rem;line-height:1.6">Stop criterion <span class="chip">within limit</span><br>Committee decision at the end of the sprint: <b>expand, adjust or suspend</b></p>
         </div>
 
@@ -663,18 +679,18 @@
           </div>
         </div>
 
-        <div class="blk w2"><h4>8. Trend by court and unit, impact × probability</h4><p class="sub">The unit own series, alphabetical order, no ranking between units</p><div style="overflow-x:auto"><table><tr><th>Unit</th><th>Prob.</th><th>Impact</th><th>Matrix</th><th>Quality, 6 months</th><th>Trend</th></tr><tr><td><b>Registry A (pilot)</b></td><td><span class="chip">Low</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#9AA0AC" stroke-width="2.5" points="0,22 24,21 48,19 72,15 96,12 120,8"/></svg></td><td>↑ improving</td></tr><tr><td><b>Court A (pilot)</b></td><td><span class="chip hi">High</span></td><td>C3</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#7A2230"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#7A2230" stroke-width="2.5" points="0,8 24,10 48,13 72,17 96,21 120,25"/></svg></td><td>↓ declining, attention</td></tr><tr><td><b>Court B</b></td><td><span class="chip warn">Medium</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#B8555F" stroke-width="2.5" points="0,15 24,14 48,16 72,15 96,14 120,15"/></svg></td><td>→ stable</td></tr></table></div></div>
+        <div class="blk w2"><h4>8. Trend by court and unit, impact × probability</h4><p class="sub">The unit own series, alphabetical order, no ranking between units</p><div style="overflow-x:auto"><table><tr><th>Unit</th><th>Prob.</th><th>Impact</th><th>Matrix</th><th>Quality, 6 months</th><th>Trend</th></tr><tr><td><b>Registry A (pilot)</b></td><td><span class="chip">Low</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#9AA0AC" stroke-width="2.5" points="0,22 24,21 48,19 72,15 96,12 120,8"/></svg></td><td>↑ improving</td></tr><tr><td><b>Court A clerk's office (pilot)</b></td><td><span class="chip hi">High</span></td><td>C3</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#7A2230"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#7A2230" stroke-width="2.5" points="0,8 24,10 48,13 72,17 96,21 120,25"/></svg></td><td>↑ peak at the close</td></tr><tr><td><b>Court B</b></td><td><span class="chip warn">Medium</span></td><td>C2</td><td><div style="display:grid;grid-template-columns:repeat(3,0.8rem);gap:2px" aria-hidden="true"><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#B8555F"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div><div style="height:0.8rem;background:#EDEEEA"></div></div></td><td><svg width="96" height="26" viewBox="0 0 120 30" aria-hidden="true"><polyline fill="none" stroke="#B8555F" stroke-width="2.5" points="0,15 24,14 48,16 72,15 96,14 120,15"/></svg></td><td>→ stable</td></tr></table></div></div>
 
         <div class="blk w3"><h4>9. Recent audit trail entries</h4><p class="sub">Table sealed by hash chain, recorded by unit, never by person</p>
           <div style="overflow-x:auto"><table><tr><th>When</th><th>Step</th><th>Status</th><th>Description</th></tr>
-            <tr><td>10:05</td><td>6. Project</td><td><span class="chip hi">Alert</span></td><td>Projected drop in reasoning quality at the unit's month-end close</td></tr>
-            <tr><td>09:41</td><td>2. Classify</td><td><span class="chip">Reassessed</span></td><td>Decision type reassessed by the area and recorded in the Record Sheet (Layer 3)</td></tr>
-            <tr><td>06:10</td><td>3. Validate</td><td><span class="chip">Validated</span></td><td>e-Gestão load completed, 48,312 rows read</td></tr>
-            <tr><td>06:02</td><td>3. Validate</td><td><span class="chip warn">Restarted</span></td><td>Extraction failure handled, responsible person identified and reason recorded</td></tr></table></div>
+            <tr><td>10:05</td><td>Weekly reading</td><td><span class="chip hi">Alert</span></td><td>Trend points to a rework peak at the unit's month-end close</td></tr>
+            <tr><td>09:41</td><td>Classification</td><td><span class="chip">Reassessed</span></td><td>Staff reallocation reassessed by the committee (Layer 3)</td></tr>
+            <tr><td>06:10</td><td>Validation</td><td><span class="chip">Validated</span></td><td>e-Gestão load completed, 48,312 rows read</td></tr>
+            <tr><td>06:02</td><td>Validation</td><td><span class="chip warn">Restarted</span></td><td>Extraction failure handled, responsible person and reason recorded</td></tr></table></div>
         </div>
       </div>
       <p class="ip-foot"><a href="../exemplo-pai/">See the full end-to-end example with the PAI (in Portuguese)</a>.</p>
-      <p class="ip-foot">Illustrative mockup with fictitious data. Baseline calibrated in Phase 0. Indicators always by unit, never by judge, and without ranking.</p>
+      <p class="ip-foot">Illustrative mockup with fictitious data, names and figures. Baseline calibrated in Phase 0. Indicators always by unit, never by person, and without ranking.</p>
     </div>
     <p style="font-size:0.85rem; color:var(--ink-soft); margin:0.9rem 0 0;"><i>The monitored routine and the audit trail are implemented and tested, but the managerial roll-up is not yet running in production.</i></p>
 
@@ -774,27 +790,79 @@
     </div>
   </section>
 
+  <section id="vantagens">
+    <h2>Expected advantages</h2>
+    <p>The pilot's focus is to measure the loss of quality in dashboard-supported administrative decisions. The advantages below are expected and will be confirmed by that measurement, with average completion time used as a counterweight.</p>
+    <div class="modules">
+      <article>
+        <span class="mn">Advantage 1</span>
+        <h3>Less rework</h3>
+        <p>Better decisions save the time now spent redoing tasks, revising decisions and recovering missed deadlines.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 2</span>
+        <h3>Better spread of the workload across the month</h3>
+        <p>By anticipating the closing peak, management redistributes the workload before the last week and reduces queues and bottlenecks.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 3</span>
+        <h3>Less manual data checking</h3>
+        <p>Automatic load validation and a visible data source save manual checks and avoid deciding on an outdated figure.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 4</span>
+        <h3>No extra step for the decision-maker</h3>
+        <p>Nothing blocks or delays the decision, and the cost of control falls on management, not on whoever decides.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 5</span>
+        <h3>Quality without losing speed</h3>
+        <p>Average completion time, measured before and after, shows whether quality improves without lengthening the process, in line with the right to a reasonable duration of proceedings (Brazilian Constitution, art. 5, LXXVIII).</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 6</span>
+        <h3>Quality risk anticipated</h3>
+        <p>The weekly reading by unit, with no ranking, flags the week in which speed may cost quality, and the alert triggers support, not enforcement.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 7</span>
+        <h3>Governance before AI</h3>
+        <p>The classification of decision types and governed data prepare the court to use AI in compliance with CNJ Resolution 615/2025.</p>
+      </article>
+      <article>
+        <span class="mn">Advantage 8</span>
+        <h3>Measurable effect per project</h3>
+        <p>Each project's impact indicators make it possible to compare before and after, in the decisions the project supports.</p>
+      </article>
+    </div>
+  </section>
+
   <section id="objecoes">
     <h2>Anticipated objections</h2>
     <p>The questions a governance committee asks first, and the answers the design already contains.</p>
     <div class="modules">
       <article>
         <span class="mn">Question 1</span>
-        <h3>Does this watch the civil servant or the judge?</h3>
-        <p>Recording is by organizational unit, never by person. The trail documents technical execution and the unit acts, not the behavior of whoever decides.</p>
+        <h3>Does this watch the civil servant?</h3>
+        <p>No. Indicators are by organizational unit, with no individual metric and no content capture. The trail documents technical execution and the unit's acts, not the behavior of whoever decides.</p>
       </article>
       <article>
         <span class="mn">Question 2</span>
         <h3>Does this interfere with the decision?</h3>
-        <p>Nothing on the screen blocks, delays or steers the choice. The controls fall on the data, the sample and the unit's working conditions, and the reasoning required by art. 93, IX, of the Brazilian Constitution remains entirely with whoever decides.</p>
+        <p>No. Nothing on the screen blocks, delays or steers the choice. The controls fall on the data and the unit's working conditions, and authorship and reasoning remain entirely with whoever decides.</p>
       </article>
       <article>
         <span class="mn">Question 3</span>
         <h3>Does this slow the work down?</h3>
-        <p>There is no additional step on the decision-maker's screen. The cost falls on the Data Governance Area and on management, and in the data steps automation reduces the time now spent on manual load checks.</p>
+        <p>There is no additional step for the decision-maker. The cost falls on the pilot team and on management, and automatic load validation reduces the time now spent on manual checks.</p>
       </article>
       <article>
         <span class="mn">Question 4</span>
+        <h3>What if the end-of-month pattern does not show up?</h3>
+        <p>That is what the prior survey and Phase 0 are for. Even without the pattern, governed data and the classification of decision types remain useful to prepare the court for AI, in compliance with CNJ Resolution 615/2025.</p>
+      </article>
+      <article>
+        <span class="mn">Question 5</span>
         <h3>Why measure before acting?</h3>
         <p>Without a baseline, there is no way to know whether the controls worked or whether they were proportional to the problem. Phase 0 observes without intervening, and its results follow the rule of no individual metrics.</p>
       </article>
@@ -896,8 +964,8 @@
 
   var CAMADAS = {
     C1: {nome: 'Layer 1 — Low Risk', prot: 'Automatic record in the trail.', rev: 'Annual'},
-    C2: {nome: 'Layer 2 — Moderate Risk', prot: 'Data representativeness map, regular sampling of the reasoning and a contingency plan.', rev: 'Semiannual'},
-    C3: {nome: 'Layer 3 — High Risk', prot: 'Expanded sampling of the reasoning, early reassessment and mandatory training. Nothing blocks the screen.', rev: 'Quarterly'}
+    C2: {nome: 'Layer 2 — Moderate Risk', prot: 'Confirmation of the data source and update before use, and a contingency plan.', rev: 'Semiannual'},
+    C3: {nome: 'Layer 3 — High Risk', prot: 'Layer 2 requirements plus early reassessment of the decision type in the closing weeks of high-probability units, with management support and training. Nothing blocks the decision-maker\'s screen.', rev: 'Quarterly'}
   };
 
   function isd(a,b){ return 8*a + 12*b; }
@@ -945,7 +1013,7 @@
     var p = +prob.value, nivel = (camada === 'C3' ? 3 : camada === 'C2' ? 2 : 1);
     var leitura;
     if (p === 3 && nivel === 3) { leitura = 'Exception to the committee: early reassessment and management support before the close'; statusBtn.style.color = '#B8555F'; }
-    else if (p === 3 || (p === 2 && nivel === 3)) { leitura = 'Predictive alert active: reinforced weekly reading and management support'; statusBtn.style.color = '#B8555F'; }
+    else if (p === 3 || (p === 2 && nivel === 3)) { leitura = 'Trend alert active: reinforced weekly reading and management support'; statusBtn.style.color = '#B8555F'; }
     else { leitura = 'Weekly monitoring, no exception to the committee'; statusBtn.style.color = '#C9CCC5'; }
     statusBtn.textContent = leitura;
     return camada;
